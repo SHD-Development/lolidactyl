@@ -1,5 +1,18 @@
 {
-  "auth": {
-    "welcomeBack": "歡迎回來！"
+  "appName": "Lolidactyl",
+  "common": {
+    "languages": "語言",
+    "logout": "登出"
+  },
+  "settings": {
+    "title": "設定",
+    "description": "調整成您喜愛的偏好設定"
+  },
+  "loginForm": {
+    "welcomeBack": "歡迎回來！",
+    "description": "登入以繼續使用 Lolidactyl",
+    "continueWith": "使用以下方式繼續",
+    "comingSoon": "即將推出",
+    "agreement": "使用本服務即表示您同意我們的服務條款及隱私政策。"
   }
 }

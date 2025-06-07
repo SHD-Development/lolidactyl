@@ -16,7 +16,7 @@ export async function LoginForm({
     "use server";
     await signIn("discord", { redirectTo: "/dashboard" });
   }
-  const t = await getTranslations("auth");
+  const t = await getTranslations("loginForm");
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card className="overflow-hidden p-0 w-full">
@@ -26,12 +26,12 @@ export async function LoginForm({
               <div className="flex flex-col items-center text-center">
                 <h1 className="text-2xl font-bold">{t("welcomeBack")}</h1>
                 <p className="text-muted-foreground text-balance">
-                  Login to continue
+                  {t("description")}
                 </p>
               </div>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                 <span className="bg-card text-muted-foreground relative z-10 px-2">
-                  Continue with
+                  {t("continueWith")}
                 </span>
               </div>
 
@@ -42,11 +42,11 @@ export async function LoginForm({
                   className="w-full"
                   onClick={discordLogin}
                 >
-                  <FaDiscord className="mr-2 h-4 w-4" />
+                  <FaDiscord className="h-4 w-4" />
                   <span>Discord</span>
                 </Button>
                 <Button variant="outline" disabled>
-                  登入即可享受服務
+                  {t("comingSoon")}
                 </Button>
               </div>
             </div>
@@ -62,8 +62,7 @@ export async function LoginForm({
         </CardContent>
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        By clicking continue, you agree to our Terms of Service and Privacy
-        Policy.
+        {t("agreement")}
       </div>
     </div>
   );
