@@ -36,6 +36,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { title } from "process";
+import { Link } from "next-view-transitions";
 export default function LandingPage() {
   const t = useTranslations("landing");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -287,12 +288,14 @@ export default function LandingPage() {
               className="flex flex-col sm:flex-row gap-4 justify-center items-center"
               variants={fadeInUp}
             >
-              <BackgroundGradient className="p-0.5">
-                <Button className="rounded-2xl w-50 h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg group">
-                  <h1 className="text-2xl font-semibold">{t("hero.cta")}</h1>
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                </Button>
-              </BackgroundGradient>
+              <Link href="/dashboard">
+                <BackgroundGradient className="p-0.5">
+                  <Button className="rounded-2xl w-50 h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg group">
+                    <h1 className="text-2xl font-semibold">{t("hero.cta")}</h1>
+                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </BackgroundGradient>
+              </Link>
             </motion.div>
           </motion.div>
         </div>

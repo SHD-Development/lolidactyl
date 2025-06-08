@@ -125,6 +125,9 @@
       "rights": "保留所有權利"
     }
   },
+  "dashboard": {
+    "breadcrumbs": "主頁"
+  },
   "settings": {
     "title": "設定",
     "description": "調整成您喜愛的偏好設定"
