@@ -1,5 +1,272 @@
 {
+  "appName": "Lolidactyl",
+  "common": {
+    "droplets": "Droplets",
+    "languages": "Languages",
+    "login": "Login",
+    "logout": "Logout",
+    "resources": "Resources",
+    "dashboard": "Dashboard"
+  },
+  "resourceCards": {
+    "resources": "Resources",
+    "available": "Available",
+    "maxedOut": "Maxed Out",
+    "usage": "Usage",
+    "cpu": "CPU",
+    "ram": "RAM",
+    "disk": "Disk",
+    "ports": "Ports",
+    "databases": "Databases",
+    "backups": "Backups",
+    "servers": "Server Slots"
+  },
+  "landing": {
+    "nav": {
+      "features": "Features",
+      "pricing": "Pricing",
+      "contact": "Contact",
+      "getStarted": "Get Started"
+    },
+    "hero": {
+      "title": "Reimagining \"Cloud\"",
+      "subtitle": "SHD Cloud provides free hosting services and an active gaming community.",
+      "cta": "Get Started"
+    },
+    "features": {
+      "title": "Rich Features to Meet Your Needs",
+      "subtitle": "We provide comprehensive solutions",
+      "security": {
+        "title": "Security",
+        "description": "We won't steal your tokens"
+      },
+      "performance": {
+        "title": "Performance",
+        "description": "High-performance servers ensuring fast and stable operation"
+      },
+      "global": {
+        "title": "Languages",
+        "description": "We support multiple languages"
+      },
+      "scalable": {
+        "title": "Scalable",
+        "description": "Adjust resource allocation based on needs"
+      },
+      "backup": {
+        "title": "Backup",
+        "description": "Backup your data with restore functionality"
+      },
+      "support": {
+        "title": "Support",
+        "description": "Support team waiting for you on Discord"
+      }
+    },
+    "testimonials": {
+      "title": "Customer Reviews",
+      "subtitle": "See what our customers say",
+      "tCount": "3",
+      "t": {
+        "1": {
+          "quote": "Meow?",
+          "name": "Brian0901ThePro",
+          "title": "Professional Cat Girl"
+        },
+        "2": {
+          "quote": "Gone /////////",
+          "name": "RynoTheCatgirl",
+          "title": "Senior Cat Girl"
+        },
+        "3": {
+          "quote": ":BongoYes:",
+          "name": "Aquatf",
+          "title": "osu! #1 Player / maimai DX w6"
+        }
+      }
+    },
+    "pricing": {
+      "title": "Flexible Pricing Plans",
+      "subtitle": "Choose the plan that best fits your needs, upgrade or adjust anytime",
+      "popular": "Most Popular",
+      "chooseplan": "Choose Plan",
+      "starter": {
+        "name": "Starter",
+        "price": "$9.99",
+        "description": "Perfect for personal websites and small projects",
+        "features": {
+          "storage": "10GB SSD Storage",
+          "bandwidth": "100GB Monthly Bandwidth",
+          "domains": "1 Domain Name",
+          "support": "Email Technical Support"
+        }
+      },
+      "pro": {
+        "name": "Professional",
+        "price": "$29.99",
+        "description": "Ideal for small to medium businesses and professional websites",
+        "features": {
+          "storage": "50GB SSD Storage",
+          "bandwidth": "500GB Monthly Bandwidth",
+          "domains": "5 Domain Names",
+          "ssl": "Free SSL Certificate",
+          "support": "24/7 Online Customer Support"
+        }
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "price": "$99.99",
+        "description": "Perfect for large enterprises and high-traffic websites",
+        "features": {
+          "storage": "200GB SSD Storage",
+          "bandwidth": "Unlimited Monthly Bandwidth",
+          "domains": "Unlimited Domain Names",
+          "dedicated": "Dedicated Server Resources",
+          "support": "Dedicated Account Manager"
+        }
+      }
+    },
+    "cta": {
+      "title": "Ready to Get Started?",
+      "subtitle": "Join thousands of satisfied customers and experience SHD Cloud's excellent service",
+      "button": "Free 30-Day Trial"
+    },
+    "footer": {
+      "description": "SHD Cloud is committed to providing the cutest cloud hosting services, meow meow!",
+      "company": "Company",
+      "about": "About Us",
+      "careers": "Careers",
+      "contact": "Contact",
+      "support": "Support",
+      "help": "Help Center",
+      "docs": "Documentation",
+      "status": "Service Status",
+      "rights": "All rights reserved"
+    }
+  },
+  "dashboard": {
+    "breadcrumbs": "Home",
+    "additionalResources": "Additional Resources"
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "Adjust to your preferred settings"
+  },
+  "loginForm": {
+    "welcomeBack": "Welcome Back!",
+    "description": "Login to continue using Lolidactyl",
+    "continueWith": "Continue with",
+    "comingSoon": "Coming Soon",
+    "agreement": "By using this service, you agree to our Terms of Service and Privacy Policy."
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "home": "Home",
+    "panel": "Panel",
+    "index": "Index",
+    "servers": "Servers",
+    "create": "Create",
+    "manage": "Manage",
+    "overview": "Overview",
+    "droplets": "Droplets",
+    "coupons": "Coupons",
+    "transfer": "Transfer",
+    "stores": "Stores",
+    "resources": "Resources",
+    "platform": "Platform",
+    "go": "Go",
+    "destination": "Go to"
+  },
   "auth": {
     "welcomeBack": "Welcome Back!"
+  },
+  "userCard": {
+    "title": "User Information",
+    "unknownUser": "Unknown User",
+    "unknownId": "Unknown",
+    "droplets": "Droplets",
+    "dropletsDescription": "Your currency balance",
+    "servers": "Servers",
+    "serversDescription": "Number of servers you currently own",
+    "goToPanel": "Go to Panel",
+    "resetPassword": "Reset Password"
+  },
+  "serverCreate": {
+    "title": "Create New Server",
+    "description": "Create a server!",
+    "available": "Available",
+    "form": {
+      "serverName": {
+        "label": "Server Name",
+        "placeholder": "My awesome server",
+        "description": "Name."
+      },
+      "node": {
+        "label": "Node",
+        "placeholder": "Select a node",
+        "loadingPlaceholder": "Loading nodes...",
+        "description": "Select node location."
+      },
+      "serverType": {
+        "label": "Server Type",
+        "placeholder": "Select a server type",
+        "loadingPlaceholder": "Loading server types...",
+        "description": "Select server type (Egg)."
+      },
+      "cpu": {
+        "label": "CPU (%)",
+        "placeholder": "Enter CPU percentage (10-400)",
+        "description": "CPU allocation. Cost:",
+        "pricePerUnit": "per 100%"
+      },
+      "ram": {
+        "label": "RAM (MiB)",
+        "placeholder": "Enter RAM in MiB (128-16384)",
+        "description": "Memory allocation. Cost:",
+        "pricePerUnit": "per MiB"
+      },
+      "disk": {
+        "label": "Disk Space (MiB)",
+        "placeholder": "Enter disk space in MiB (128-32768)",
+        "description": "Storage space. Cost:",
+        "pricePerUnit": "per MiB"
+      },
+      "databases": {
+        "label": "Database Count",
+        "description": "Database instances. Cost:",
+        "pricePerUnit": "per DB"
+      },
+      "ports": {
+        "label": "Network Ports",
+        "description": "Network ports. Cost:",
+        "pricePerUnit": "per Port"
+      },
+      "backups": {
+        "label": "Backup Slots",
+        "description": "Backup slots for data protection. Cost:",
+        "pricePerUnit": "per Backup"
+      }
+    },
+    "tabs": {
+      "resources": "Resources",
+      "advanced": "Advanced Options"
+    },
+    "pricing": {
+      "title": "Pricing Summary",
+      "description": "Total cost for server creation",
+      "cost": "Cost",
+      "resourceToCost": "Resource → Cost",
+      "baseCost": "Base Cost:",
+      "totalCost": "Total Cost:",
+      "droplets": "Droplets"
+    },
+    "buttons": {
+      "create": "Create Server",
+      "loading": "Loading..."
+    },
+    "messages": {
+      "createSuccess": "is being created. Total cost:",
+      "pricingError": "Failed to load pricing, using default values",
+      "serverTypesError": "Failed to load server types",
+      "nodesError": "Failed to load nodes"
+    }
   }
 }

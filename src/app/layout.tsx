@@ -4,10 +4,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import { ViewTransitions } from "next-view-transitions";
-
+import { SessionProvider } from "next-auth/react";
 import Settings from "@/components/settings";
 import "./globals.css";
-
+import { Locale } from "@/components/locale";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -29,6 +29,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+
   return (
     <ViewTransitions>
       <html lang={locale} suppressHydrationWarning>
@@ -41,11 +42,14 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <NextIntlClientProvider>
-              {children}
-              <Settings />
-            </NextIntlClientProvider>
+            <SessionProvider>
+              <NextIntlClientProvider>
+                {children}
+                <Settings />
+              </NextIntlClientProvider>
+            </SessionProvider>
           </ThemeProvider>
+          <Locale />
         </body>
       </html>
     </ViewTransitions>

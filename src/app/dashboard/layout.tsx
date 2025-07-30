@@ -9,7 +9,7 @@ export default async function DashboardLayout({
   const session = await auth();
   return (
     <SidebarProvider>
-      <AppSidebar session={session} />
+      <AppSidebar />
       <SidebarInset>{children}</SidebarInset>
     </SidebarProvider>
   );
