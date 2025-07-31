@@ -16,7 +16,7 @@
     "cpu": "CPU",
     "ram": "RAM",
     "disk": "Disk",
-    "ports": "Ports",
+    "allocations": "Allocations",
     "databases": "Databases",
     "backups": "Backups",
     "servers": "Server Slots"
@@ -193,17 +193,22 @@
     "title": "Create New Server",
     "description": "Create a server!",
     "available": "Available",
+    "status": {
+      "checking": "Checking",
+      "available": "Available",
+      "suspended": "Creation Suspended"
+    },
     "form": {
       "serverName": {
         "label": "Server Name",
         "placeholder": "My awesome server",
         "description": "Name."
       },
-      "node": {
-        "label": "Node",
-        "placeholder": "Select a node",
-        "loadingPlaceholder": "Loading nodes...",
-        "description": "Select node location."
+      "location": {
+        "label": "Location",
+        "placeholder": "Select a location",
+        "loadingPlaceholder": "Loading locations...",
+        "description": "Select server location."
       },
       "serverType": {
         "label": "Server Type",
@@ -231,18 +236,22 @@
       },
       "databases": {
         "label": "Database Count",
-        "description": "Database instances. Cost:",
+        "description": "Databases. Cost:",
         "pricePerUnit": "per DB"
       },
-      "ports": {
-        "label": "Network Ports",
-        "description": "Network ports. Cost:",
-        "pricePerUnit": "per Port"
+      "allocations": {
+        "label": "Network Allocations",
+        "description": "Network allocations. Cost:",
+        "pricePerUnit": "per Allocation"
       },
       "backups": {
         "label": "Backup Slots",
         "description": "Backup slots for data protection. Cost:",
         "pricePerUnit": "per Backup"
+      },
+      "autoRenew": {
+        "label": "Auto Renew",
+        "description": "When enabled, the service will automatically renew before expiration to ensure uninterrupted service"
       }
     },
     "tabs": {
@@ -255,18 +264,44 @@
       "cost": "Cost",
       "resourceToCost": "Resource → Cost",
       "baseCost": "Base Cost:",
+      "cpu": "CPU",
+      "ram": "RAM",
+      "disk": "Disk",
+      "databases": "Databases",
+      "backups": "Backups",
+      "allocations": "Allocations",
       "totalCost": "Total Cost:",
       "droplets": "Droplets"
     },
+    "balance": {
+      "change": "Balance Change:",
+      "status": "Balance Status:",
+      "sufficient": "Sufficient",
+      "insufficient": "Insufficient",
+      "expiration": "Service Expiration:",
+      "daysRemain": "",
+      "daysRemaining": "days remaining"
+    },
     "buttons": {
       "create": "Create Server",
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "creating": "Creating Server...",
+      "serviceSuspended": "Service Suspended",
+      "insufficientBalance": "Insufficient Balance",
+      "pleaseComplete": "Please complete the form first"
     },
     "messages": {
       "createSuccess": "is being created. Total cost:",
+      "createError": "Failed to create server",
       "pricingError": "Failed to load pricing, using default values",
       "serverTypesError": "Failed to load server types",
-      "nodesError": "Failed to load nodes"
+      "locationsError": "Failed to load locations",
+      "NaNError": "Please fill in all values to calculate the estimate",
+      "NaNErrorDescription": "If you do not fill in all values, the estimate cannot be calculated. Please fill in all values."
+    },
+    "toasts": {
+      "userInfoError": "Failed to fetch user info",
+      "creatingServer": "Creating server {name}..."
     }
   }
 }

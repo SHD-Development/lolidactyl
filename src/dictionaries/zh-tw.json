@@ -16,7 +16,7 @@
     "cpu": "處理器",
     "ram": "記憶體",
     "disk": "磁碟",
-    "ports": "端口",
+    "allocations": "分配",
     "databases": "資料庫",
     "backups": "備份",
     "servers": "伺服器欄位"
@@ -190,17 +190,22 @@
     "title": "創建新伺服器",
     "description": "創建一個伺服器！",
     "available": "可用",
+    "status": {
+      "checking": "檢查中",
+      "available": "可用",
+      "suspended": "暫停創建"
+    },
     "form": {
       "serverName": {
         "label": "伺服器名稱",
         "placeholder": "我的超棒伺服器",
         "description": "名稱。"
       },
-      "node": {
-        "label": "節點",
-        "placeholder": "選擇一個節點",
-        "loadingPlaceholder": "正在載入節點...",
-        "description": "選擇節點位置。"
+      "location": {
+        "label": "位置",
+        "placeholder": "選擇一個位置",
+        "loadingPlaceholder": "正在載入位置...",
+        "description": "選擇伺服器位置。"
       },
       "serverType": {
         "label": "伺服器類型",
@@ -228,18 +233,22 @@
       },
       "databases": {
         "label": "資料庫數量",
-        "description": "資料庫實例。費用：",
+        "description": "資料庫。費用：",
         "pricePerUnit": "每個資料庫"
       },
-      "ports": {
-        "label": "網路端口",
-        "description": "網路端口。費用：",
-        "pricePerUnit": "每個端口"
+      "allocations": {
+        "label": "網路分配",
+        "description": "網路分配。費用：",
+        "pricePerUnit": "每個分配"
       },
       "backups": {
         "label": "備份槽",
         "description": "資料保護的備份槽。費用：",
         "pricePerUnit": "每個備份"
+      },
+      "autoRenew": {
+        "label": "自動續約",
+        "description": "啟用後服務將在到期前自動續約，確保服務不中斷"
       }
     },
     "tabs": {
@@ -252,18 +261,44 @@
       "cost": "費用",
       "resourceToCost": "資源 → 費用",
       "baseCost": "基礎費用：",
+      "cpu": "處理器",
+      "ram": "記憶體",
+      "disk": "磁碟",
+      "databases": "資料庫",
+      "backups": "備份",
+      "allocations": "網路分配",
       "totalCost": "總費用：",
       "droplets": "露凝"
     },
+    "balance": {
+      "change": "餘額變化:",
+      "status": "餘額狀態:",
+      "sufficient": "充足",
+      "insufficient": "不足",
+      "expiration": "服務到期:",
+      "daysRemain": "剩餘",
+      "daysRemaining": "天"
+    },
     "buttons": {
       "create": "創建伺服器",
-      "loading": "載入中..."
+      "loading": "載入中...",
+      "creating": "正在創建伺服器...",
+      "serviceSuspended": "服務暫停中",
+      "insufficientBalance": "餘額不足",
+      "pleaseComplete": "請先填完再創建"
     },
     "messages": {
-      "createSuccess": "正在創建。總費用：",
+      "createSuccess": "創建成功。總費用：",
+      "createError": "創建伺服器失敗",
       "pricingError": "無法載入價格，使用預設值",
       "serverTypesError": "無法載入伺服器類型",
-      "nodesError": "無法載入節點"
+      "locationsError": "無法載入位置",
+      "NaNError": "請先填入所有數值以便計算估價",
+      "NaNErrorDescription": "如果您沒有填寫所有數值，則無法計算估價。請先填寫所有數值。"
+    },
+    "toasts": {
+      "userInfoError": "獲取用戶信息失敗",
+      "creatingServer": "正在創建伺服器 {name}..."
     }
   }
 }

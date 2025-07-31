@@ -66,11 +66,6 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: isPathActive("/dashboard/servers"),
         items: [
           {
-            title: t("overview"),
-            url: "/dashboard/servers/overview",
-            isActive: isPathActive("/dashboard/servers/overview"),
-          },
-          {
             title: t("manage"),
             url: "/dashboard/servers/manage",
             isActive: isPathActive("/dashboard/servers/manage"),
@@ -119,7 +114,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg" asChild>
-                  <Link href="/" className="group/home">
+                  <Link href="/dashboard" className="group/home">
                     <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
                       <Cloud />
                     </div>
@@ -171,7 +166,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </DropdownMenuItem>
                 <DropdownMenuItem className="gap-2 p-2">
                   <Link
-                    href={appConfig.panelUrl as string}
+                    href={process.env.NEXT_PUBLIC_PANEL_URL as string}
                     className="flex items-center gap-2 w-full h-full"
                   >
                     <div className="flex size-6 items-center justify-center rounded-md border">

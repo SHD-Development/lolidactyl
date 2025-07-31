@@ -8,16 +8,30 @@ import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import axios from "axios";
-interface UserCardProps {
-  serversCount?: number;
-}
 
 interface UserInfo {
   coins: number;
   panelId: number;
+  servers: Array<{
+    id: number;
+    identifier: string;
+    status: string;
+    resources: {
+      cpu: number;
+      ram: number;
+      disk: number;
+      databases: number;
+      allocations: number;
+      backups: number;
+    };
+    expireAt: string;
+    autoRenew: boolean;
+    createAt: string;
+    _id: string;
+  }>;
 }
 
-export function UserCard({ serversCount = 0 }: UserCardProps) {
+export function UserCard() {
   const { data: session } = useSession();
   const t = useTranslations("userCard");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
@@ -115,13 +129,13 @@ export function UserCard({ serversCount = 0 }: UserCardProps) {
               variant="secondary"
               className="bg-emerald-500/10 text-emerald-700 dark:text-emerald-300"
             >
-              {serversCount}
+              {loading ? "..." : userInfo?.servers?.length || 0}
             </Badge>
           </div>
           <p className="text-xs text-muted-foreground mt-1">
             {t("serversDescription", {
               defaultValue: "您目前擁有的伺服器數量",
-              count: serversCount,
+              count: userInfo?.servers?.length || 0,
             })}
           </p>
         </div>

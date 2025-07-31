@@ -16,7 +16,7 @@
     "cpu": "处理器",
     "ram": "内存",
     "disk": "磁盘",
-    "ports": "端口",
+    "allocations": "分配",
     "databases": "数据库",
     "backups": "备份",
     "servers": "服务器栏位"
@@ -193,17 +193,22 @@
     "title": "创建新服务器",
     "description": "创建一个服务器！",
     "available": "可用",
+    "status": {
+      "checking": "检查中",
+      "available": "可用",
+      "suspended": "暂停创建"
+    },
     "form": {
       "serverName": {
         "label": "服务器名称",
         "placeholder": "我的超棒服务器",
         "description": "名称。"
       },
-      "node": {
-        "label": "节点",
-        "placeholder": "选择一个节点",
-        "loadingPlaceholder": "正在加载节点...",
-        "description": "选择节点位置。"
+      "location": {
+        "label": "位置",
+        "placeholder": "选择一个位置",
+        "loadingPlaceholder": "正在加载位置...",
+        "description": "选择服务器位置。"
       },
       "serverType": {
         "label": "服务器类型",
@@ -231,18 +236,22 @@
       },
       "databases": {
         "label": "数据库数量",
-        "description": "数据库实例。费用：",
+        "description": "数据库。费用：",
         "pricePerUnit": "每个数据库"
       },
-      "ports": {
-        "label": "网络端口",
-        "description": "网络端口。费用：",
-        "pricePerUnit": "每个端口"
+      "allocations": {
+        "label": "网络分配",
+        "description": "网络分配。费用：",
+        "pricePerUnit": "每个分配"
       },
       "backups": {
         "label": "备份槽",
         "description": "数据保护的备份槽。费用：",
         "pricePerUnit": "每个备份"
+      },
+      "autoRenew": {
+        "label": "自动续约",
+        "description": "启用后服务将在到期前自动续约，确保服务不中断"
       }
     },
     "tabs": {
@@ -255,18 +264,44 @@
       "cost": "费用",
       "resourceToCost": "资源 → 费用",
       "baseCost": "基础费用：",
+      "cpu": "处理器",
+      "ram": "内存",
+      "disk": "磁盘",
+      "databases": "数据库",
+      "backups": "备份",
+      "allocations": "网络分配",
       "totalCost": "总费用：",
       "droplets": "露凝"
     },
+    "balance": {
+      "change": "余额变化:",
+      "status": "余额状态:",
+      "sufficient": "充足",
+      "insufficient": "不足",
+      "expiration": "服务到期:",
+      "daysRemain": "剩余",
+      "daysRemaining": "天"
+    },
     "buttons": {
       "create": "创建服务器",
-      "loading": "加载中..."
+      "loading": "加载中...",
+      "creating": "正在创建服务器...",
+      "serviceSuspended": "服务暂停中",
+      "insufficientBalance": "余额不足",
+      "pleaseComplete": "请先填完再创建"
     },
     "messages": {
       "createSuccess": "正在创建。总费用：",
+      "createError": "创建服务器失败",
       "pricingError": "无法加载价格，使用默认值",
       "serverTypesError": "无法加载服务器类型",
-      "nodesError": "无法加载节点"
+      "locationsError": "无法加载位置",
+      "NaNError": "请先填写所有数值以便计算估价",
+      "NaNErrorDescription": "如果您没有填写所有数值，则无法计算估价。请先填写所有数值。"
+    },
+    "toasts": {
+      "userInfoError": "获取用户信息失败",
+      "creatingServer": "正在创建服务器 {name}..."
     }
   }
 }

@@ -8,6 +8,7 @@ import { SessionProvider } from "next-auth/react";
 import Settings from "@/components/settings";
 import "./globals.css";
 import { Locale } from "@/components/locale";
+import { Toaster } from "react-hot-toast";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -46,6 +47,7 @@ export default async function RootLayout({
               <NextIntlClientProvider>
                 {children}
                 <Settings />
+                <Toaster />
               </NextIntlClientProvider>
             </SessionProvider>
           </ThemeProvider>

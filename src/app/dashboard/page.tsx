@@ -22,10 +22,10 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import toast from "react-hot-toast";
 export default function Dashboard() {
   const t = useTranslations("dashboard");
   const [dialogOpen, setDialogOpen] = useState(false);
-
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2">
@@ -49,7 +49,7 @@ export default function Dashboard() {
       </header>
       <div className="p-6 flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          <UserCard dropletsBalance={1250} serversCount={3} />
+          <UserCard />
         </div>
       </div>
     </>
