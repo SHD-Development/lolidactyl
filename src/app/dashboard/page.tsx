@@ -11,6 +11,7 @@ import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "next-intl";
 import { UserCard } from "@/components/user-card";
+import { AdCard } from "@/components/ad-card";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import {
@@ -20,12 +21,15 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
+import axios from "axios";
+
 export default function Dashboard() {
   const t = useTranslations("dashboard");
   const [dialogOpen, setDialogOpen] = useState(false);
+  const { data: session, status } = useSession();
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2">
@@ -50,6 +54,7 @@ export default function Dashboard() {
       <div className="p-6 flex justify-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <UserCard />
+          <AdCard />
         </div>
       </div>
     </>

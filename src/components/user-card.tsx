@@ -3,7 +3,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { User, Droplets, Server, ExternalLink, KeyRound } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
+import {
+  User,
+  Droplets,
+  Server,
+  ExternalLink,
+  KeyRound,
+  Copy,
+  Check,
+} from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
@@ -36,6 +51,14 @@ export function UserCard() {
   const t = useTranslations("userCard");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [resetPasswordLoading, setResetPasswordLoading] = useState(false);
+  const [confirmDialog, setConfirmDialog] = useState(false);
+  const [passwordDialog, setPasswordDialog] = useState({
+    open: false,
+    password: "",
+  });
+  const [copied, setCopied] = useState(false);
+  const [copiedUserId, setCopiedUserId] = useState(false);
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -53,6 +76,46 @@ export function UserCard() {
       fetchUserInfo();
     }
   }, [session]);
+
+  const handleResetPasswordClick = () => {
+    setConfirmDialog(true);
+  };
+
+  const handleResetPassword = async () => {
+    setConfirmDialog(false);
+    setResetPasswordLoading(true);
+    try {
+      const response = await axios.patch("/api/resetpassword");
+      if (response.data.status === "success") {
+        setPasswordDialog({ open: true, password: response.data.password });
+      }
+    } catch (error) {
+      console.error("Failed to reset password:", error);
+      // You might want to show a toast or error message here
+    } finally {
+      setResetPasswordLoading(false);
+    }
+  };
+
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(passwordDialog.password);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (error) {
+      console.error("Failed to copy to clipboard:", error);
+    }
+  };
+
+  const copyUserIdToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(user.id || "");
+      setCopiedUserId(true);
+      setTimeout(() => setCopiedUserId(false), 2000);
+    } catch (error) {
+      console.error("Failed to copy user ID to clipboard:", error);
+    }
+  };
 
   if (!session?.user) {
     return null;
@@ -151,13 +214,128 @@ export function UserCard() {
               <ExternalLink className="h-4 w-4 mr-2" />
               {t("goToPanel", { defaultValue: "前往面板" })}
             </Button>
-            <Button variant="secondary" size="sm" className="w-full">
+            <Button
+              variant="secondary"
+              size="sm"
+              className="w-full"
+              onClick={handleResetPasswordClick}
+              disabled={resetPasswordLoading}
+            >
               <KeyRound className="h-4 w-4 mr-2" />
-              {t("resetPassword", { defaultValue: "重設密碼" })}
+              {resetPasswordLoading
+                ? t("resettingPassword", { defaultValue: "重設中..." })
+                : t("resetPassword", { defaultValue: "重設密碼" })}
             </Button>
           </div>
         </div>
       </CardContent>
+
+      {/* Confirmation Dialog */}
+      <Dialog open={confirmDialog} onOpenChange={setConfirmDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {t("confirmResetTitle", { defaultValue: "確認重設密碼" })}
+            </DialogTitle>
+            <DialogDescription>
+              {t("confirmResetDescription", {
+                defaultValue:
+                  "您確定要重設密碼嗎？這將會產生一個新的密碼，舊密碼將無法使用。",
+              })}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setConfirmDialog(false)}>
+              {t("cancel", { defaultValue: "取消" })}
+            </Button>
+            <Button
+              variant="destructive"
+              onClick={handleResetPassword}
+              disabled={resetPasswordLoading}
+            >
+              {resetPasswordLoading
+                ? t("resettingPassword", { defaultValue: "重設中..." })
+                : t("confirmReset", { defaultValue: "確認重設" })}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Password Display Dialog */}
+      <Dialog
+        open={passwordDialog.open}
+        onOpenChange={(open) => setPasswordDialog({ ...passwordDialog, open })}
+      >
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              {t("passwordResetSuccess", { defaultValue: "密碼重設成功" })}
+            </DialogTitle>
+            <DialogDescription>
+              {t("passwordResetDescription", {
+                defaultValue: "您的新密碼如下，請妥善保存:",
+              })}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-3">
+            {/* User ID Section */}
+            <div>
+              <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                {t("userId", { defaultValue: "用戶 ID" })}
+              </label>
+              <div className="flex items-center justify-between p-3 bg-muted rounded-md">
+                <code className="font-mono text-sm">
+                  {user.id || t("unknownId", { defaultValue: "未知" })}
+                </code>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={copyUserIdToClipboard}
+                  className="h-8 w-8 p-0"
+                >
+                  {copiedUserId ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+
+            {/* Password Section */}
+            <div>
+              <label className="text-sm font-medium text-muted-foreground mb-2 block">
+                {t("newPassword", { defaultValue: "新密碼" })}
+              </label>
+              <div className="flex items-center justify-between p-3 bg-muted rounded-md">
+                <code className="font-mono text-sm">
+                  {passwordDialog.password}
+                </code>
+                <Button
+                  size="sm"
+                  variant="ghost"
+                  onClick={copyToClipboard}
+                  className="h-8 w-8 p-0"
+                >
+                  {copied ? (
+                    <Check className="h-4 w-4 text-green-500" />
+                  ) : (
+                    <Copy className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className="flex justify-end">
+            <Button
+              variant="outline"
+              onClick={() => setPasswordDialog({ open: false, password: "" })}
+            >
+              {t("close", { defaultValue: "關閉" })}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Card>
   );
 }

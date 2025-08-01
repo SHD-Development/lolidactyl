@@ -143,7 +143,7 @@
     }
   },
   "dashboard": {
-    "breadcrumbs": "主頁",
+    "breadcrumbs": "索引",
     "additionalResources": "其他資源"
   },
   "settings": {
@@ -169,22 +169,264 @@
     "droplets": "露凝",
     "coupons": "兌換代碼",
     "transfer": "轉帳",
-    "stores": "商店",
+    "store": "商店",
+    "general": "一般",
     "resources": "資源",
     "platform": "平台",
     "go": "前往",
     "destination": "跳轉至"
   },
+  "servers": {
+    "breadcrumbs": {
+      "servers": "伺服器",
+      "create": "創建",
+      "manage": "管理"
+    },
+    "manage": {
+      "title": "伺服器管理",
+      "description": "管理和監控您的伺服器",
+      "statistics": {
+        "active": "運行中",
+        "suspended": "已暫停",
+        "deleted": "已刪除",
+        "total": "總伺服器數"
+      },
+      "filter": {
+        "label": "按狀態篩選",
+        "placeholder": "篩選伺服器...",
+        "noSelection": "未選擇狀態",
+        "showAll": "顯示所有伺服器",
+        "selectAll": "全選",
+        "clear": "清除"
+      },
+      "table": {
+        "name": "名稱",
+        "identifier": "識別碼",
+        "node": "節點",
+        "status": "狀態",
+        "actions": "操作",
+        "title": "伺服器列表",
+        "cpu": "處理器",
+        "memory": "記憶體",
+        "disk": "磁碟",
+        "databases": "資料庫",
+        "allocations": "網路分配",
+        "backups": "備份欄位",
+        "expiration": "到期時間",
+        "daysRemaining": "剩餘天數",
+        "expired": "已過期",
+        "unnamed": "未命名",
+        "days": "天"
+      },
+      "actions": {
+        "edit": "編輯",
+        "delete": "刪除",
+        "disabled": "操作不可用",
+        "manage": "管理",
+        "renew": "續約",
+        "create": "創建伺服器",
+        "deleteSelected": "刪除選中的"
+      },
+      "status": {
+        "active": "運行中",
+        "suspended": "已暫停",
+        "deleted": "已刪除"
+      },
+      "edit": {
+        "title": "編輯伺服器",
+        "nameLabel": "伺服器名稱",
+        "namePlaceholder": "輸入伺服器名稱",
+        "cancel": "取消",
+        "save": "儲存變更"
+      },
+      "empty": {
+        "title": "找不到伺服器",
+        "description": "沒有伺服器符合目前的篩選條件。"
+      },
+      "loading": "載入伺服器中...",
+      "error": "載入伺服器失敗",
+      "stats": {
+        "showing": "顯示 {count} 個伺服器 (共 {total} 個)",
+        "filtered": "顯示 {start} 到 {end} 項，共 {total} 項 (從總共 {totalServers} 個伺服器中篩選)",
+        "pagination": "第 {current} 頁，共 {total} 頁",
+        "previous": "上一頁",
+        "next": "下一頁"
+      },
+      "dialogs": {
+        "delete": {
+          "title": "確認刪除",
+          "description": "您確定要刪除伺服器 {identifier} 嗎？此操作無法撤銷。",
+          "cancel": "取消",
+          "confirm": "刪除",
+          "deleting": "刪除中..."
+        },
+        "bulkDelete": {
+          "title": "確認批量刪除",
+          "description": "您確定要刪除選中的 {count} 個伺服器嗎？此操作無法撤銷。",
+          "cancel": "取消",
+          "confirm": "刪除全部",
+          "deleting": "刪除中..."
+        },
+        "edit": {
+          "description": "修改您的伺服器配置和資源分配",
+          "serverType": {
+            "label": "伺服器類型",
+            "description": "請重新選擇伺服器類型（其他資源配置已自動載入當前值）",
+            "loadingPlaceholder": "載入中...",
+            "selectPlaceholder": "選擇伺服器類型"
+          },
+          "tabs": {
+            "resources": "資源配置",
+            "databases": "資料庫與備份"
+          },
+          "form": {
+            "cpu": {
+              "label": "CPU (%)",
+              "unitPrice": "每 %",
+              "costDescription": "CPU 成本: ${amount} Droplets"
+            },
+            "memory": {
+              "label": "記憶體 (MiB)",
+              "unitPrice": "每 MiB",
+              "costDescription": "記憶體成本: ${amount} Droplets"
+            },
+            "disk": {
+              "label": "磁碟空間 (MiB)",
+              "unitPrice": "每 MiB",
+              "costDescription": "磁碟成本: ${amount} Droplets"
+            },
+            "databases": {
+              "label": "資料庫數量",
+              "unitPrice": "每個",
+              "costDescription": "資料庫成本: ${amount} Droplets"
+            },
+            "allocations": {
+              "label": "網路分配數量",
+              "unitPrice": "每個",
+              "costDescription": "網路分配成本: ${amount} Droplets"
+            },
+            "backups": {
+              "label": "備份數量",
+              "unitPrice": "每個",
+              "costDescription": "備份成本: ${amount} Droplets"
+            },
+            "autoRenew": {
+              "label": "自動續約",
+              "description": "啟用後將自動續約伺服器"
+            }
+          },
+          "pricing": {
+            "title": "價格預覽",
+            "description": "修改後的配置預計費用",
+            "loading": "載入中...",
+            "error": {
+              "title": "價格計算錯誤",
+              "description": "請檢查您的配置並重新計算價格"
+            },
+            "breakdown": {
+              "title": "費用明細",
+              "subtitle": "資源 → 費用",
+              "base": "基礎費用",
+              "cpu": "CPU ({amount}%)",
+              "memory": "記憶體 ({amount} MiB)",
+              "disk": "磁碟 ({amount} MiB)",
+              "databases": "資料庫 ({amount})",
+              "allocations": "網路分配 ({amount})",
+              "backups": "備份 ({amount})",
+              "total": "總費用"
+            },
+            "balance": {
+              "current": "目前餘額",
+              "afterPayment": "付款後餘額",
+              "insufficient": "餘額不足",
+              "change": "餘額變化",
+              "loading": "載入中...",
+              "totalModificationCost": "總修改費用",
+              "status": "餘額狀態",
+              "sufficient": "餘額充足",
+              "calculating": "計算中...",
+              "modifying": "修改中...",
+              "insufficientFunds": "餘額不足",
+              "insufficientBalanceMessage": "餘額不足，無法進行修改",
+              "additionalDropletsNeeded": "您需要額外 {amount} Droplets 才能完成此次修改"
+            }
+          }
+        }
+      },
+      "notifications": {
+        "modifying": "修改伺服器 {name} ({identifier})...",
+        "modifySuccess": "伺服器 {name} ({identifier}) 修改成功",
+        "modifyError": "修改伺服器失敗",
+        "loadError": "載入伺服器類型失敗",
+        "priceError": "載入價格失敗",
+        "deleteError": "刪除伺服器失敗: {error}",
+        "deleteErrorGeneric": "刪除伺服器時發生錯誤",
+        "bulkDeleteError": "批量刪除伺服器失敗: {error}",
+        "bulkDeleteErrorGeneric": "批量刪除伺服器時發生錯誤"
+      }
+    }
+  },
+  "auth": {
+    "welcomeBack": "歡迎回來！",
+    "error": {
+      "accessDenied": {
+        "title": "拒絕存取",
+        "description": "您可能使用了 VPN / Proxy / Hosting 或是有創立多重帳號的行為，這些都是不被我們的條款允許的。",
+        "suggestion": "請聯繫管理員以獲得進一步協助。"
+      },
+      "configuration": {
+        "title": "配置錯誤",
+        "description": "服務配置出現問題。",
+        "suggestion": "請稍後再試或聯繫技術支援。"
+      },
+      "verification": {
+        "title": "驗證失敗",
+        "description": "無法驗證您的身份。",
+        "suggestion": "請檢查您的網路連線並重試。"
+      },
+      "default": {
+        "title": "登入錯誤",
+        "description": "登入過程中發生未知錯誤。",
+        "suggestion": "請稍後再試或聯繫技術支援。"
+      },
+      "technicalDetails": "技術詳情",
+      "errorCode": "錯誤代碼",
+      "retryLogin": "重新登入",
+      "returnHome": "返回首頁"
+    }
+  },
   "userCard": {
-    "title": "用戶資訊",
-    "unknownUser": "未知用戶",
+    "title": "使用者資訊",
+    "unknownUser": "未知使用者",
     "unknownId": "未知",
     "droplets": "露凝",
     "dropletsDescription": "您的貨幣餘額",
     "servers": "伺服器",
     "serversDescription": "您目前擁有的伺服器數量",
     "goToPanel": "前往面板",
-    "resetPassword": "重設密碼"
+    "resetPassword": "重設密碼",
+    "resettingPassword": "重設中...",
+    "confirmResetTitle": "確認重設密碼",
+    "confirmResetDescription": "您確定要重設密碼嗎？這將會產生一個新的密碼，舊密碼將無法使用。",
+    "cancel": "取消",
+    "confirmReset": "確認重設",
+    "passwordResetSuccess": "密碼重設成功",
+    "passwordResetDescription": "您的新密碼如下，請妥善保存:",
+    "userId": "Discord ID",
+    "newPassword": "新密碼",
+    "close": "關閉"
+  },
+  "navUser": {
+    "logout": "登出",
+    "droplets": "露凝"
+  },
+  "adCard": {
+    "title": "推薦服務",
+    "learnMore": "了解更多",
+    "advertisement": "廣告",
+    "clickToViewMore": "點擊查看更多",
+    "goToView": "前往查看",
+    "close": "關閉"
   },
   "serverCreate": {
     "title": "創建新伺服器",
@@ -297,8 +539,8 @@
       "NaNErrorDescription": "如果您沒有填寫所有數值，則無法計算估價。請先填寫所有數值。"
     },
     "toasts": {
-      "userInfoError": "獲取用戶信息失敗",
-      "creatingServer": "正在創建伺服器 {name}..."
+      "userInfoError": "獲取使用者信息失敗",
+      "creatingServer": "正在創建伺服器 "
     }
   }
 }

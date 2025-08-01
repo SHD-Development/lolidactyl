@@ -143,7 +143,7 @@
     }
   },
   "dashboard": {
-    "breadcrumbs": "Home",
+    "breadcrumbs": "Index",
     "additionalResources": "Additional Resources"
   },
   "settings": {
@@ -169,14 +169,231 @@
     "droplets": "Droplets",
     "coupons": "Coupons",
     "transfer": "Transfer",
-    "stores": "Stores",
+    "store": "Store",
+    "general": "General",
     "resources": "Resources",
     "platform": "Platform",
     "go": "Go",
     "destination": "Go to"
   },
+  "servers": {
+    "breadcrumbs": {
+      "servers": "Servers",
+      "create": "Create",
+      "manage": "Manage"
+    },
+    "manage": {
+      "title": "Server Management",
+      "description": "Manage and monitor your servers",
+      "statistics": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "deleted": "Deleted",
+        "total": "Total Servers"
+      },
+      "filter": {
+        "label": "Filter by Status",
+        "placeholder": "Filter servers...",
+        "noSelection": "No status selected",
+        "showAll": "Show All Servers",
+        "selectAll": "Select All",
+        "clear": "Clear"
+      },
+      "table": {
+        "name": "Name",
+        "identifier": "Identifier",
+        "node": "Node",
+        "status": "Status",
+        "actions": "Actions",
+        "title": "Server List",
+        "cpu": "CPU",
+        "memory": "Memory",
+        "disk": "Disk",
+        "databases": "Databases",
+        "allocations": "Network Allocations",
+        "backups": "Backups",
+        "expiration": "Expiration Date",
+        "daysRemaining": "Days Remaining",
+        "expired": "Expired",
+        "unnamed": "Unnamed",
+        "days": "days"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "disabled": "Action unavailable",
+        "manage": "Manage",
+        "renew": "Renew",
+        "create": "Create Server",
+        "deleteSelected": "Delete Selected"
+      },
+      "status": {
+        "active": "Active",
+        "suspended": "Suspended",
+        "deleted": "Deleted"
+      },
+      "edit": {
+        "title": "Edit Server",
+        "nameLabel": "Server Name",
+        "namePlaceholder": "Enter server name",
+        "cancel": "Cancel",
+        "save": "Save Changes"
+      },
+      "empty": {
+        "title": "No servers found",
+        "description": "No servers match the current filter criteria."
+      },
+      "loading": "Loading servers...",
+      "error": "Failed to load servers",
+      "stats": {
+        "showing": "Showing {count} servers (of {total} total)",
+        "filtered": "Showing {start} to {end} of {total} items (filtered from {totalServers} servers)",
+        "pagination": "Page {current} of {total}",
+        "previous": "Previous",
+        "next": "Next"
+      },
+      "dialogs": {
+        "delete": {
+          "title": "Confirm Delete",
+          "description": "Are you sure you want to delete server {identifier}? This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete",
+          "deleting": "Deleting..."
+        },
+        "bulkDelete": {
+          "title": "Confirm Bulk Delete",
+          "description": "Are you sure you want to delete {count} selected servers? This action cannot be undone.",
+          "cancel": "Cancel",
+          "confirm": "Delete All",
+          "deleting": "Deleting..."
+        },
+        "edit": {
+          "description": "Modify your server configuration and resource allocation",
+          "serverType": {
+            "label": "Server Type",
+            "description": "Please reselect the server type (other resource configurations have been automatically loaded with current values)",
+            "loadingPlaceholder": "Loading...",
+            "selectPlaceholder": "Select server type"
+          },
+          "tabs": {
+            "resources": "Resource Configuration",
+            "databases": "Databases & Backups"
+          },
+          "form": {
+            "cpu": {
+              "label": "CPU (%)",
+              "unitPrice": "per %",
+              "costDescription": "CPU cost: ${amount} Droplets"
+            },
+            "memory": {
+              "label": "Memory (MiB)",
+              "unitPrice": "per MiB",
+              "costDescription": "Memory cost: ${amount} Droplets"
+            },
+            "disk": {
+              "label": "Disk Space (MiB)",
+              "unitPrice": "per MiB",
+              "costDescription": "Disk cost: ${amount} Droplets"
+            },
+            "databases": {
+              "label": "Number of Databases",
+              "unitPrice": "each",
+              "costDescription": "Database cost: ${amount} Droplets"
+            },
+            "allocations": {
+              "label": "Number of Network Allocations",
+              "unitPrice": "each",
+              "costDescription": "Network allocation cost: ${amount} Droplets"
+            },
+            "backups": {
+              "label": "Number of Backups",
+              "unitPrice": "each",
+              "costDescription": "Backup cost: ${amount} Droplets"
+            },
+            "autoRenew": {
+              "label": "Auto Renewal",
+              "description": "Automatically renew the server when enabled"
+            }
+          },
+          "pricing": {
+            "title": "Price Preview",
+            "description": "Estimated cost for the modified configuration",
+            "loading": "Loading...",
+            "error": {
+              "title": "Price Calculation Error",
+              "description": "Please check your configuration and recalculate the price"
+            },
+            "breakdown": {
+              "title": "Cost Breakdown",
+              "subtitle": "Resource → Cost",
+              "base": "Base Cost",
+              "cpu": "CPU ({amount}%)",
+              "memory": "Memory ({amount} MiB)",
+              "disk": "Disk ({amount} MiB)",
+              "databases": "Databases ({amount})",
+              "allocations": "Allocations ({amount})",
+              "backups": "Backups ({amount})",
+              "total": "Total Cost"
+            },
+            "balance": {
+              "current": "Current Balance",
+              "afterPayment": "After Payment",
+              "insufficient": "Insufficient Balance",
+              "change": "Balance Change",
+              "loading": "Loading...",
+              "totalModificationCost": "Total Modification Cost",
+              "status": "Balance Status",
+              "sufficient": "Sufficient Balance",
+              "calculating": "Calculating...",
+              "modifying": "Modifying...",
+              "insufficientFunds": "Insufficient Balance",
+              "insufficientBalanceMessage": "Insufficient balance, unable to modify",
+              "additionalDropletsNeeded": "You need an additional {amount} Droplets to complete this modification"
+            }
+          }
+        }
+      },
+      "notifications": {
+        "modifying": "Modifying server {name} ({identifier})...",
+        "modifySuccess": "Server {name} ({identifier}) modified successfully",
+        "modifyError": "Failed to modify server",
+        "loadError": "Failed to load server types",
+        "priceError": "Failed to load pricing",
+        "deleteError": "Failed to delete server: {error}",
+        "deleteErrorGeneric": "An error occurred while deleting the server",
+        "bulkDeleteError": "Failed to bulk delete servers: {error}",
+        "bulkDeleteErrorGeneric": "An error occurred while bulk deleting servers"
+      }
+    }
+  },
   "auth": {
-    "welcomeBack": "Welcome Back!"
+    "welcomeBack": "Welcome Back!",
+    "error": {
+      "accessDenied": {
+        "title": "Access Denied",
+        "description": "You may be using a VPN / Proxy / Hosting or have created multiple accounts, which are not allowed by our terms.",
+        "suggestion": "Please contact the administrator for further assistance."
+      },
+      "configuration": {
+        "title": "Configuration Error",
+        "description": "There is a problem with the service configuration.",
+        "suggestion": "Please try again later or contact technical support."
+      },
+      "verification": {
+        "title": "Verification Failed",
+        "description": "Unable to verify your identity.",
+        "suggestion": "Please check your network connection and try again."
+      },
+      "default": {
+        "title": "Login Error",
+        "description": "An unknown error occurred during the login process.",
+        "suggestion": "Please try again later or contact technical support."
+      },
+      "technicalDetails": "Technical Details",
+      "errorCode": "Error Code",
+      "retryLogin": "Retry Login",
+      "returnHome": "Return Home"
+    }
   },
   "userCard": {
     "title": "User Information",
@@ -187,7 +404,29 @@
     "servers": "Servers",
     "serversDescription": "Number of servers you currently own",
     "goToPanel": "Go to Panel",
-    "resetPassword": "Reset Password"
+    "resetPassword": "Reset Password",
+    "resettingPassword": "Resetting...",
+    "confirmResetTitle": "Confirm Password Reset",
+    "confirmResetDescription": "Are you sure you want to reset your password? This will generate a new password and the old password will no longer work.",
+    "cancel": "Cancel",
+    "confirmReset": "Confirm Reset",
+    "passwordResetSuccess": "Password Reset Successful",
+    "passwordResetDescription": "Your new password is shown below, please save it securely:",
+    "userId": "User ID",
+    "newPassword": "New Password",
+    "close": "Close"
+  },
+  "navUser": {
+    "logout": "Log out",
+    "droplets": "Droplets"
+  },
+  "adCard": {
+    "title": "Recommended Services",
+    "learnMore": "Learn More",
+    "advertisement": "Advertisement",
+    "clickToViewMore": "Click to view more",
+    "goToView": "Go to view",
+    "close": "Close"
   },
   "serverCreate": {
     "title": "Create New Server",
@@ -301,7 +540,7 @@
     },
     "toasts": {
       "userInfoError": "Failed to fetch user info",
-      "creatingServer": "Creating server {name}..."
+      "creatingServer": "Creating server "
     }
   }
 }

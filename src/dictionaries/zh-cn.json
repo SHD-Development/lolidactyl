@@ -30,7 +30,7 @@
     },
     "hero": {
       "title": "重新想象「云」",
-      "subtitle": "SHD Cloud 提供免费的托管服务，以及活跃的游戏社群。",
+      "subtitle": "SHD Cloud 提供免费的托管服务，以及活跃的音 (黄？) 游社群。",
       "cta": "立即开始"
     },
     "features": {
@@ -38,7 +38,7 @@
       "subtitle": "我们提供全方位的解决方案",
       "security": {
         "title": "安全",
-        "description": "我们不会偷您的 Token"
+        "description": "我们不会偷啃您的 Token"
       },
       "performance": {
         "title": "性能",
@@ -90,7 +90,7 @@
       "chooseplan": "选择方案",
       "starter": {
         "name": "入门版",
-        "price": "¥69",
+        "price": "¥19.9",
         "description": "适合个人网站和小型项目",
         "features": {
           "storage": "10GB SSD 存储空间",
@@ -101,7 +101,7 @@
       },
       "pro": {
         "name": "专业版",
-        "price": "¥199",
+        "price": "¥59.9",
         "description": "适合中小型企业和专业网站",
         "features": {
           "storage": "50GB SSD 存储空间",
@@ -113,7 +113,7 @@
       },
       "enterprise": {
         "name": "企业版",
-        "price": "¥699",
+        "price": "¥199.9",
         "description": "适合大型企业和高流量网站",
         "features": {
           "storage": "200GB SSD 存储空间",
@@ -143,7 +143,7 @@
     }
   },
   "dashboard": {
-    "breadcrumbs": "主页",
+    "breadcrumbs": "索引",
     "additionalResources": "其他资源"
   },
   "settings": {
@@ -169,25 +169,264 @@
     "droplets": "露凝",
     "coupons": "兑换代码",
     "transfer": "转账",
-    "stores": "商店",
+    "store": "商店",
+    "general": "一般",
     "resources": "资源",
     "platform": "平台",
     "go": "前往",
     "destination": "跳转至"
   },
+  "servers": {
+    "breadcrumbs": {
+      "servers": "服务器",
+      "create": "创建",
+      "manage": "管理"
+    },
+    "manage": {
+      "title": "服务器管理",
+      "description": "管理和监控您的服务器",
+      "statistics": {
+        "active": "运行中",
+        "suspended": "已暂停",
+        "deleted": "已删除",
+        "total": "总服务器数"
+      },
+      "filter": {
+        "label": "按状态筛选",
+        "placeholder": "筛选服务器...",
+        "noSelection": "未选择状态",
+        "showAll": "显示所有服务器",
+        "selectAll": "全选",
+        "clear": "清除"
+      },
+      "table": {
+        "name": "名称",
+        "identifier": "识别码",
+        "node": "节点",
+        "status": "状态",
+        "actions": "操作",
+        "title": "服务器列表",
+        "cpu": "处理器",
+        "memory": "内存",
+        "disk": "磁盘",
+        "databases": "数据库",
+        "allocations": "网络分配",
+        "backups": "备份栏位",
+        "expiration": "到期时间",
+        "daysRemaining": "剩余天数",
+        "expired": "已过期",
+        "unnamed": "未命名",
+        "days": "天"
+      },
+      "actions": {
+        "edit": "编辑",
+        "delete": "删除",
+        "disabled": "操作不可用",
+        "manage": "管理",
+        "renew": "续约",
+        "create": "创建服务器",
+        "deleteSelected": "删除选中的"
+      },
+      "status": {
+        "active": "运行中",
+        "suspended": "已暂停",
+        "deleted": "已删除"
+      },
+      "edit": {
+        "title": "编辑服务器",
+        "nameLabel": "服务器名称",
+        "namePlaceholder": "输入服务器名称",
+        "cancel": "取消",
+        "save": "保存更改"
+      },
+      "empty": {
+        "title": "找不到服务器",
+        "description": "没有服务器符合目前的筛选条件。"
+      },
+      "loading": "加载服务器中...",
+      "error": "加载服务器失败",
+      "stats": {
+        "showing": "显示 {count} 个服务器 (共 {total} 个)",
+        "filtered": "显示 {start} 到 {end} 项，共 {total} 项 (从总共 {totalServers} 个服务器中筛选)",
+        "pagination": "第 {current} 页，共 {total} 页",
+        "previous": "上一页",
+        "next": "下一页"
+      },
+      "dialogs": {
+        "delete": {
+          "title": "确认删除",
+          "description": "您确定要删除服务器 {identifier} 吗？此操作无法撤销。",
+          "cancel": "取消",
+          "confirm": "删除",
+          "deleting": "删除中..."
+        },
+        "bulkDelete": {
+          "title": "确认批量删除",
+          "description": "您确定要删除选中的 {count} 个服务器吗？此操作无法撤销。",
+          "cancel": "取消",
+          "confirm": "删除全部",
+          "deleting": "删除中..."
+        },
+        "edit": {
+          "description": "修改您的服务器配置和资源分配",
+          "serverType": {
+            "label": "服务器类型",
+            "description": "请重新选择服务器类型（其他资源配置已自动加载当前值）",
+            "loadingPlaceholder": "加载中...",
+            "selectPlaceholder": "选择服务器类型"
+          },
+          "tabs": {
+            "resources": "资源配置",
+            "databases": "数据库与备份"
+          },
+          "form": {
+            "cpu": {
+              "label": "CPU (%)",
+              "unitPrice": "每 %",
+              "costDescription": "CPU 成本: ${amount} Droplets"
+            },
+            "memory": {
+              "label": "内存 (MiB)",
+              "unitPrice": "每 MiB",
+              "costDescription": "内存成本: ${amount} Droplets"
+            },
+            "disk": {
+              "label": "磁盘空间 (MiB)",
+              "unitPrice": "每 MiB",
+              "costDescription": "磁盘成本: ${amount} Droplets"
+            },
+            "databases": {
+              "label": "数据库数量",
+              "unitPrice": "每个",
+              "costDescription": "数据库成本: ${amount} Droplets"
+            },
+            "allocations": {
+              "label": "网络分配数量",
+              "unitPrice": "每个",
+              "costDescription": "网络分配成本: ${amount} Droplets"
+            },
+            "backups": {
+              "label": "备份数量",
+              "unitPrice": "每个",
+              "costDescription": "备份成本: ${amount} Droplets"
+            },
+            "autoRenew": {
+              "label": "自动续约",
+              "description": "启用后将自动续约服务器"
+            }
+          },
+          "pricing": {
+            "title": "价格预览",
+            "description": "修改后的配置预计费用",
+            "loading": "加载中...",
+            "error": {
+              "title": "价格计算错误",
+              "description": "请检查您的配置并重新计算价格"
+            },
+            "breakdown": {
+              "title": "费用明细",
+              "subtitle": "资源 → 费用",
+              "base": "基础费用",
+              "cpu": "CPU ({amount}%)",
+              "memory": "内存 ({amount} MiB)",
+              "disk": "磁盘 ({amount} MiB)",
+              "databases": "数据库 ({amount})",
+              "allocations": "网络分配 ({amount})",
+              "backups": "备份 ({amount})",
+              "total": "总费用"
+            },
+            "balance": {
+              "current": "目前余额",
+              "afterPayment": "付款后余额",
+              "insufficient": "余额不足",
+              "change": "余额变化",
+              "loading": "加载中...",
+              "totalModificationCost": "总修改费用",
+              "status": "余额状态",
+              "sufficient": "余额充足",
+              "calculating": "计算中...",
+              "modifying": "修改中...",
+              "insufficientFunds": "余额不足",
+              "insufficientBalanceMessage": "余额不足，无法进行修改",
+              "additionalDropletsNeeded": "您需要额外 {amount} Droplets 才能完成此次修改"
+            }
+          }
+        }
+      },
+      "notifications": {
+        "modifying": "修改服务器 {name} ({identifier})...",
+        "modifySuccess": "服务器 {name} ({identifier}) 修改成功",
+        "modifyError": "修改服务器失败",
+        "loadError": "加载服务器类型失败",
+        "priceError": "加载价格失败",
+        "deleteError": "删除服务器失败: {error}",
+        "deleteErrorGeneric": "删除服务器时发生错误",
+        "bulkDeleteError": "批量删除服务器失败: {error}",
+        "bulkDeleteErrorGeneric": "批量删除服务器时发生错误"
+      }
+    }
+  },
   "auth": {
-    "welcomeBack": "Welcome Back!"
+    "welcomeBack": "欢迎回来！",
+    "error": {
+      "accessDenied": {
+        "title": "拒绝访问",
+        "description": "您可能使用了 VPN / Proxy / Hosting 或是有创立多重账号的行为，这些都是不被我们的条款允许的。",
+        "suggestion": "请联系管理员以获得进一步协助。"
+      },
+      "configuration": {
+        "title": "配置错误",
+        "description": "服务配置出现问题。",
+        "suggestion": "请稍后再试或联系技术支持。"
+      },
+      "verification": {
+        "title": "验证失败",
+        "description": "无法验证您的身份。",
+        "suggestion": "请检查您的网络连接并重试。"
+      },
+      "default": {
+        "title": "登录错误",
+        "description": "登录过程中发生未知错误。",
+        "suggestion": "请稍后再试或联系技术支持。"
+      },
+      "technicalDetails": "技术详情",
+      "errorCode": "错误代码",
+      "retryLogin": "重新登录",
+      "returnHome": "返回首页"
+    }
   },
   "userCard": {
     "title": "用户信息",
     "unknownUser": "未知用户",
     "unknownId": "未知",
-    "droplets": "Droplets",
+    "droplets": "露凝",
     "dropletsDescription": "您的货币余额",
     "servers": "服务器",
     "serversDescription": "您目前拥有的服务器数量",
     "goToPanel": "前往面板",
-    "resetPassword": "重设密码"
+    "resetPassword": "重设密码",
+    "resettingPassword": "重设中...",
+    "confirmResetTitle": "确认重设密码",
+    "confirmResetDescription": "您确定要重设密码吗？这将会产生一个新的密码，旧密码将无法使用。",
+    "cancel": "取消",
+    "confirmReset": "确认重设",
+    "passwordResetSuccess": "密码重设成功",
+    "passwordResetDescription": "您的新密码如下，请妥善保存:",
+    "userId": "Discord ID",
+    "newPassword": "新密码",
+    "close": "关闭"
+  },
+  "navUser": {
+    "logout": "登出",
+    "droplets": "露凝"
+  },
+  "adCard": {
+    "title": "推荐服务",
+    "learnMore": "了解更多",
+    "advertisement": "广告",
+    "clickToViewMore": "点击查看更多",
+    "goToView": "前往查看",
+    "close": "关闭"
   },
   "serverCreate": {
     "title": "创建新服务器",
@@ -291,17 +530,17 @@
       "pleaseComplete": "请先填完再创建"
     },
     "messages": {
-      "createSuccess": "正在创建。总费用：",
+      "createSuccess": "创建成功。总费用：",
       "createError": "创建服务器失败",
       "pricingError": "无法加载价格，使用默认值",
       "serverTypesError": "无法加载服务器类型",
       "locationsError": "无法加载位置",
-      "NaNError": "请先填写所有数值以便计算估价",
+      "NaNError": "请先填入所有数值以便计算估价",
       "NaNErrorDescription": "如果您没有填写所有数值，则无法计算估价。请先填写所有数值。"
     },
     "toasts": {
       "userInfoError": "获取用户信息失败",
-      "creatingServer": "正在创建服务器 {name}..."
+      "creatingServer": "正在创建服务器 "
     }
   }
 }

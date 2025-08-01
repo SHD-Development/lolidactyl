@@ -66,14 +66,14 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         isActive: isPathActive("/dashboard/servers"),
         items: [
           {
-            title: t("manage"),
-            url: "/dashboard/servers/manage",
-            isActive: isPathActive("/dashboard/servers/manage"),
-          },
-          {
             title: t("create"),
             url: "/dashboard/servers/create",
             isActive: isPathActive("/dashboard/servers/create"),
+          },
+          {
+            title: t("manage"),
+            url: "/dashboard/servers/manage",
+            isActive: isPathActive("/dashboard/servers/manage"),
           },
         ],
       },
@@ -81,25 +81,30 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         title: t("droplets"),
         url: "#",
         icon: Droplet,
+        isActive: isPathActive("/dashboard/droplets"),
         items: [
           {
             title: t("coupons"),
-            url: "#",
+            url: "/dashboard/droplets/coupons",
+            isActive: isPathActive("/dashboard/droplets/coupons"),
           },
           {
             title: t("transfer"),
-            url: "#",
+            url: "/dashboard/droplets/transfer",
+            isActive: isPathActive("/dashboard/droplets/transfer"),
           },
         ],
       },
       {
-        title: t("stores"),
-        url: "#",
+        title: t("store"),
+        url: "/dashboard/store",
         icon: Store,
+        isActive: isPathActive("/dashboard/store"),
         items: [
           {
-            title: t("resources"),
-            url: "#",
+            title: t("general"),
+            url: "/dashboard/store/general",
+            isActive: isPathActive("/dashboard/store/general"),
           },
         ],
       },

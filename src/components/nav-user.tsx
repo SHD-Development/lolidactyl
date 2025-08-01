@@ -7,6 +7,8 @@ import {
   CreditCard,
   LogOut,
   Sparkles,
+  Coins,
+  Droplets,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -26,6 +28,16 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { Link } from "next-view-transitions";
+import { LoaderCircle } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import axios from "axios";
+
+interface UserInfo {
+  coins: number;
+  panelId: number;
+}
+
 export function NavUser({
   user,
 }: {
@@ -36,6 +48,24 @@ export function NavUser({
   };
 }) {
   const { isMobile } = useSidebar();
+  const t = useTranslations("navUser");
+  const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await axios.get("/api/userinfo");
+        setUserInfo(response.data);
+      } catch (error) {
+        console.error("Failed to fetch user info:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserInfo();
+  }, []);
 
   return (
     <SidebarMenu>
@@ -48,7 +78,9 @@ export function NavUser({
             >
               <Avatar className="h-8 w-8 rounded-lg">
                 <AvatarImage src={user.avatar} alt={user.name} />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                <AvatarFallback className="rounded-lg">
+                  <LoaderCircle className="h-4 w-4 animate-spin" />
+                </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
                 <span className="truncate font-medium">{user.name}</span>
@@ -77,31 +109,25 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
+              <DropdownMenuItem className="flex items-center gap-2">
+                <Droplets className="h-4 w-4" />
+                <div className="flex flex-col">
+                  <span className="text-sm font-medium">{t("droplets")}</span>
+                  <span className="text-xs text-muted-foreground">
+                    {loading ? (
+                      <LoaderCircle className="h-3 w-3 animate-spin inline" />
+                    ) : (
+                      `${userInfo?.coins?.toFixed(2) || "0.00"}`
+                    )}
+                  </span>
+                </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <Link href="/auth/logout" prefetch={false}>
               <DropdownMenuItem>
                 <LogOut />
-                Log out
+                {t("logout")}
               </DropdownMenuItem>
             </Link>
           </DropdownMenuContent>

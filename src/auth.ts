@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import Discord from "next-auth/providers/discord";
 import { NextResponse } from "next/server";
-
+import axios from "axios";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
     Discord({
@@ -19,6 +19,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+
+  pages: {
+    error: "/auth/error",
+  },
+
   callbacks: {
     authorized: async ({ auth, request }) => {
       const isLoggedIn = !!auth?.user;
@@ -29,6 +34,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
+
     async session({ session }) {
       if (session.user.image == null || session.user.image == undefined)
         return session;
@@ -36,6 +42,36 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       const userId = url.pathname.split("/")[2];
       session.user.id = userId;
       return session;
+    },
+    async signIn({ user, account, profile }) {
+      try {
+        const { headers } = await import("next/headers");
+        const headersList = await headers();
+        const ip =
+          headersList.get("x-forwarded-for") ||
+          headersList.get("x-real-ip") ||
+          "";
+        const apiKey = process.env.BACKEND_API_KEY;
+        const apiUrl = new URL(process.env.BACKEND_API_URL as string);
+        apiUrl.pathname = "/ipcheck";
+        apiUrl.searchParams.append("id", profile?.id as string);
+        apiUrl.searchParams.append("ip", ip);
+        const response = await axios.get(apiUrl.toString(), {
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
+        });
+      } catch (error) {
+        if (
+          axios.isAxiosError(error) &&
+          (error.response?.status === 403 || error.response?.status === 409)
+        ) {
+          throw new Error("AccessDenied");
+        }
+      }
+
+      return true;
     },
   },
 });

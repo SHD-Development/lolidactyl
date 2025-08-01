@@ -289,12 +289,52 @@ export default function LandingPage() {
               variants={fadeInUp}
             >
               <Link href="/dashboard">
-                <BackgroundGradient className="p-0.5">
-                  <Button className="rounded-[1.25rem] w-50 h-16 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg group cursor-pointer">
-                    <h1 className="text-2xl font-semibold">{t("hero.cta")}</h1>
-                    <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <motion.div
+                  whileHover={{
+                    scale: 1.02,
+                    y: -8,
+                  }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                >
+                  <Button className="relative overflow-hidden rounded-[2rem] min-w-[260px] h-[5.5rem] bg-white/[0.015] dark:bg-white/[0.005] backdrop-blur-[6px] border border-white/[0.04] dark:border-white/[0.02] hover:bg-white/[0.03] dark:hover:bg-white/[0.015] text-gray-800 dark:text-gray-100 px-14 py-7 text-lg group cursor-pointer shadow-[0_8px_32px_0_rgba(31,38,135,0.08)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.08)] transition-all duration-500 ease-in-out">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/[0.04] via-white/[0.01] to-white/[0.002] dark:from-white/[0.025] dark:via-white/[0.008] dark:to-white/[0.001] rounded-[2rem] backdrop-blur-[4px]" />
+
+                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.03] to-transparent dark:via-white/[0.015] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-all duration-700 transform group-hover:scale-105" />
+
+                    <div className="absolute inset-[1px] rounded-[calc(2rem-1px)] border border-white/[0.04] dark:border-white/[0.02] shadow-inner" />
+
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.08] to-transparent dark:via-white/[0.04] w-[120%] h-full -translate-x-full group-hover:translate-x-full transition-transform duration-1200 ease-out rounded-[2rem] transform -skew-x-12" />
+
+                    <div className="absolute top-3 left-6 w-2 h-2 bg-white/[0.06] dark:bg-white/[0.04] rounded-full blur-[1px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse" />
+                    <div
+                      className="absolute bottom-4 right-8 w-3 h-3 bg-white/[0.04] dark:bg-white/[0.025] rounded-full blur-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-700 animate-pulse"
+                      style={{ animationDelay: "0.3s" }}
+                    />
+
+                    <div className="absolute inset-0 bg-gradient-to-bl from-white/[0.02] via-transparent to-white/[0.01] dark:from-white/[0.012] dark:to-white/[0.005] rounded-[2rem] opacity-0 group-hover:opacity-100 transition-all duration-500 transform group-hover:rotate-1" />
+
+                    <div className="relative z-20 flex items-center justify-center gap-4">
+                      <span className="text-xl font-medium tracking-wide text-gray-900 dark:text-gray-50 group-hover:text-gray-950 dark:group-hover:text-white transition-all duration-300 drop-shadow-lg">
+                        {t("hero.cta")}
+                      </span>
+                      <ArrowRight className="h-6 w-6 text-gray-800 dark:text-gray-100 group-hover:translate-x-3 group-hover:scale-110 group-hover:text-gray-950 dark:group-hover:text-white transition-all duration-400 ease-out drop-shadow-lg" />
+                    </div>
+
+                    <div className="absolute -inset-2 rounded-[2.5rem] bg-gradient-to-br from-white/[0.03] via-white/[0.01] to-transparent dark:from-white/[0.015] dark:via-white/[0.005] dark:to-transparent opacity-0 group-hover:opacity-100 blur-xl transition-all duration-700 -z-10 transform group-hover:scale-110" />
+
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-1000">
+                      <div
+                        className="absolute top-1/4 left-1/4 w-1 h-1 bg-white/[0.1] rounded-full animate-ping"
+                        style={{ animationDelay: "0.5s" }}
+                      />
+                      <div
+                        className="absolute bottom-1/3 right-1/3 w-1 h-1 bg-white/[0.08] rounded-full animate-ping"
+                        style={{ animationDelay: "1s" }}
+                      />
+                    </div>
                   </Button>
-                </BackgroundGradient>
+                </motion.div>
               </Link>
             </motion.div>
           </motion.div>
