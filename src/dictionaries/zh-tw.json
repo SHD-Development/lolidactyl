@@ -585,5 +585,37 @@
       "limitReached": "該兌換代碼已被兌換完畢",
       "redeemFailed": "兌換代碼失敗"
     }
+  },
+  "transfer": {
+    "breadcrumbs": "轉帳",
+    "title": "轉帳露凝",
+    "description": "將您的露凝轉帳給其他使用者",
+    "form": {
+      "processing": "處理中...",
+      "recipientLabel": "收款人 Discord ID",
+      "recipientPlaceholder": "輸入 Discord ID",
+      "amountLabel": "金額",
+      "amountPlaceholder": "輸入轉帳金額",
+      "submit": "轉帳"
+    },
+    "success": {
+      "title": "轉帳成功！",
+      "description": "您的露凝已成功轉帳",
+      "details": "轉帳詳情",
+      "yourBalance": "您的餘額",
+      "recipientBalance": "收款人餘額",
+      "fee": "手續費",
+      "actualTransfer": "實際收款",
+      "droplets": "露凝",
+      "close": "完成"
+    },
+    "errors": {
+      "receiverNotFound": "找不到收款人",
+      "insufficientBalance": "餘額不足",
+      "transferFailed": "轉帳失敗",
+      "invalidAmount": "無效金額",
+      "invalidRecipient": "無效收款人 ID",
+      "amountTooLow": "輸入金額低於最低轉帳金額"
+    }
   }
 }

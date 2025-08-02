@@ -30,7 +30,7 @@ import {
 import { useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import { Coins, Gift, Droplets } from "lucide-react";
+import { Key, Gift, Droplets } from "lucide-react";
 import { Cover } from "@/components/ui/cover";
 interface RedeemResponse {
   status: "success" | "error";
@@ -153,7 +153,7 @@ export default function CouponsPage() {
               <CardTitle className="text-3xl font-bold text-primary">
                 {t("title")}
               </CardTitle>
-              <CardDescription className="text-base mt-3 max-w-md mx-auto text-muted-foreground">
+              <CardDescription className="text-lg mt-3 max-w-md mx-auto text-muted-foreground">
                 {t("description")}
               </CardDescription>
             </CardHeader>
@@ -177,7 +177,7 @@ export default function CouponsPage() {
                       className="text-center text-xl font-mono h-14 border-2 focus:border-primary bg-background shadow-inner transition-all duration-200 hover:bg-muted/30"
                     />
                     <div className="absolute inset-y-0 left-4 flex items-center pointer-events-none">
-                      <Coins className="h-5 w-5 text-muted-foreground" />
+                      <Key className="h-5 w-5 text-muted-foreground" />
                     </div>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export default function CouponsPage() {
         <DialogContent className="sm:max-w-lg border shadow-2xl bg-card">
           <DialogHeader>
             <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100 dark:bg-green-900/40 shadow-xl border border-green-200 dark:border-green-800">
-              <Droplets className="h-10 w-10 text-green-600 dark:text-green-400" />
+              <Gift className="h-10 w-10 text-green-600 dark:text-green-400" />
             </div>
             <DialogTitle className="text-center text-2xl font-bold text-green-600 dark:text-green-400">
               {t("success.title")}

@@ -585,5 +585,37 @@
       "limitReached": "该兑换代码已被兑换完毕",
       "redeemFailed": "兑换兑换代码失败"
     }
+  },
+  "transfer": {
+    "breadcrumbs": "转账",
+    "title": "转账露凝",
+    "description": "将您的露凝转账给其他用户",
+    "form": {
+      "processing": "处理中...",
+      "recipientLabel": "收款人 Discord ID",
+      "recipientPlaceholder": "输入 Discord ID",
+      "amountLabel": "金额",
+      "amountPlaceholder": "输入转账金额",
+      "submit": "转账"
+    },
+    "success": {
+      "title": "转账成功！",
+      "description": "您的露凝已成功转账",
+      "details": "转账详情",
+      "yourBalance": "您的余额",
+      "recipientBalance": "收款人余额",
+      "fee": "手续费",
+      "actualTransfer": "实际收款",
+      "droplets": "露凝",
+      "close": "完成"
+    },
+    "errors": {
+      "receiverNotFound": "找不到收款人",
+      "insufficientBalance": "余额不足",
+      "transferFailed": "转账失败",
+      "invalidAmount": "无效金额",
+      "invalidRecipient": "无效收款人 ID",
+      "amountTooLow": "输入金额低于最低转账金额"
+    }
   }
 }

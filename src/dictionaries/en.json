@@ -585,5 +585,37 @@
       "limitReached": "This coupon has reached its usage limit",
       "redeemFailed": "Failed to redeem coupon"
     }
+  },
+  "transfer": {
+    "breadcrumbs": "Transfer",
+    "title": "Transfer Droplets",
+    "description": "Transfer your droplets to another user",
+    "form": {
+      "processing": "Processing...",
+      "recipientLabel": "Recipient Discord ID",
+      "recipientPlaceholder": "Enter Discord ID",
+      "amountLabel": "Amount",
+      "amountPlaceholder": "Enter amount to transfer",
+      "submit": "Transfer"
+    },
+    "success": {
+      "title": "Transfer Completed Successfully!",
+      "description": "Your droplets have been transferred successfully",
+      "details": "Transfer Details",
+      "yourBalance": "Your Balance",
+      "recipientBalance": "Recipient Balance",
+      "fee": "Transaction Fee",
+      "actualTransfer": "Amount Received",
+      "droplets": "Droplets",
+      "close": "Done"
+    },
+    "errors": {
+      "receiverNotFound": "Recipient not found",
+      "insufficientBalance": "Insufficient balance",
+      "transferFailed": "Transfer failed",
+      "invalidAmount": "Invalid amount",
+      "invalidRecipient": "Invalid recipient ID",
+      "amountTooLow": "Transfer amount is below the minimum transfer amount"
+    }
   }
 }
