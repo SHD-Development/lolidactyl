@@ -40,20 +40,11 @@ const appConfig = {
   ads: [
     {
       id: 1,
-      title: "Brian0901ThePro",
-      description: "高性能TS魔法少女貓娘，適合個人和企業使用。",
+      title: "Lolidactyl",
+      description: "幫這個專案點顆星星嗎？",
       imageUrl:
-        "https://cdn.discordapp.com/avatars/810409750625386497/6f018500ceb0fb97ff63a50aceb89c18.png?size=4096",
-      linkUrl: "",
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: "RynoTheCatgirl",
-      description: "店貓娘，非常可愛。",
-      imageUrl:
-        "https://cdn.discordapp.com/avatars/551019276174229505/c0eb91d693e043401630f209648258e8.png?size=4096",
-      linkUrl: "",
+        "https://static.wikia.nocookie.net/windows/images/0/01/GitHub_logo_2013.png/revision/latest?cb=20231201024220",
+      linkUrl: "https://github.com/SHD-Development/lolidactyl",
       isActive: true,
     },
   ],
