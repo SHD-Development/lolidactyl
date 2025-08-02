@@ -214,6 +214,7 @@
         "backups": "備份欄位",
         "expiration": "到期時間",
         "daysRemaining": "剩餘天數",
+        "autoRenew": "自動續約",
         "expired": "已過期",
         "unnamed": "未命名",
         "days": "天"
@@ -230,7 +231,9 @@
       "status": {
         "active": "運行中",
         "suspended": "已暫停",
-        "deleted": "已刪除"
+        "deleted": "已刪除",
+        "autoRenewEnabled": "開啟",
+        "autoRenewDisabled": "關閉"
       },
       "edit": {
         "title": "編輯伺服器",
@@ -351,6 +354,23 @@
               "additionalDropletsNeeded": "您需要額外 {amount} Droplets 才能完成此次修改"
             }
           }
+        },
+        "renew": {
+          "title": "確認續約",
+          "description": "您確定要續約伺服器 {serverName} ({identifier}) 嗎？",
+          "serverInfo": "伺服器資訊",
+          "pricing": "續約費用",
+          "renewalCost": "續約費用",
+          "currentBalance": "目前餘額",
+          "afterRenewal": "續約後餘額",
+          "insufficientBalance": "餘額不足，無法續約",
+          "needMoreDroplets": "您需要額外 {amount} Droplets 才能續約",
+          "cancel": "取消",
+          "confirm": "確認續約",
+          "renewing": "續約中...",
+          "insufficientFunds": "餘額不足",
+          "success": "伺服器續約成功",
+          "failed": "伺服器續約失敗"
         }
       },
       "notifications": {
@@ -541,6 +561,29 @@
     "toasts": {
       "userInfoError": "獲取使用者信息失敗",
       "creatingServer": "正在創建伺服器 "
+    }
+  },
+  "coupons": {
+    "breadcrumbs": "兌換代碼",
+    "title": "兌換代碼",
+    "description": "輸入兌換代碼以兌換露凝",
+    "form": {
+      "label": "兌換代碼",
+      "placeholder": "請輸入您的兌換代碼",
+      "submit": "兌換"
+    },
+    "success": {
+      "title": "兌換代碼成功！",
+      "description": "您已成功兌換代碼",
+      "rewardReceived": "獲得獎勵",
+      "currentBalance": "目前餘額",
+      "droplets": "露凝"
+    },
+    "errors": {
+      "alreadyUsed": "該兌換代碼已被兌換過",
+      "notFound": "無效的兌換代碼",
+      "limitReached": "該兌換代碼已被兌換完畢",
+      "redeemFailed": "兌換代碼失敗"
     }
   }
 }

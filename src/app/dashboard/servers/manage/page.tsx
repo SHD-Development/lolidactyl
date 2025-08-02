@@ -75,6 +75,7 @@ import {
   Activity,
   Pause,
   X,
+  ClockPlus,
 } from "lucide-react";
 import { Link } from "next-view-transitions";
 import { useForm } from "react-hook-form";
@@ -191,7 +192,7 @@ interface UserInfo {
   __v: number;
 }
 
-const ITEMS_PER_PAGE = 3;
+const ITEMS_PER_PAGE = 5;
 
 export default function DashboardServersManage() {
   const t = useTranslations("servers.manage");
@@ -221,6 +222,12 @@ export default function DashboardServersManage() {
   const [editDialogOpen, setEditDialogOpen] = useState(false);
   const [serverToEdit, setServerToEdit] = useState<Server | null>(null);
   const [isModifying, setIsModifying] = useState(false);
+
+  const [renewDialogOpen, setRenewDialogOpen] = useState(false);
+  const [serverToRenew, setServerToRenew] = useState<Server | null>(null);
+  const [isRenewing, setIsRenewing] = useState(false);
+  const [renewCost, setRenewCost] = useState(0);
+
   const [nests, setNests] = useState<Nest[]>([]);
   const [locations, setLocations] = useState<Location[]>([]);
   const [pricing, setPricing] = useState<ResourcePricing>({
@@ -396,15 +403,21 @@ export default function DashboardServersManage() {
         (currentPage - 1) * ITEMS_PER_PAGE,
         currentPage * ITEMS_PER_PAGE
       );
-      setSelectedServers(
-        new Set(currentPageServers.map((server) => server.id))
+      const selectableServers = currentPageServers.filter(
+        (server) => server.status !== "Deleted"
       );
+      setSelectedServers(new Set(selectableServers.map((server) => server.id)));
     } else {
       setSelectedServers(new Set());
     }
   };
 
   const handleSelectServer = (serverId: number, checked: boolean) => {
+    const server = userInfo?.servers.find((s) => s.id === serverId);
+    if (server && server.status === "Deleted") {
+      return;
+    }
+
     const newSelected = new Set(selectedServers);
     if (checked) {
       newSelected.add(serverId);
@@ -485,8 +498,60 @@ export default function DashboardServersManage() {
     }
   };
 
-  const handleRenewServer = (identifier: string) => {
-    console.log("Renew server:", identifier);
+  const handleRenewServer = async (identifier: string) => {
+    const server = userInfo?.servers.find((s) => s.identifier === identifier);
+    if (!server) {
+      toast.error("Server not found");
+      return;
+    }
+
+    try {
+      const pricingResponse = await axios.get("/api/pricing");
+      const currentPricing = pricingResponse.data.data;
+      const cost =
+        currentPricing.base +
+        server.resources.cpu * currentPricing.cpu +
+        server.resources.ram * currentPricing.ram +
+        server.resources.disk * currentPricing.disk +
+        server.resources.databases * currentPricing.databases +
+        server.resources.backups * currentPricing.backups +
+        server.resources.allocations * currentPricing.allocations;
+
+      setRenewCost(cost);
+      setServerToRenew(server);
+      setRenewDialogOpen(true);
+    } catch (error) {
+      console.error("Failed to calculate renewal cost:", error);
+      toast.error("Failed to calculate renewal cost");
+    }
+  };
+
+  const confirmRenew = async () => {
+    if (!serverToRenew) return;
+
+    setIsRenewing(true);
+    try {
+      const response = await axios.post("/api/renew", {
+        serverId: serverToRenew.id,
+      });
+
+      if (response.data.status == "success") {
+        toast.success(t("dialogs.renew.success"));
+        setRenewDialogOpen(false);
+        await fetchUserInfo();
+      } else {
+        toast.error(response.data.message || t("dialogs.renew.failed"));
+      }
+    } catch (error) {
+      console.error("Renew error:", error);
+      if (axios.isAxiosError(error) && error.response?.data?.error) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error(t("dialogs.renew.failed"));
+      }
+    } finally {
+      setIsRenewing(false);
+    }
   };
 
   const handleEditServer = (serverId: number) => {
@@ -651,7 +716,9 @@ export default function DashboardServersManage() {
 
   const allCurrentPageSelected =
     currentPageServers.length > 0 &&
-    currentPageServers.every((server) => selectedServers.has(server.id));
+    currentPageServers
+      .filter((server) => server.status !== "Deleted")
+      .every((server) => selectedServers.has(server.id));
 
   return (
     <>
@@ -970,6 +1037,11 @@ export default function DashboardServersManage() {
                   <TableHead className="w-12">
                     <Checkbox
                       checked={allCurrentPageSelected}
+                      disabled={
+                        currentPageServers.filter(
+                          (server) => server.status !== "Deleted"
+                        ).length === 0
+                      }
                       onCheckedChange={handleSelectAll}
                     />
                   </TableHead>
@@ -982,6 +1054,7 @@ export default function DashboardServersManage() {
                   <TableHead>{t("table.allocations")}</TableHead>
                   <TableHead>{t("table.backups")}</TableHead>
                   <TableHead>{t("table.status")}</TableHead>
+                  <TableHead>{t("table.autoRenew")}</TableHead>
                   <TableHead>{t("table.expiration")}</TableHead>
                   <TableHead>{t("table.daysRemaining")}</TableHead>
                   <TableHead className="w-12">{t("table.actions")}</TableHead>
@@ -990,7 +1063,7 @@ export default function DashboardServersManage() {
               <TableBody>
                 {currentPageServers.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={13} className="text-center py-8">
+                    <TableCell colSpan={14} className="text-center py-8">
                       <div className="flex flex-col items-center gap-2">
                         <p className="text-muted-foreground">
                           {statusFilter.length === 0
@@ -1033,6 +1106,7 @@ export default function DashboardServersManage() {
                         <TableCell>
                           <Checkbox
                             checked={selectedServers.has(server.id)}
+                            disabled={server.status === "Deleted"}
                             onCheckedChange={(checked) =>
                               handleSelectServer(server.id, checked as boolean)
                             }
@@ -1113,6 +1187,22 @@ export default function DashboardServersManage() {
                         <TableCell>{getStatusBadge(server.status)}</TableCell>
                         <TableCell
                           className={
+                            server.status === "Deleted" ? "opacity-50" : ""
+                          }
+                        >
+                          <Badge
+                            variant={server.autoRenew ? "default" : "secondary"}
+                            className={
+                              server.status === "Deleted" ? "line-through" : ""
+                            }
+                          >
+                            {server.autoRenew
+                              ? t("status.autoRenewEnabled")
+                              : t("status.autoRenewDisabled")}
+                          </Badge>
+                        </TableCell>
+                        <TableCell
+                          className={
                             server.status === "Deleted"
                               ? "line-through text-gray-500"
                               : ""
@@ -1176,7 +1266,7 @@ export default function DashboardServersManage() {
                                 }
                                 className="flex items-center gap-2"
                               >
-                                <LoaderCircle className="h-4 w-4" />
+                                <ClockPlus className="h-4 w-4" />
                                 {t("actions.renew")}
                               </DropdownMenuItem>
                               <DropdownMenuItem
@@ -1907,6 +1997,174 @@ export default function DashboardServersManage() {
                 </DialogFooter>
               </form>
             </Form>
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={renewDialogOpen} onOpenChange={setRenewDialogOpen}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>{t("dialogs.renew.title")}</DialogTitle>
+              <DialogDescription>
+                {t("dialogs.renew.description", {
+                  serverName: serverToRenew?.name || t("table.unnamed"),
+                  identifier: serverToRenew?.identifier || "",
+                })}
+              </DialogDescription>
+            </DialogHeader>
+
+            {serverToRenew && (
+              <div className="space-y-4">
+                <div className="bg-muted/30 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-3">
+                    {t("dialogs.renew.serverInfo")}
+                  </h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.name")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.name || t("table.unnamed")}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">ID:</span>
+                      <p className="font-medium font-mono">
+                        {serverToRenew.identifier}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.cpu")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.cpu}%
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.memory")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.ram} MiB
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.disk")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.disk} MiB
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.databases")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.databases}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.allocations")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.allocations}
+                      </p>
+                    </div>
+                    <div>
+                      <span className="text-sm text-muted-foreground">
+                        {t("table.backups")}:
+                      </span>
+                      <p className="font-medium">
+                        {serverToRenew.resources.backups}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-muted/30 p-4 rounded-lg">
+                  <h3 className="font-semibold mb-3">
+                    {t("dialogs.renew.pricing")}
+                  </h3>
+                  <div className="flex justify-between items-center">
+                    <span className="text-lg">
+                      {t("dialogs.renew.renewalCost")}
+                    </span>
+                    <span className="text-2xl font-bold text-primary">
+                      {safeToFixed(renewCost)} Droplets
+                    </span>
+                  </div>
+
+                  {userInfo && (
+                    <div className="mt-4 space-y-2">
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {t("dialogs.renew.currentBalance")}
+                        </span>
+                        <span className="font-medium">
+                          {safeToFixed(userInfo.coins)} Droplets
+                        </span>
+                      </div>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-muted-foreground">
+                          {t("dialogs.renew.afterRenewal")}
+                        </span>
+                        <span
+                          className={`font-medium ${
+                            userInfo.coins >= renewCost
+                              ? "text-green-600"
+                              : "text-red-600"
+                          }`}
+                        >
+                          {safeToFixed(userInfo.coins - renewCost)} Droplets
+                        </span>
+                      </div>
+                    </div>
+                  )}
+
+                  {userInfo && userInfo.coins < renewCost && (
+                    <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-lg">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+                        <span className="text-sm font-medium text-red-800">
+                          {t("dialogs.renew.insufficientBalance")}
+                        </span>
+                      </div>
+                      <p className="text-xs text-red-600 mt-1">
+                        {t("dialogs.renew.needMoreDroplets", {
+                          amount: safeToFixed(renewCost - userInfo.coins),
+                        })}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <DialogFooter>
+              <Button
+                variant="outline"
+                onClick={() => setRenewDialogOpen(false)}
+                disabled={isRenewing}
+              >
+                {t("dialogs.renew.cancel")}
+              </Button>
+              <Button
+                onClick={confirmRenew}
+                disabled={isRenewing || !userInfo || userInfo.coins < renewCost}
+              >
+                {isRenewing && (
+                  <LoaderCircle className="h-4 w-4 mr-2 animate-spin" />
+                )}
+                {isRenewing
+                  ? t("dialogs.renew.renewing")
+                  : !userInfo || userInfo.coins < renewCost
+                  ? t("dialogs.renew.insufficientFunds")
+                  : t("dialogs.renew.confirm")}
+              </Button>
+            </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>

@@ -214,6 +214,7 @@
         "backups": "Backups",
         "expiration": "Expiration Date",
         "daysRemaining": "Days Remaining",
+        "autoRenew": "Auto Renew",
         "expired": "Expired",
         "unnamed": "Unnamed",
         "days": "days"
@@ -230,7 +231,9 @@
       "status": {
         "active": "Active",
         "suspended": "Suspended",
-        "deleted": "Deleted"
+        "deleted": "Deleted",
+        "autoRenewEnabled": "Enabled",
+        "autoRenewDisabled": "Disabled"
       },
       "edit": {
         "title": "Edit Server",
@@ -351,6 +354,23 @@
               "additionalDropletsNeeded": "You need an additional {amount} Droplets to complete this modification"
             }
           }
+        },
+        "renew": {
+          "title": "Confirm Renewal",
+          "description": "Are you sure you want to renew server {serverName} ({identifier})?",
+          "serverInfo": "Server Information",
+          "pricing": "Renewal Pricing",
+          "renewalCost": "Renewal Cost",
+          "currentBalance": "Current Balance",
+          "afterRenewal": "Balance After Renewal",
+          "insufficientBalance": "Insufficient balance, cannot renew",
+          "needMoreDroplets": "You need an additional {amount} Droplets to renew",
+          "cancel": "Cancel",
+          "confirm": "Confirm Renewal",
+          "renewing": "Renewing...",
+          "insufficientFunds": "Insufficient Balance",
+          "success": "Server renewed successfully",
+          "failed": "Failed to renew server"
         }
       },
       "notifications": {
@@ -541,6 +561,29 @@
     "toasts": {
       "userInfoError": "Failed to fetch user info",
       "creatingServer": "Creating server "
+    }
+  },
+  "coupons": {
+    "breadcrumbs": "Coupons",
+    "title": "Redeem Coupon",
+    "description": "Enter a coupon code to redeem rewards",
+    "form": {
+      "label": "Coupon Code",
+      "placeholder": "Enter your coupon code",
+      "submit": "Redeem"
+    },
+    "success": {
+      "title": "Coupon Redeemed Successfully!",
+      "description": "You have successfully redeemed the coupon code",
+      "rewardReceived": "Reward Received",
+      "currentBalance": "Current Balance",
+      "droplets": "Droplets"
+    },
+    "errors": {
+      "alreadyUsed": "This coupon has already been redeemed",
+      "notFound": "Invalid coupon code",
+      "limitReached": "This coupon has reached its usage limit",
+      "redeemFailed": "Failed to redeem coupon"
     }
   }
 }

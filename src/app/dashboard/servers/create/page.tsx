@@ -399,10 +399,11 @@ export default function DashboardServersCreate() {
     });
 
     const createServer = async () => {
+      let loadingToast;
       try {
         setIsCreatingServer(true);
 
-        const loadingToast = toast.loading(
+        loadingToast = toast.loading(
           t("toasts.creatingServer") + ` ${values.name}...`,
           {
             duration: Infinity,
@@ -443,8 +444,22 @@ export default function DashboardServersCreate() {
         }
       } catch (error) {
         console.error("Error creating server:", error);
+        if (loadingToast) {
+          toast.dismiss(loadingToast);
+        }
+
         if (axios.isAxiosError(error)) {
-          toast.error(error.response?.data?.error || t("messages.createError"));
+          if (
+            error.response?.status === 400 &&
+            error.response?.data?.error.errors[0].code ==
+              "NoViableNodeException"
+          ) {
+            toast.error(t("messages.nodeFullError"));
+          } else {
+            toast.error(
+              error.response?.data?.error || t("messages.createError")
+            );
+          }
         } else {
           toast.error(t("messages.createError"));
         }

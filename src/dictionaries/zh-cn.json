@@ -214,6 +214,7 @@
         "backups": "备份栏位",
         "expiration": "到期时间",
         "daysRemaining": "剩余天数",
+        "autoRenew": "自动续约",
         "expired": "已过期",
         "unnamed": "未命名",
         "days": "天"
@@ -230,7 +231,9 @@
       "status": {
         "active": "运行中",
         "suspended": "已暂停",
-        "deleted": "已删除"
+        "deleted": "已删除",
+        "autoRenewEnabled": "开启",
+        "autoRenewDisabled": "关闭"
       },
       "edit": {
         "title": "编辑服务器",
@@ -351,6 +354,23 @@
               "additionalDropletsNeeded": "您需要额外 {amount} Droplets 才能完成此次修改"
             }
           }
+        },
+        "renew": {
+          "title": "确认续约",
+          "description": "您确定要续约服务器 {serverName} ({identifier}) 吗？",
+          "serverInfo": "服务器信息",
+          "pricing": "续约费用",
+          "renewalCost": "续约费用",
+          "currentBalance": "当前余额",
+          "afterRenewal": "续约后余额",
+          "insufficientBalance": "余额不足，无法续约",
+          "needMoreDroplets": "您需要额外 {amount} Droplets 才能续约",
+          "cancel": "取消",
+          "confirm": "确认续约",
+          "renewing": "续约中...",
+          "insufficientFunds": "余额不足",
+          "success": "服务器续约成功",
+          "failed": "服务器续约失败"
         }
       },
       "notifications": {
@@ -541,6 +561,29 @@
     "toasts": {
       "userInfoError": "获取用户信息失败",
       "creatingServer": "正在创建服务器 "
+    }
+  },
+  "coupons": {
+    "breadcrumbs": "兑换代码",
+    "title": "兑换代码",
+    "description": "输入兑换代码以兑换",
+    "form": {
+      "label": "兑换代码",
+      "placeholder": "请输入您的兑换代码",
+      "submit": "兑换"
+    },
+    "success": {
+      "title": "兑换代码成功！",
+      "description": "您已成功兑换代码",
+      "rewardReceived": "获得奖励",
+      "currentBalance": "当前余额",
+      "droplets": "露凝"
+    },
+    "errors": {
+      "alreadyUsed": "该兑换代码已被兑换过",
+      "notFound": "无效的兑换代码",
+      "limitReached": "该兑换代码已被兑换完毕",
+      "redeemFailed": "兑换兑换代码失败"
     }
   }
 }

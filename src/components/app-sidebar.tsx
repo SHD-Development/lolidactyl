@@ -95,19 +95,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
         ],
       },
-      {
-        title: t("store"),
-        url: "/dashboard/store",
-        icon: Store,
-        isActive: isPathActive("/dashboard/store"),
-        items: [
-          {
-            title: t("general"),
-            url: "/dashboard/store/general",
-            isActive: isPathActive("/dashboard/store/general"),
-          },
-        ],
-      },
+      // {
+      //   title: t("store"),
+      //   url: "/dashboard/store",
+      //   icon: Store,
+      //   isActive: isPathActive("/dashboard/store"),
+      //   items: [
+      //     {
+      //       title: t("general"),
+      //       url: "/dashboard/store/general",
+      //       isActive: isPathActive("/dashboard/store/general"),
+      //     },
+      //   ],
+      // },
     ],
   };
 
