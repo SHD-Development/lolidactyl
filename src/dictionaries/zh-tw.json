@@ -617,7 +617,8 @@
       "transferFailed": "轉帳失敗",
       "invalidAmount": "無效金額",
       "invalidRecipient": "無效收款人 ID",
-      "amountTooLow": "輸入金額低於最低轉帳金額"
+      "amountTooLow": "輸入金額低於最低轉帳金額",
+      "sameUserTransfer": "不能轉帳給自己"
     }
   }
 }

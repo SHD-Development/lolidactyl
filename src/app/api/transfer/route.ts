@@ -24,6 +24,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    if (id === to) {
+      return NextResponse.json(
+        { status: "error", errors: ["Same user transfer is not allowed"] },
+        { status: 400 }
+      );
+    }
+
     if (!coins || typeof coins !== "number" || coins <= 0) {
       return NextResponse.json(
         { error: "Invalid transfer amount" },

@@ -617,7 +617,8 @@
       "transferFailed": "转账失败",
       "invalidAmount": "无效金额",
       "invalidRecipient": "无效收款人 ID",
-      "amountTooLow": "输入金额低于最低转账金额"
+      "amountTooLow": "输入金额低于最低转账金额",
+      "sameUserTransfer": "不能转账给自己"
     }
   }
 }

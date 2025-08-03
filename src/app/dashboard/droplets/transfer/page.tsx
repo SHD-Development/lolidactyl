@@ -101,6 +101,8 @@ export default function TransferPage() {
           toast.error(t("errors.insufficientBalance"));
         } else if (errorMessage === "Transfer amount too low") {
           toast.error(t("errors.amountTooLow"));
+        } else if (errorMessage === "Same user transfer is not allowed") {
+          toast.error(t("errors.sameUserTransfer"));
         } else {
           toast.error(t("errors.transferFailed"));
         }
@@ -119,6 +121,8 @@ export default function TransferPage() {
             toast.error(t("errors.insufficientBalance"));
           } else if (errorMessage === "Transfer amount too low") {
             toast.error(t("errors.amountTooLow"));
+          } else if (errorMessage === "Same user transfer is not allowed") {
+            toast.error(t("errors.sameUserTransfer"));
           } else {
             toast.error(t("errors.transferFailed"));
           }

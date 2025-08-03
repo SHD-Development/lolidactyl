@@ -191,7 +191,10 @@ export function NavUser({
               <DropdownMenuItem asChild className="flex items-center gap-2">
                 <div>
                   <Languages className="h-4 w-4" />
-                  <div className="flex flex-1 items-center">
+                  <div
+                    className="flex flex-1 items-center"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <span className="text-sm font-medium mr-2">
                       {t("language")}
                     </span>

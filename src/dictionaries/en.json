@@ -617,7 +617,8 @@
       "transferFailed": "Transfer failed",
       "invalidAmount": "Invalid amount",
       "invalidRecipient": "Invalid recipient ID",
-      "amountTooLow": "Transfer amount is below the minimum transfer amount"
+      "amountTooLow": "Transfer amount is below the minimum transfer amount",
+      "sameUserTransfer": "You cannot transfer droplets to yourself"
     }
   }
 }
