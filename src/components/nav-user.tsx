@@ -9,6 +9,10 @@ import {
   Sparkles,
   Coins,
   Droplets,
+  Settings2,
+  Sun,
+  Moon,
+  Languages,
 } from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -32,6 +36,19 @@ import { LoaderCircle } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Switch } from "@/components/ui/switch";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { US, TW, CN } from "country-flag-icons/react/3x2";
+import { useTransitionRouter } from "next-view-transitions";
+import { getCookie, setCookie } from "cookies-next";
 
 interface UserInfo {
   coins: number;
@@ -51,6 +68,9 @@ export function NavUser({
   const t = useTranslations("navUser");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isDark, setIsDark] = useState(false);
+  const [locale, setLocale] = useState<string>("");
+  const router = useTransitionRouter();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -65,7 +85,41 @@ export function NavUser({
     };
 
     fetchUserInfo();
-  }, []);
+
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme === "dark") {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    } else if (storedTheme === "light") {
+      setIsDark(false);
+      document.documentElement.classList.remove("dark");
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      setIsDark(true);
+      document.documentElement.classList.add("dark");
+    }
+
+    const cookieLocale = getCookie("NEXT_LOCALE");
+    if (cookieLocale) {
+      setLocale(cookieLocale as string);
+    } else {
+      const browserLocale = navigator.language.toLowerCase();
+      setLocale(browserLocale);
+      setCookie("NEXT_LOCALE", browserLocale);
+    }
+  }, [router]);
+
+  const toggleTheme = (checked: boolean) => {
+    setIsDark(checked);
+    const newTheme = checked ? "dark" : "light";
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", checked);
+  };
+
+  const changeLanguage = (value: string) => {
+    setLocale(value);
+    setCookie("NEXT_LOCALE", value);
+    window.location.reload();
+  };
 
   return (
     <SidebarMenu>
@@ -120,6 +174,52 @@ export function NavUser({
                       `${userInfo?.coins?.toFixed(2) || "0.00"}`
                     )}
                   </span>
+                </div>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem className="flex items-center">
+                <Sun className="h-4 w-4" />
+                <Switch
+                  checked={isDark}
+                  onCheckedChange={toggleTheme}
+                  aria-label="Toggle dark mode"
+                />
+                <Moon className="h-4 w-4" />
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild className="flex items-center gap-2">
+                <div>
+                  <Languages className="h-4 w-4" />
+                  <div className="flex flex-1 items-center">
+                    <span className="text-sm font-medium mr-2">
+                      {t("language")}
+                    </span>
+                    <Select value={locale} onValueChange={changeLanguage}>
+                      <SelectTrigger className="h-8 w-32">
+                        <SelectValue placeholder="Language" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="en">
+                            <div className="flex items-center gap-1">
+                              <US className="h-3 w-4" /> English
+                            </div>
+                          </SelectItem>
+                          <SelectItem value="zh-tw">
+                            <div className="flex items-center gap-1">
+                              <TW className="h-3 w-4" /> 繁體中文
+                            </div>
+                          </SelectItem>
+                          <SelectItem value="zh-cn">
+                            <div className="flex items-center gap-1">
+                              <CN className="h-3 w-4" /> 简体中文
+                            </div>
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>

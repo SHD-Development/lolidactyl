@@ -438,7 +438,8 @@
   },
   "navUser": {
     "logout": "Log out",
-    "droplets": "Droplets"
+    "droplets": "Droplets",
+    "language": "Language"
   },
   "adCard": {
     "title": "Recommended Services",

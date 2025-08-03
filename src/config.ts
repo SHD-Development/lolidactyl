@@ -11,19 +11,19 @@ const appConfig = {
       min: 5,
       max: 400,
       step: 5,
-      default: "",
+      default: 5,
     },
     ram: {
       min: 128,
       max: 16384,
       step: 128,
-      default: "",
+      default: 128,
     },
     disk: {
       min: 128,
       max: 32768,
       step: 128,
-      default: "",
+      default: 128,
     },
     databases: {
       min: 0,

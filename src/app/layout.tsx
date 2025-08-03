@@ -5,7 +5,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ViewTransitions } from "next-view-transitions";
 import { SessionProvider } from "next-auth/react";
-import Settings from "@/components/settings";
 import "./globals.css";
 import { Locale } from "@/components/locale";
 import { Toaster } from "react-hot-toast";
@@ -50,7 +49,6 @@ export default async function RootLayout({
             <SessionProvider>
               <NextIntlClientProvider>
                 {children}
-                <Settings />
                 <Toaster />
               </NextIntlClientProvider>
             </SessionProvider>
