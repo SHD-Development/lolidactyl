@@ -735,7 +735,7 @@ export default function DashboardServersManage() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard/servers">
+                <BreadcrumbLink href="/dashboard">
                   {tBreadcrumbs("servers")}
                 </BreadcrumbLink>
               </BreadcrumbItem>

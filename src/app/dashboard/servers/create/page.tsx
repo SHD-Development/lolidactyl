@@ -437,7 +437,7 @@ export default function DashboardServersCreate() {
           );
 
           setTimeout(() => {
-            router.push("/dashboard");
+            router.push("/dashboard/servers/manage");
           }, 1500);
         } else {
           toast.error(response.data.error || t("messages.createError"));
@@ -486,7 +486,7 @@ export default function DashboardServersCreate() {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
-                <BreadcrumbLink href="/dashboard/servers">
+                <BreadcrumbLink href="/dashboard">
                   {useTranslations("servers.breadcrumbs")("servers")}
                 </BreadcrumbLink>
               </BreadcrumbItem>
