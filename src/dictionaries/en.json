@@ -552,6 +552,7 @@
     "messages": {
       "createSuccess": "is being created. Total cost:",
       "createError": "Failed to create server",
+      "nodeFullError": "The selected node is full",
       "pricingError": "Failed to load pricing, using default values",
       "serverTypesError": "Failed to load server types",
       "locationsError": "Failed to load locations",

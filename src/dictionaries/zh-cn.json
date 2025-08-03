@@ -552,6 +552,7 @@
     "messages": {
       "createSuccess": "创建成功。总费用：",
       "createError": "创建服务器失败",
+      "nodeFullError": "该节点已满",
       "pricingError": "无法加载价格，使用默认值",
       "serverTypesError": "无法加载服务器类型",
       "locationsError": "无法加载位置",

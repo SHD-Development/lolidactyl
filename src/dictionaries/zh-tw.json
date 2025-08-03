@@ -552,6 +552,7 @@
     "messages": {
       "createSuccess": "創建成功。總費用：",
       "createError": "創建伺服器失敗",
+      "nodeFullError": "該節點已滿",
       "pricingError": "無法載入價格，使用預設值",
       "serverTypesError": "無法載入伺服器類型",
       "locationsError": "無法載入位置",
