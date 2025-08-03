@@ -226,7 +226,7 @@
         "manage": "管理",
         "renew": "续约",
         "create": "创建服务器",
-        "deleteSelected": "删除选中的"
+        "deleteSelected": "删除选中"
       },
       "status": {
         "active": "运行中",

@@ -84,7 +84,7 @@ import * as z from "zod";
 import axios from "axios";
 import toast from "react-hot-toast";
 import appConfig from "@/config";
-
+import { useTransitionRouter } from "next-view-transitions";
 const DEFAULT_PRICING = {
   base: 0,
   cpu: 0,
@@ -286,7 +286,7 @@ export default function DashboardServersManage() {
     "allocations",
   ]);
   const [cpu, ram, disk, databases, backups, allocations] = watchedFields;
-
+  const router = useTransitionRouter();
   useEffect(() => {
     fetchUserInfo();
   }, []);
@@ -747,29 +747,32 @@ export default function DashboardServersManage() {
           </Breadcrumb>
         </div>
       </header>
-      <div className="p-10 space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="p-4 sm:p-6 lg:p-10 space-y-6">
+        <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
           <div>
             <h1 className="text-3xl font-bold">{t("title")}</h1>
             <p className="text-muted-foreground">{t("description")}</p>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
             {selectedServers.size > 0 && (
               <Button
                 variant="destructive"
                 onClick={handleBulkDelete}
-                className="flex items-center gap-2"
+                className="flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
               >
-                <Trash2 className="h-4 w-4" />
-                {t("actions.deleteSelected")} ({selectedServers.size})
+                <Trash2 className="h-4 w-4 flex-shrink-0" />
+                <span className="truncate">
+                  {t("actions.deleteSelected")} ({selectedServers.size})
+                </span>
               </Button>
             )}
-            <Link href="/dashboard/servers/create">
-              <Button className="flex items-center gap-2">
-                <Plus className="h-4 w-4" />
-                {t("actions.create")}
-              </Button>
-            </Link>
+            <Button
+              onClick={() => router.push("/dashboard/servers/create")}
+              className="flex items-center justify-center gap-2 text-sm sm:text-base whitespace-nowrap"
+            >
+              <Plus className="h-4 w-4 flex-shrink-0" />
+              <span>{t("actions.create")}</span>
+            </Button>
           </div>
         </div>
 
@@ -835,18 +838,20 @@ export default function DashboardServersManage() {
         </div>
         <Card>
           <CardContent className="">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+            <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:space-y-0 gap-4">
               <span className="text-sm font-medium">{t("filter.label")}:</span>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
                       variant="outline"
-                      className="flex items-center gap-2"
+                      className="flex items-center gap-2 w-full sm:w-auto"
                     >
-                      <Funnel className="h-4 w-4" />
-                      {t("filter.placeholder")}
-                      <span className="ml-2 text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full">
+                      <Funnel className="h-4 w-4 flex-shrink-0" />
+                      <span className="truncate">
+                        {t("filter.placeholder")}
+                      </span>
+                      <span className="ml-auto sm:ml-2 text-xs bg-primary text-primary-foreground px-2 py-1 rounded-full flex-shrink-0">
                         {statusFilter.length}
                       </span>
                     </Button>
@@ -979,7 +984,7 @@ export default function DashboardServersManage() {
                   </DropdownMenuContent>
                 </DropdownMenu>
 
-                <div className="hidden sm:flex items-center gap-2">
+                <div className="hidden sm:flex flex-wrap items-center gap-2">
                   {statusFilter.map((status) => (
                     <Badge
                       key={status}
@@ -987,7 +992,7 @@ export default function DashboardServersManage() {
                       className="flex items-center gap-1"
                     >
                       <div
-                        className={`w-2 h-2 rounded-full ${
+                        className={`w-2 h-2 rounded-full flex-shrink-0 ${
                           status === "Active"
                             ? "bg-green-500"
                             : status === "Suspended"
@@ -995,13 +1000,15 @@ export default function DashboardServersManage() {
                             : "bg-gray-400"
                         }`}
                       ></div>
-                      {status === "Active"
-                        ? t("status.active")
-                        : status === "Suspended"
-                        ? t("status.suspended")
-                        : status === "Deleted"
-                        ? t("status.deleted")
-                        : status}
+                      <span className="truncate">
+                        {status === "Active"
+                          ? t("status.active")
+                          : status === "Suspended"
+                          ? t("status.suspended")
+                          : status === "Deleted"
+                          ? t("status.deleted")
+                          : status}
+                      </span>
                       <button
                         onClick={() => {
                           setStatusFilter(
@@ -1009,7 +1016,7 @@ export default function DashboardServersManage() {
                           );
                           setCurrentPage(1);
                         }}
-                        className="ml-1 hover:bg-background/20 rounded-full"
+                        className="ml-1 hover:bg-background/20 rounded-full flex-shrink-0"
                       >
                         ×
                       </button>
@@ -1017,7 +1024,46 @@ export default function DashboardServersManage() {
                   ))}
                 </div>
               </div>
-              <span className="text-sm text-muted-foreground">
+              <div className="flex sm:hidden flex-wrap gap-2">
+                {statusFilter.map((status) => (
+                  <Badge
+                    key={status}
+                    variant="secondary"
+                    className="flex items-center gap-1 text-xs"
+                  >
+                    <div
+                      className={`w-2 h-2 rounded-full flex-shrink-0 ${
+                        status === "Active"
+                          ? "bg-green-500"
+                          : status === "Suspended"
+                          ? "bg-orange-500"
+                          : "bg-gray-400"
+                      }`}
+                    ></div>
+                    <span className="truncate">
+                      {status === "Active"
+                        ? t("status.active")
+                        : status === "Suspended"
+                        ? t("status.suspended")
+                        : status === "Deleted"
+                        ? t("status.deleted")
+                        : status}
+                    </span>
+                    <button
+                      onClick={() => {
+                        setStatusFilter(
+                          statusFilter.filter((s) => s !== status)
+                        );
+                        setCurrentPage(1);
+                      }}
+                      className="ml-1 hover:bg-background/20 rounded-full flex-shrink-0"
+                    >
+                      ×
+                    </button>
+                  </Badge>
+                ))}
+              </div>
+              <span className="text-sm text-muted-foreground text-center sm:text-left">
                 {t("stats.showing", {
                   count: filteredServers.length,
                   total: servers.length,
@@ -1031,271 +1077,282 @@ export default function DashboardServersManage() {
             <CardTitle>{t("table.title")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead className="w-12">
-                    <Checkbox
-                      checked={allCurrentPageSelected}
-                      disabled={
-                        currentPageServers.filter(
-                          (server) => server.status !== "Deleted"
-                        ).length === 0
-                      }
-                      onCheckedChange={handleSelectAll}
-                    />
-                  </TableHead>
-                  <TableHead>ID</TableHead>
-                  <TableHead>{t("table.name")}</TableHead>
-                  <TableHead>{t("table.cpu")}</TableHead>
-                  <TableHead>{t("table.memory")}</TableHead>
-                  <TableHead>{t("table.disk")}</TableHead>
-                  <TableHead>{t("table.databases")}</TableHead>
-                  <TableHead>{t("table.allocations")}</TableHead>
-                  <TableHead>{t("table.backups")}</TableHead>
-                  <TableHead>{t("table.status")}</TableHead>
-                  <TableHead>{t("table.autoRenew")}</TableHead>
-                  <TableHead>{t("table.expiration")}</TableHead>
-                  <TableHead>{t("table.daysRemaining")}</TableHead>
-                  <TableHead className="w-12">{t("table.actions")}</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {currentPageServers.length === 0 ? (
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
                   <TableRow>
-                    <TableCell colSpan={14} className="text-center py-8">
-                      <div className="flex flex-col items-center gap-2">
-                        <p className="text-muted-foreground">
-                          {statusFilter.length === 0
-                            ? t("filter.noSelection")
-                            : t("empty.description")}
-                        </p>
-                        {statusFilter.length === 0 && (
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => {
-                              setStatusFilter([
-                                "Active",
-                                "Suspended",
-                                "Deleted",
-                              ]);
-                              setCurrentPage(1);
-                            }}
-                          >
-                            {t("filter.showAll")}
-                          </Button>
-                        )}
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ) : (
-                  currentPageServers.map((server) => {
-                    const daysUntilExpiry = calculateDaysUntilExpiry(
-                      server.expiresAt
-                    );
-                    return (
-                      <TableRow
-                        key={server.identifier}
-                        className={
-                          server.status === "Deleted"
-                            ? "dark:bg-zinc-800 opacity-60"
-                            : ""
+                    <TableHead className="w-12">
+                      <Checkbox
+                        checked={allCurrentPageSelected}
+                        disabled={
+                          currentPageServers.filter(
+                            (server) => server.status !== "Deleted"
+                          ).length === 0
                         }
-                      >
-                        <TableCell>
-                          <Checkbox
-                            checked={selectedServers.has(server.id)}
-                            disabled={server.status === "Deleted"}
-                            onCheckedChange={(checked) =>
-                              handleSelectServer(server.id, checked as boolean)
-                            }
-                          />
-                        </TableCell>
-                        <TableCell
-                          className={`font-mono ${
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }`}
-                        >
-                          {server.identifier}
-                        </TableCell>
-                        <TableCell
-                          className={`font-medium ${
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }`}
-                        >
-                          {server.name || t("table.unnamed")}
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.cpu}
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.ram} MiB
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.disk} MiB
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.databases}
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.allocations}
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {server.resources.backups}
-                        </TableCell>
-                        <TableCell>{getStatusBadge(server.status)}</TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted" ? "opacity-50" : ""
-                          }
-                        >
-                          <Badge
-                            variant={server.autoRenew ? "default" : "secondary"}
-                            className={
-                              server.status === "Deleted" ? "line-through" : ""
-                            }
-                          >
-                            {server.autoRenew
-                              ? t("status.autoRenewEnabled")
-                              : t("status.autoRenewDisabled")}
-                          </Badge>
-                        </TableCell>
-                        <TableCell
-                          className={
-                            server.status === "Deleted"
-                              ? "line-through text-gray-500"
-                              : ""
-                          }
-                        >
-                          {new Date(server.expiresAt).toLocaleDateString(
-                            "zh-TW"
+                        onCheckedChange={handleSelectAll}
+                      />
+                    </TableHead>
+                    <TableHead>ID</TableHead>
+                    <TableHead>{t("table.name")}</TableHead>
+                    <TableHead>{t("table.cpu")}</TableHead>
+                    <TableHead>{t("table.memory")}</TableHead>
+                    <TableHead>{t("table.disk")}</TableHead>
+                    <TableHead>{t("table.databases")}</TableHead>
+                    <TableHead>{t("table.allocations")}</TableHead>
+                    <TableHead>{t("table.backups")}</TableHead>
+                    <TableHead>{t("table.status")}</TableHead>
+                    <TableHead>{t("table.autoRenew")}</TableHead>
+                    <TableHead>{t("table.expiration")}</TableHead>
+                    <TableHead>{t("table.daysRemaining")}</TableHead>
+                    <TableHead className="w-12">{t("table.actions")}</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {currentPageServers.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={14} className="text-center py-8">
+                        <div className="flex flex-col items-center gap-2">
+                          <p className="text-muted-foreground">
+                            {statusFilter.length === 0
+                              ? t("filter.noSelection")
+                              : t("empty.description")}
+                          </p>
+                          {statusFilter.length === 0 && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                setStatusFilter([
+                                  "Active",
+                                  "Suspended",
+                                  "Deleted",
+                                ]);
+                                setCurrentPage(1);
+                              }}
+                            >
+                              {t("filter.showAll")}
+                            </Button>
                           )}
-                        </TableCell>
-                        <TableCell
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ) : (
+                    currentPageServers.map((server) => {
+                      const daysUntilExpiry = calculateDaysUntilExpiry(
+                        server.expiresAt
+                      );
+                      return (
+                        <TableRow
+                          key={server.identifier}
                           className={
-                            server.status === "Deleted" ? "opacity-50" : ""
+                            server.status === "Deleted"
+                              ? "dark:bg-zinc-800 opacity-60"
+                              : ""
                           }
                         >
-                          <Badge
-                            variant={
-                              daysUntilExpiry < 7
-                                ? "destructive"
-                                : daysUntilExpiry < 30
-                                ? "secondary"
-                                : "outline"
-                            }
+                          <TableCell>
+                            <Checkbox
+                              checked={selectedServers.has(server.id)}
+                              disabled={server.status === "Deleted"}
+                              onCheckedChange={(checked) =>
+                                handleSelectServer(
+                                  server.id,
+                                  checked as boolean
+                                )
+                              }
+                            />
+                          </TableCell>
+                          <TableCell
+                            className={`font-mono ${
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }`}
+                          >
+                            {server.identifier}
+                          </TableCell>
+                          <TableCell
+                            className={`font-medium ${
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }`}
+                          >
+                            {server.name || t("table.unnamed")}
+                          </TableCell>
+                          <TableCell
                             className={
-                              server.status === "Deleted" ? "line-through" : ""
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
                             }
                           >
-                            {daysUntilExpiry > 0
-                              ? `${daysUntilExpiry} ${t("table.days")}`
-                              : t("table.expired")}
-                          </Badge>
-                        </TableCell>
-                        <TableCell>
-                          <DropdownMenu>
-                            <DropdownMenuTrigger asChild>
-                              <Button
-                                variant="ghost"
-                                size="sm"
-                                disabled={server.status === "Deleted"}
-                                className={
-                                  server.status === "Deleted"
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : ""
-                                }
-                              >
-                                <MoreHorizontal className="h-4 w-4" />
-                              </Button>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
-                              <DropdownMenuItem
-                                onClick={() =>
-                                  handleManageServer(server.identifier)
-                                }
-                                className="flex items-center gap-2"
-                              >
-                                <ExternalLink className="h-4 w-4" />
-                                {t("actions.manage")}
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() =>
-                                  handleRenewServer(server.identifier)
-                                }
-                                className="flex items-center gap-2"
-                              >
-                                <ClockPlus className="h-4 w-4" />
-                                {t("actions.renew")}
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleEditServer(server.id)}
-                                className="flex items-center gap-2"
-                              >
-                                <Edit className="h-4 w-4" />
-                                {t("actions.edit")}
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleDeleteServer(server)}
-                                className="flex items-center gap-2 text-destructive"
-                              >
-                                <Trash2 className="h-4 w-4" />
-                                {t("actions.delete")}
-                              </DropdownMenuItem>
-                            </DropdownMenuContent>
-                          </DropdownMenu>
-                        </TableCell>
-                      </TableRow>
-                    );
-                  })
-                )}
-              </TableBody>
-            </Table>
+                            {server.resources.cpu}
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {server.resources.ram} MiB
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {server.resources.disk} MiB
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {server.resources.databases}
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {server.resources.allocations}
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {server.resources.backups}
+                          </TableCell>
+                          <TableCell>{getStatusBadge(server.status)}</TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted" ? "opacity-50" : ""
+                            }
+                          >
+                            <Badge
+                              variant={
+                                server.autoRenew ? "default" : "secondary"
+                              }
+                              className={
+                                server.status === "Deleted"
+                                  ? "line-through"
+                                  : ""
+                              }
+                            >
+                              {server.autoRenew
+                                ? t("status.autoRenewEnabled")
+                                : t("status.autoRenewDisabled")}
+                            </Badge>
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted"
+                                ? "line-through text-gray-500"
+                                : ""
+                            }
+                          >
+                            {new Date(server.expiresAt).toLocaleDateString(
+                              "zh-TW"
+                            )}
+                          </TableCell>
+                          <TableCell
+                            className={
+                              server.status === "Deleted" ? "opacity-50" : ""
+                            }
+                          >
+                            <Badge
+                              variant={
+                                daysUntilExpiry < 7
+                                  ? "destructive"
+                                  : daysUntilExpiry < 30
+                                  ? "secondary"
+                                  : "outline"
+                              }
+                              className={
+                                server.status === "Deleted"
+                                  ? "line-through"
+                                  : ""
+                              }
+                            >
+                              {daysUntilExpiry > 0
+                                ? `${daysUntilExpiry} ${t("table.days")}`
+                                : t("table.expired")}
+                            </Badge>
+                          </TableCell>
+                          <TableCell>
+                            <DropdownMenu>
+                              <DropdownMenuTrigger asChild>
+                                <Button
+                                  variant="ghost"
+                                  size="sm"
+                                  disabled={server.status === "Deleted"}
+                                  className={
+                                    server.status === "Deleted"
+                                      ? "opacity-50 cursor-not-allowed"
+                                      : ""
+                                  }
+                                >
+                                  <MoreHorizontal className="h-4 w-4" />
+                                </Button>
+                              </DropdownMenuTrigger>
+                              <DropdownMenuContent align="end">
+                                <DropdownMenuItem
+                                  onClick={() =>
+                                    handleManageServer(server.identifier)
+                                  }
+                                  className="flex items-center gap-2"
+                                >
+                                  <ExternalLink className="h-4 w-4" />
+                                  {t("actions.manage")}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() =>
+                                    handleRenewServer(server.identifier)
+                                  }
+                                  className="flex items-center gap-2"
+                                >
+                                  <ClockPlus className="h-4 w-4" />
+                                  {t("actions.renew")}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() => handleEditServer(server.id)}
+                                  className="flex items-center gap-2"
+                                >
+                                  <Edit className="h-4 w-4" />
+                                  {t("actions.edit")}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem
+                                  onClick={() => handleDeleteServer(server)}
+                                  className="flex items-center gap-2 text-destructive"
+                                >
+                                  <Trash2 className="h-4 w-4" />
+                                  {t("actions.delete")}
+                                </DropdownMenuItem>
+                              </DropdownMenuContent>
+                            </DropdownMenu>
+                          </TableCell>
+                        </TableRow>
+                      );
+                    })
+                  )}
+                </TableBody>
+              </Table>
+            </div>
 
             {totalPages > 1 && (
-              <div className="flex items-center justify-between mt-4">
-                <div className="text-sm text-muted-foreground">
+              <div className="flex flex-col space-y-2 sm:flex-row sm:items-center sm:justify-between sm:space-y-0 mt-4">
+                <div className="text-sm text-muted-foreground order-2 sm:order-1">
                   {t("stats.filtered", {
                     start: (currentPage - 1) * ITEMS_PER_PAGE + 1,
                     end: Math.min(
@@ -1306,7 +1363,7 @@ export default function DashboardServersManage() {
                     totalServers: servers.length,
                   })}
                 </div>
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-center gap-2 order-1 sm:order-2">
                   <Button
                     variant="outline"
                     size="sm"
@@ -1314,11 +1371,14 @@ export default function DashboardServersManage() {
                       setCurrentPage((prev) => Math.max(1, prev - 1))
                     }
                     disabled={currentPage === 1}
+                    className="flex-shrink-0"
                   >
                     <ChevronLeft className="h-4 w-4" />
-                    {t("stats.previous")}
+                    <span className="hidden sm:inline">
+                      {t("stats.previous")}
+                    </span>
                   </Button>
-                  <span className="text-sm">
+                  <span className="text-sm whitespace-nowrap">
                     {t("stats.pagination", {
                       current: currentPage,
                       total: totalPages,
@@ -1331,8 +1391,9 @@ export default function DashboardServersManage() {
                       setCurrentPage((prev) => Math.min(totalPages, prev + 1))
                     }
                     disabled={currentPage === totalPages}
+                    className="flex-shrink-0"
                   >
-                    {t("stats.next")}
+                    <span className="hidden sm:inline">{t("stats.next")}</span>
                     <ChevronRight className="h-4 w-4" />
                   </Button>
                 </div>
