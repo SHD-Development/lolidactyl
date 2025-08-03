@@ -9,6 +9,9 @@ import Settings from "@/components/settings";
 import "./globals.css";
 import { Locale } from "@/components/locale";
 import { Toaster } from "react-hot-toast";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -53,6 +56,8 @@ export default async function RootLayout({
             </SessionProvider>
           </ThemeProvider>
           <Locale />
+          <SpeedInsights />
+          <Analytics />
         </body>
       </html>
     </ViewTransitions>

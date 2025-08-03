@@ -89,45 +89,45 @@
       "popular": "最受歡迎",
       "chooseplan": "選擇方案",
       "starter": {
-        "name": "入門版",
-        "price": "NT$299",
-        "description": "適合個人網站和小型專案",
+        "name": "不知道放啥",
+        "price": "NT$0",
+        "description": "不知道放啥",
         "features": {
-          "storage": "10GB SSD 儲存空間",
-          "bandwidth": "100GB 月流量",
-          "domains": "1 個網域名稱",
-          "support": "電子郵件技術支援"
+          "storage": "不知道放啥",
+          "bandwidth": "不知道放啥",
+          "domains": "不知道放啥",
+          "support": "不知道放啥"
         }
       },
       "pro": {
-        "name": "專業版",
-        "price": "NT$899",
-        "description": "適合中小型企業和專業網站",
+        "name": "不知道放啥",
+        "price": "NT$0",
+        "description": "不知道放啥",
         "features": {
-          "storage": "50GB SSD 儲存空間",
-          "bandwidth": "500GB 月流量",
-          "domains": "5 個網域名稱",
-          "ssl": "免費 SSL 憑證",
-          "support": "24/7 線上客服支援"
+          "storage": "不知道放啥",
+          "bandwidth": "不知道放啥",
+          "domains": "不知道放啥",
+          "ssl": "不知道放啥",
+          "support": "不知道放啥"
         }
       },
       "enterprise": {
-        "name": "企業版",
-        "price": "NT$2,999",
-        "description": "適合大型企業和高流量網站",
+        "name": "不知道放啥",
+        "price": "NT$0",
+        "description": "不知道放啥",
         "features": {
-          "storage": "200GB SSD 儲存空間",
-          "bandwidth": "無限月流量",
-          "domains": "無限網域名稱",
-          "dedicated": "專屬伺服器資源",
-          "support": "專屬客戶經理服務"
+          "storage": "不知道放啥",
+          "bandwidth": "不知道放啥",
+          "domains": "不知道放啥",
+          "dedicated": "不知道放啥",
+          "support": "不知道放啥"
         }
       }
     },
     "cta": {
       "title": "準備好開始了嗎？",
       "subtitle": "加入數千位滿意客戶的行列，體驗 SHD Cloud 的卓越服務",
-      "button": "免費試用 30 天"
+      "button": "加入"
     },
     "footer": {
       "description": "SHD Cloud 致力於提供最可愛的雲端託管服務，快點喵喵叫！",
