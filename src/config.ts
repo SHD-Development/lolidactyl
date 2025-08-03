@@ -1,4 +1,11 @@
+import { metadata } from "./app/layout";
+
 const appConfig = {
+  metadata: {
+    title: "Lolidactyl",
+    description:
+      "Lolidactyl is an open-source Pterodactyl client area that provides a simple and user-friendly interface with powerful features.",
+  },
   limit: {
     cpu: {
       min: 5,

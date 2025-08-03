@@ -479,7 +479,7 @@
         "label": "CPU (%)",
         "placeholder": "输入CPU百分比 (10-400)",
         "description": "CPU分配。费用：",
-        "pricePerUnit": "每 100%"
+        "pricePerUnit": "每 %"
       },
       "ram": {
         "label": "内存 (MiB)",

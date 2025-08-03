@@ -479,7 +479,7 @@
         "label": "CPU (%)",
         "placeholder": "Enter CPU percentage (10-400)",
         "description": "CPU allocation. Cost:",
-        "pricePerUnit": "per 100%"
+        "pricePerUnit": "per %"
       },
       "ram": {
         "label": "RAM (MiB)",
