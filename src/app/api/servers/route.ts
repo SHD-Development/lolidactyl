@@ -1,6 +1,56 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 import { auth } from "@/auth";
+import appConfig from "@/config";
+
+function validateResourceLimits(resources: {
+  cpu: number;
+  ram: number;
+  disk: number;
+  databases?: number;
+  allocations?: number;
+  backups?: number;
+}) {
+  const { cpu, ram, disk, databases, allocations, backups } = resources;
+
+  if (cpu < appConfig.limit.cpu.min || cpu > appConfig.limit.cpu.max) {
+    return `CPU must be between ${appConfig.limit.cpu.min} and ${appConfig.limit.cpu.max}`;
+  }
+
+  if (ram < appConfig.limit.ram.min || ram > appConfig.limit.ram.max) {
+    return `RAM must be between ${appConfig.limit.ram.min} and ${appConfig.limit.ram.max} MiB`;
+  }
+
+  if (disk < appConfig.limit.disk.min || disk > appConfig.limit.disk.max) {
+    return `Disk must be between ${appConfig.limit.disk.min} and ${appConfig.limit.disk.max} MiB`;
+  }
+
+  if (
+    databases !== undefined &&
+    (databases < appConfig.limit.databases.min ||
+      databases > appConfig.limit.databases.max)
+  ) {
+    return `Databases must be between ${appConfig.limit.databases.min} and ${appConfig.limit.databases.max}`;
+  }
+
+  if (
+    allocations !== undefined &&
+    (allocations < appConfig.limit.allocations.min ||
+      allocations > appConfig.limit.allocations.max)
+  ) {
+    return `Allocations must be between ${appConfig.limit.allocations.min} and ${appConfig.limit.allocations.max}`;
+  }
+
+  if (
+    backups !== undefined &&
+    (backups < appConfig.limit.backups.min ||
+      backups > appConfig.limit.backups.max)
+  ) {
+    return `Backups must be between ${appConfig.limit.backups.min} and ${appConfig.limit.backups.max}`;
+  }
+
+  return null;
+}
 
 export async function POST(request: Request) {
   try {
@@ -39,6 +89,22 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    const validationError = validateResourceLimits({
+      cpu,
+      ram,
+      disk,
+      databases,
+      allocations,
+      backups,
+    });
+
+    if (validationError) {
+      return NextResponse.json(
+        { success: false, error: validationError },
         { status: 400 }
       );
     }
@@ -189,6 +255,22 @@ export async function PATCH(request: Request) {
     if (!serverType || !nestId || !cpu || !ram || !disk) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
+        { status: 400 }
+      );
+    }
+
+    const validationError = validateResourceLimits({
+      cpu,
+      ram,
+      disk,
+      databases,
+      allocations,
+      backups,
+    });
+
+    if (validationError) {
+      return NextResponse.json(
+        { success: false, error: validationError },
         { status: 400 }
       );
     }
