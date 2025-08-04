@@ -66,9 +66,9 @@ export async function POST(request: NextRequest) {
       (expirationDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
     );
 
-    if (daysUntilExpiry >= 31) {
+    if (daysUntilExpiry >= 30) {
       return NextResponse.json(
-        { error: "Server can only be renewed within 31 days of expiration" },
+        { error: "Server can only be renewed within 30 days of expiration" },
         { status: 400 }
       );
     }
