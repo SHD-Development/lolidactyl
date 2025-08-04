@@ -195,9 +195,6 @@ export function NavUser({
                     className="flex flex-1 items-center"
                     onClick={(e) => e.stopPropagation()}
                   >
-                    <span className="text-sm font-medium mr-2">
-                      {t("language")}
-                    </span>
                     <Select value={locale} onValueChange={changeLanguage}>
                       <SelectTrigger className="h-8 w-32">
                         <SelectValue placeholder="Language" />
