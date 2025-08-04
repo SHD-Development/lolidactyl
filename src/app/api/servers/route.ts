@@ -275,6 +275,47 @@ export async function PATCH(request: Request) {
       );
     }
 
+    const apiKey = process.env.BACKEND_API_KEY;
+
+    const userInfoUrl = new URL(process.env.BACKEND_API_URL as string);
+    userInfoUrl.pathname = "/userinfo";
+    userInfoUrl.searchParams.append("id", session.user.id);
+    userInfoUrl.searchParams.append("name", session.user.name || "");
+    userInfoUrl.searchParams.append("email", session.user.email || "");
+    userInfoUrl.searchParams.append("ip", "");
+
+    const userInfoResponse = await axios.get(userInfoUrl.toString(), {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const userInfo = userInfoResponse.data;
+    if (!userInfo.servers || !Array.isArray(userInfo.servers)) {
+      return NextResponse.json(
+        { success: false, error: "Unable to fetch server information" },
+        { status: 500 }
+      );
+    }
+
+    const serverToModify = userInfo.servers.find(
+      (server: any) => server.id === serverId
+    );
+    if (!serverToModify) {
+      return NextResponse.json(
+        { success: false, error: "Server not found" },
+        { status: 404 }
+      );
+    }
+
+    if (serverToModify.status === "Suspended") {
+      return NextResponse.json(
+        { success: false, error: "Cannot modify suspended server" },
+        { status: 400 }
+      );
+    }
+
     const serverData = {
       serverId,
       id: session.user.id,
@@ -289,7 +330,6 @@ export async function PATCH(request: Request) {
       autoRenew: autoRenew,
     };
 
-    const apiKey = process.env.BACKEND_API_KEY;
     const apiUrl = new URL(process.env.BACKEND_API_URL as string);
     apiUrl.pathname = "/servers/modify";
 

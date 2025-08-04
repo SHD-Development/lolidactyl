@@ -262,6 +262,32 @@ export default function DashboardServersManage() {
     return userInfo.coins - totalPrice;
   };
 
+  const calculateOriginalPrice = () => {
+    if (!serverToEdit || !pricing) return 0;
+
+    const baseCost = pricing.base ?? 0;
+    const cpuCost = serverToEdit.resources.cpu * (pricing.cpu ?? 0);
+    const ramCost = serverToEdit.resources.ram * (pricing.ram ?? 0);
+    const diskCost = serverToEdit.resources.disk * (pricing.disk ?? 0);
+    const databasesCost =
+      serverToEdit.resources.databases * (pricing.databases ?? 0);
+    const backupsCost = serverToEdit.resources.backups * (pricing.backups ?? 0);
+    const allocationsCost =
+      serverToEdit.resources.allocations * (pricing.allocations ?? 0);
+
+    return parseFloat(
+      (
+        baseCost +
+        cpuCost +
+        ramCost +
+        diskCost +
+        databasesCost +
+        backupsCost +
+        allocationsCost
+      ).toFixed(2)
+    );
+  };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -301,19 +327,46 @@ export default function DashboardServersManage() {
       const backupsCost = backups * (pricing?.backups ?? 0);
       const allocationsCost = allocations * (pricing?.allocations ?? 0);
 
+      let originalBreakdown = {
+        base: 0,
+        cpu: 0,
+        ram: 0,
+        disk: 0,
+        databases: 0,
+        backups: 0,
+        allocations: 0,
+      };
+
+      if (serverToEdit && pricing) {
+        originalBreakdown = {
+          base: pricing.base ?? 0,
+          cpu: serverToEdit.resources.cpu * (pricing.cpu ?? 0),
+          ram: serverToEdit.resources.ram * (pricing.ram ?? 0),
+          disk: serverToEdit.resources.disk * (pricing.disk ?? 0),
+          databases:
+            serverToEdit.resources.databases * (pricing.databases ?? 0),
+          backups: serverToEdit.resources.backups * (pricing.backups ?? 0),
+          allocations:
+            serverToEdit.resources.allocations * (pricing.allocations ?? 0),
+        };
+      }
+
       const breakdown = {
-        base: baseCost,
-        cpu: cpuCost,
-        ram: ramCost,
-        disk: diskCost,
-        databases: databasesCost,
-        backups: backupsCost,
-        allocations: allocationsCost,
+        base: Math.max(0, baseCost - originalBreakdown.base),
+        cpu: Math.max(0, cpuCost - originalBreakdown.cpu),
+        ram: Math.max(0, ramCost - originalBreakdown.ram),
+        disk: Math.max(0, diskCost - originalBreakdown.disk),
+        databases: Math.max(0, databasesCost - originalBreakdown.databases),
+        backups: Math.max(0, backupsCost - originalBreakdown.backups),
+        allocations: Math.max(
+          0,
+          allocationsCost - originalBreakdown.allocations
+        ),
       };
 
       setPriceBreakdown(breakdown);
 
-      return parseFloat(
+      const newTotalPrice = parseFloat(
         (
           baseCost +
           cpuCost +
@@ -324,6 +377,11 @@ export default function DashboardServersManage() {
           allocationsCost
         ).toFixed(2)
       );
+
+      const originalPrice = calculateOriginalPrice();
+      const priceDifference = newTotalPrice - originalPrice;
+
+      return Math.max(0, priceDifference);
     };
 
     if (!isLoadingPricing) {
@@ -339,6 +397,7 @@ export default function DashboardServersManage() {
     allocations,
     pricing,
     isLoadingPricing,
+    serverToEdit,
   ]);
 
   const fetchUserInfo = async () => {
