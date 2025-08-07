@@ -377,6 +377,7 @@
         "modifying": "Modifying server {name} ({identifier})...",
         "modifySuccess": "Server {name} ({identifier}) modified successfully",
         "modifyError": "Failed to modify server",
+        "insufficientBalance": "Insufficient balance to modify server",
         "loadError": "Failed to load server types",
         "priceError": "Failed to load pricing",
         "deleteError": "Failed to delete server: {error}",

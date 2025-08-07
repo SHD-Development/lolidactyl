@@ -366,22 +366,16 @@ export default function DashboardServersManage() {
 
       setPriceBreakdown(breakdown);
 
-      const newTotalPrice = parseFloat(
-        (
-          baseCost +
-          cpuCost +
-          ramCost +
-          diskCost +
-          databasesCost +
-          backupsCost +
-          allocationsCost
-        ).toFixed(2)
-      );
+      const totalAdditionalCost =
+        breakdown.base +
+        breakdown.cpu +
+        breakdown.ram +
+        breakdown.disk +
+        breakdown.databases +
+        breakdown.backups +
+        breakdown.allocations;
 
-      const originalPrice = calculateOriginalPrice();
-      const priceDifference = newTotalPrice - originalPrice;
-
-      return Math.max(0, priceDifference);
+      return parseFloat(totalAdditionalCost.toFixed(2));
     };
 
     if (!isLoadingPricing) {
@@ -730,9 +724,12 @@ export default function DashboardServersManage() {
     } catch (error) {
       console.error("Error modifying server:", error);
       if (axios.isAxiosError(error)) {
-        toast.error(
-          error.response?.data?.error || t("notifications.modifyError")
-        );
+        const errorMessage = error.response?.data?.error;
+        if (errorMessage && errorMessage.includes("Insufficient balance")) {
+          toast.error(t("notifications.insufficientBalance"));
+        } else {
+          toast.error(errorMessage || t("notifications.modifyError"));
+        }
       } else {
         toast.error(t("notifications.modifyError"));
       }

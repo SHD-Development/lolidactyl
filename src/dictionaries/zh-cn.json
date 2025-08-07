@@ -377,6 +377,7 @@
         "modifying": "修改服务器 {name} ({identifier})...",
         "modifySuccess": "服务器 {name} ({identifier}) 修改成功",
         "modifyError": "修改服务器失败",
+        "insufficientBalance": "余额不足，无法修改服务器",
         "loadError": "加载服务器类型失败",
         "priceError": "加载价格失败",
         "deleteError": "删除服务器失败: {error}",

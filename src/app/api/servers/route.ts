@@ -316,6 +316,51 @@ export async function PATCH(request: Request) {
       );
     }
 
+    const pricingUrl = new URL(process.env.BACKEND_API_URL as string);
+    pricingUrl.pathname = "/pricing";
+
+    const pricingResponse = await axios.get(pricingUrl.toString(), {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+    });
+
+    const pricing = pricingResponse.data;
+
+    const originalCost =
+      (pricing.base || 0) +
+      serverToModify.resources.cpu * (pricing.cpu || 0) +
+      serverToModify.resources.ram * (pricing.ram || 0) +
+      serverToModify.resources.disk * (pricing.disk || 0) +
+      serverToModify.resources.databases * (pricing.databases || 0) +
+      serverToModify.resources.allocations * (pricing.allocations || 0) +
+      serverToModify.resources.backups * (pricing.backups || 0);
+
+    const newCost =
+      (pricing.base || 0) +
+      cpu * (pricing.cpu || 0) +
+      ram * (pricing.ram || 0) +
+      disk * (pricing.disk || 0) +
+      (databases || 0) * (pricing.databases || 0) +
+      (allocations || 0) * (pricing.allocations || 0) +
+      (backups || 0) * (pricing.backups || 0);
+
+    const costDifference = newCost - originalCost;
+    const additionalCost = Math.max(0, costDifference);
+
+    if (additionalCost > 0 && userInfo.coins < additionalCost) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Insufficient balance. Required: ${additionalCost.toFixed(
+            2
+          )} Droplets, Available: ${userInfo.coins.toFixed(2)} Droplets`,
+        },
+        { status: 400 }
+      );
+    }
+
     const serverData = {
       serverId,
       id: session.user.id,
