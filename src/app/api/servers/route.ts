@@ -329,6 +329,7 @@ export async function PATCH(request: Request) {
     const pricing = pricingResponse.data;
 
     const originalCost =
+      (pricing.base || 0) +
       serverToModify.resources.cpu * (pricing.cpu || 0) +
       serverToModify.resources.ram * (pricing.ram || 0) +
       serverToModify.resources.disk * (pricing.disk || 0) +
@@ -337,6 +338,7 @@ export async function PATCH(request: Request) {
       serverToModify.resources.backups * (pricing.backups || 0);
 
     const newCost =
+      (pricing.base || 0) +
       cpu * (pricing.cpu || 0) +
       ram * (pricing.ram || 0) +
       disk * (pricing.disk || 0) +
@@ -344,16 +346,14 @@ export async function PATCH(request: Request) {
       (allocations || 0) * (pricing.allocations || 0) +
       (backups || 0) * (pricing.backups || 0);
 
-    const resourceDifference = newCost - originalCost;
-    const additionalResourceCost = Math.max(0, resourceDifference);
+    const costDifference = newCost - originalCost;
+    const additionalCost = Math.max(0, costDifference);
 
-    const totalAdditionalCost = (pricing.base || 0) + additionalResourceCost;
-
-    if (totalAdditionalCost > 0 && userInfo.coins < totalAdditionalCost) {
+    if (additionalCost > 0 && userInfo.coins < additionalCost) {
       return NextResponse.json(
         {
           success: false,
-          error: `Insufficient balance. Required: ${totalAdditionalCost.toFixed(
+          error: `Insufficient balance. Required: ${additionalCost.toFixed(
             2
           )} Droplets, Available: ${userInfo.coins.toFixed(2)} Droplets`,
         },
