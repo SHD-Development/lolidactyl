@@ -317,7 +317,7 @@ export async function PATCH(request: Request) {
     }
 
     const pricingUrl = new URL(process.env.BACKEND_API_URL as string);
-    pricingUrl.pathname = "/pricing";
+    pricingUrl.pathname = "/price";
 
     const pricingResponse = await axios.get(pricingUrl.toString(), {
       headers: {
