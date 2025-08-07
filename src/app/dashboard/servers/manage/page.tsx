@@ -339,7 +339,7 @@ export default function DashboardServersManage() {
 
       if (serverToEdit && pricing) {
         originalBreakdown = {
-          base: pricing.base ?? 0,
+          base: 0,
           cpu: serverToEdit.resources.cpu * (pricing.cpu ?? 0),
           ram: serverToEdit.resources.ram * (pricing.ram ?? 0),
           disk: serverToEdit.resources.disk * (pricing.disk ?? 0),
@@ -351,8 +351,7 @@ export default function DashboardServersManage() {
         };
       }
 
-      const breakdown = {
-        base: Math.max(0, baseCost - originalBreakdown.base),
+      const resourceBreakdown = {
         cpu: Math.max(0, cpuCost - originalBreakdown.cpu),
         ram: Math.max(0, ramCost - originalBreakdown.ram),
         disk: Math.max(0, diskCost - originalBreakdown.disk),
@@ -364,16 +363,21 @@ export default function DashboardServersManage() {
         ),
       };
 
+      const breakdown = {
+        base: baseCost,
+        ...resourceBreakdown,
+      };
+
       setPriceBreakdown(breakdown);
 
       const totalAdditionalCost =
-        breakdown.base +
-        breakdown.cpu +
-        breakdown.ram +
-        breakdown.disk +
-        breakdown.databases +
-        breakdown.backups +
-        breakdown.allocations;
+        baseCost +
+        resourceBreakdown.cpu +
+        resourceBreakdown.ram +
+        resourceBreakdown.disk +
+        resourceBreakdown.databases +
+        resourceBreakdown.backups +
+        resourceBreakdown.allocations;
 
       return parseFloat(totalAdditionalCost.toFixed(2));
     };
