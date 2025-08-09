@@ -54,6 +54,15 @@ const appConfig = {
       linkUrl: "https://github.com/SHD-Development/lolidactyl",
       isActive: true,
     },
+    {
+      id: 2,
+      title: "SHD Community",
+      description: "加入我們的 Discord 社群！",
+      imageUrl:
+        "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Discord_logo.svg/1920px-Discord_logo.svg.png",
+      linkUrl: "https://dc.shdtw.cloud",
+      isActive: true,
+    },
   ],
 };
 export default appConfig;
