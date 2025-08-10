@@ -63,6 +63,15 @@ const appConfig = {
       linkUrl: "https://dc.shdtw.cloud",
       isActive: true,
     },
+    {
+      id: 2,
+      title: "Coffee Host",
+      description: "NT$89 起 超便宜 Minecraft 9950X 主機！",
+      imageUrl:
+        "https://cdn.coffeehost.net/logo.png",
+      linkUrl: "https://coffeehost.net",
+      isActive: true,
+    },
   ],
 };
 export default appConfig;
