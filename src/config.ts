@@ -64,7 +64,7 @@ const appConfig = {
       isActive: true,
     },
     {
-      id: 2,
+      id: 3,
       title: "Coffee Host",
       description: "NT$89 起 超便宜 Minecraft 9950X 主機！",
       imageUrl:
