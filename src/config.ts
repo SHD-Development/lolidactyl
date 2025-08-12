@@ -1,5 +1,3 @@
-import { metadata } from "./app/layout";
-
 const appConfig = {
   metadata: {
     title: "Lolidactyl",
@@ -67,8 +65,7 @@ const appConfig = {
       id: 3,
       title: "Coffee Host",
       description: "NT$89 起 超便宜 Minecraft 9950X 主機！",
-      imageUrl:
-        "https://cdn.coffeehost.net/logo.png",
+      imageUrl: "https://cdn.coffeehost.net/logo.png",
       linkUrl: "https://coffeehost.net",
       isActive: true,
     },
