@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "./src/config";
+import createMDX from "@next/mdx";
 
 function extractImageDomains() {
   const domains = new Set<string>();
@@ -20,6 +21,7 @@ function extractImageDomains() {
 }
 
 const nextConfig: NextConfig = {
+  pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   images: {
     remotePatterns: extractImageDomains().map((hostname) => ({
       protocol: "https",
@@ -27,6 +29,7 @@ const nextConfig: NextConfig = {
     })),
   },
 };
+const withMDX = createMDX({});
 
 const withNextIntl = createNextIntlPlugin();
-export default withNextIntl(nextConfig);
+export default withNextIntl(withMDX(nextConfig));

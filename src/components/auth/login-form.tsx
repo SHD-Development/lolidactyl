@@ -61,8 +61,22 @@ export async function LoginForm({
           </div>
         </CardContent>
       </Card>
-      <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
-        {t("agreement")}
+      <div className="text-muted-foreground text-center text-xs text-balance">
+        {t("agreementPrefix")}{" "}
+        <Link
+          href="/docs/terms"
+          className="hover:text-primary underline underline-offset-4"
+        >
+          {t("agreementTerms")}
+        </Link>{" "}
+        {t("agreementAnd")}{" "}
+        <Link
+          href="/docs/privacy"
+          className="hover:text-primary underline underline-offset-4"
+        >
+          {t("agreementPrivacy")}
+        </Link>
+        {t("agreementSuffix")}
       </div>
     </div>
   );

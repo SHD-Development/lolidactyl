@@ -155,12 +155,18 @@
     "description": "Login to continue using Lolidactyl",
     "continueWith": "Continue with",
     "comingSoon": "Coming Soon",
-    "agreement": "By using this service, you agree to our Terms of Service and Privacy Policy."
+    "agreement": "By using this service, you agree to our Terms of Service and Privacy Policy.",
+    "agreementPrefix": "By using this service, you agree to our",
+    "agreementTerms": "Terms of Service",
+    "agreementAnd": "and",
+    "agreementPrivacy": "Privacy Policy",
+    "agreementSuffix": "."
   },
   "sidebar": {
     "dashboard": "Dashboard",
     "home": "Home",
     "panel": "Panel",
+    "docs": "Documentation",
     "index": "Index",
     "servers": "Servers",
     "create": "Create",
@@ -620,6 +626,34 @@
       "invalidRecipient": "Invalid recipient ID",
       "amountTooLow": "Transfer amount is below the minimum transfer amount",
       "sameUserTransfer": "You cannot transfer droplets to yourself"
+    }
+  },
+  "docs": {
+    "title": "Documentation Center",
+    "subtitle": "Important Policies & Guidelines",
+    "copyright": "© 2025 SHD Cloud - All Rights Reserved.",
+    "index": {
+      "title": "Documentation Index",
+      "subtitle": "Browse all available documentation",
+      "loading": "Loading...",
+      "lastUpdated": "Last updated",
+      "readMore": "Read More",
+      "backToHome": "Back to Docs",
+      "backToDashboard": "Back to Dashboard",
+      "searchPlaceholder": "Search documents...",
+      "noResults": "No documents found",
+      "noResultsHint": "Try different search keywords",
+      "privacy": {
+        "title": "Privacy Policy",
+        "description": "Learn how we collect, use, and protect your personal information",
+        "updated": "Last updated"
+      },
+      "terms": {
+        "title": "Terms of Service",
+        "description": "Important terms and conditions for using our services",
+        "updated": "Last updated"
+      },
+      "noDocuments": "No documents available"
     }
   }
 }

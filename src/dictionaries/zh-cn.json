@@ -137,7 +137,7 @@
       "contact": "联系我们",
       "support": "支持",
       "help": "帮助中心",
-      "docs": "技术文档",
+      "docs": "文档",
       "status": "服务状态",
       "rights": "保留所有权利"
     }
@@ -155,12 +155,18 @@
     "description": "登录以继续使用 Lolidactyl",
     "continueWith": "使用以下方式继续",
     "comingSoon": "即将推出",
-    "agreement": "使用本服务即表示您同意我们的服务条款及隐私政策。"
+    "agreement": "使用本服务即表示您同意我们的服务条款及隐私政策。",
+    "agreementPrefix": "使用本服务即表示您同意我们的",
+    "agreementTerms": "服务条款",
+    "agreementAnd": "及",
+    "agreementPrivacy": "隐私政策",
+    "agreementSuffix": "。"
   },
   "sidebar": {
     "dashboard": "仪表板",
     "home": "首页",
     "panel": "面板",
+    "docs": "文档",
     "index": "索引",
     "servers": "服务器",
     "create": "创建",
@@ -620,6 +626,34 @@
       "invalidRecipient": "无效收款人 ID",
       "amountTooLow": "输入金额低于最低转账金额",
       "sameUserTransfer": "不能转账给自己"
+    }
+  },
+  "docs": {
+    "title": "文档中心",
+    "subtitle": "重要政策与规范说明",
+    "copyright": "© 2025 SHD Cloud - 保留所有权利。",
+    "index": {
+      "title": "文档索引",
+      "subtitle": "浏览所有可用的文档",
+      "loading": "加载中...",
+      "lastUpdated": "最后更新",
+      "readMore": "阅读更多",
+      "backToHome": "返回文档索引",
+      "backToDashboard": "返回仪表板",
+      "searchPlaceholder": "搜索文档...",
+      "noResults": "未找到相关文档",
+      "noResultsHint": "请尝试不同的搜索关键词",
+      "privacy": {
+        "title": "隐私政策",
+        "description": "了解我们如何收集、使用和保护您的个人信息",
+        "updated": "最后更新"
+      },
+      "terms": {
+        "title": "服务条款",
+        "description": "使用我们服务的重要条款和条件",
+        "updated": "最后更新"
+      },
+      "noDocuments": "没有可用的文档"
     }
   }
 }
