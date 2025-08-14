@@ -1,4 +1,4 @@
-import { Shield, Scale, FileText, BookOpen } from "lucide-react";
+import * as LucideIcons from "lucide-react";
 
 export interface DocumentMetadata {
   title: string;
@@ -13,12 +13,10 @@ export interface DocumentMetadata {
   slug: string;
 }
 
-const iconMap = {
-  Shield,
-  Scale,
-  FileText,
-  BookOpen,
-};
+function getIconComponent(iconName: string) {
+  const IconComponent = (LucideIcons as any)[iconName];
+  return IconComponent || LucideIcons.FileText;
+}
 
 const colorMap = {
   blue: {
@@ -54,8 +52,7 @@ const colorMap = {
 };
 
 export function getDocumentConfig(slug: string, metadata: DocumentMetadata) {
-  const IconComponent =
-    iconMap[metadata.icon as keyof typeof iconMap] || FileText;
+  const IconComponent = getIconComponent(metadata.icon);
   const colors =
     colorMap[metadata.color as keyof typeof colorMap] || colorMap.blue;
 

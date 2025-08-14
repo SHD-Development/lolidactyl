@@ -4,9 +4,7 @@ import path from "path";
 
 export interface DocumentMetadata {
   title: string;
-  titleEn: string;
   description: string;
-  descriptionEn: string;
   icon: string;
   color: string;
   lastUpdated: string;
@@ -46,10 +44,7 @@ export async function GET() {
           const frontmatter = (module as any).frontmatter;
           documents.push({
             title: frontmatter.title || entry.name,
-            titleEn: frontmatter.titleEn || frontmatter.title || entry.name,
             description: frontmatter.description || "",
-            descriptionEn:
-              frontmatter.descriptionEn || frontmatter.description || "",
             icon: frontmatter.icon || "FileText",
             color: frontmatter.color || "blue",
             lastUpdated:
