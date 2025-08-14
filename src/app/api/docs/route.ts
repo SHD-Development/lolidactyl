@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
-import matter from "gray-matter";
 
 export interface DocumentMetadata {
   title: string;
@@ -41,10 +40,10 @@ export async function GET() {
       }
 
       try {
-        const fileContent = fs.readFileSync(mdxPath, "utf8");
-        const { data: frontmatter } = matter(fileContent);
+        const module = await import(`@/app/docs/${entry.name}/page.mdx`);
 
-        if (frontmatter) {
+        if ((module as any).frontmatter) {
+          const frontmatter = (module as any).frontmatter;
           documents.push({
             title: frontmatter.title || entry.name,
             titleEn: frontmatter.titleEn || frontmatter.title || entry.name,
@@ -61,7 +60,7 @@ export async function GET() {
           });
         }
       } catch (importError) {
-        console.error(`Failed to read ${entry.name}:`, importError);
+        console.error(`Failed to import ${entry.name}:`, importError);
       }
     }
 
