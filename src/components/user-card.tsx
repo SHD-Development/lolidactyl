@@ -91,7 +91,6 @@ export function UserCard() {
       }
     } catch (error) {
       console.error("Failed to reset password:", error);
-      // You might want to show a toast or error message here
     } finally {
       setResetPasswordLoading(false);
     }
