@@ -104,7 +104,7 @@ export default function DocsIndexPage() {
           <p className="text-muted-foreground text-lg">{t("subtitle")}</p>
         </div>
 
-        <div className="px-32 mx-auto">
+        <div className="md:px-32 mx-auto">
           <div className="relative w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground w-4 h-4" />
             <Input
