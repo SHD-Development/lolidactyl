@@ -34,13 +34,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-
-    async session({ session }) {
-      if (session.user.image == null || session.user.image == undefined)
-        return session;
-      const url = new URL(session.user.image);
-      const userId = url.pathname.split("/")[2];
-      session.user.id = userId;
+    jwt({ token, account }) {
+      if (account) {
+        token.id = account.providerAccountId;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.id = token.id as string;
       return session;
     },
     async signIn({ user, account, profile }) {
