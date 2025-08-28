@@ -5,6 +5,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ViewTransitions } from "next-view-transitions";
 import { SessionProvider } from "next-auth/react";
+import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { Locale } from "@/components/locale";
 import { Toaster } from "react-hot-toast";
@@ -40,6 +41,7 @@ export default async function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <NextTopLoader color="#4FD1C5" />
           <ThemeProvider
             attribute="class"
             defaultTheme="system"

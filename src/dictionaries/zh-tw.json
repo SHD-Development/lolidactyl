@@ -29,37 +29,89 @@
       "getStarted": "立即開始"
     },
     "hero": {
-      "title": "重新想像「雲」",
+      "badge": "免費伺服器託管",
+      "title": {
+        "prefix": "重新想像",
+        "highlight": "雲"
+      },
       "subtitle": "SHD Cloud 提供免費的託管服務，以及活躍的音 (黃？) 遊社群。",
-      "cta": "立即開始"
+      "cta": "立即開始",
+      "joinGroup": "加入群組",
+      "indicators": {
+        "security": "安全",
+        "uptime": "90% 線上率保證",
+        "support": "12/7 技術支援"
+      }
     },
     "features": {
-      "title": "豐富功能，滿足您的需求",
+      "title": "成功所需的一切",
       "subtitle": "我們提供全方位的解決方案",
       "security": {
         "title": "安全",
-        "description": "我們不會偷啃您的 Token"
+        "description": "我們不會偷啃您的 Token",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "performance": {
         "title": "效能",
-        "description": "高效能伺服器，確保您的網站快速穩定運行"
+        "description": "不知道",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "global": {
         "title": "語言",
-        "description": "我們支援多種語言"
+        "description": "我們支援多種語言",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "scalable": {
         "title": "彈性",
-        "description": "根據需求調整資源配置"
+        "description": "根據需求調整資源配置",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "backup": {
         "title": "備份",
-        "description": "備份您的資料，支援還原功能"
+        "description": "備份您的資料，支援還原功能",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "support": {
         "title": "支援",
-        "description": "支援團隊在 Discord 等著您"
+        "description": "支援團隊在 Discord 等著您",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       }
+    },
+    "stats": {
+      "uptime": "正常運行保證",
+      "customers": "滿意客戶",
+      "locations": "全球位置",
+      "support": "專業支援"
     },
     "testimonials": {
       "title": "客戶評價",
@@ -84,50 +136,85 @@
       }
     },
     "pricing": {
-      "title": "靈活的價格方案",
-      "subtitle": "選擇最適合您需求的方案，隨時可以升級或調整",
+      "title": "簡單透明的定價",
+      "subtitle": "選擇最適合您需求的方案。所有方案都包含我們的核心功能，無隱藏費用。",
       "popular": "最受歡迎",
       "chooseplan": "選擇方案",
-      "starter": {
-        "name": "不知道放啥",
-        "price": "NT$0",
-        "description": "不知道放啥",
-        "features": {
-          "storage": "不知道放啥",
-          "bandwidth": "不知道放啥",
-          "domains": "不知道放啥",
-          "support": "不知道放啥"
+      "guarantee": "所有方案享有 30 天退款保證",
+      "pCount": "3",
+      "plans": {
+        "1": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "false",
+          "fCount": "2",
+          "features": {
+            "1": "不知道",
+            "2": "不知道"
+          }
+        },
+        "2": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "true",
+          "fCount": "3",
+          "features": {
+            "1": "不知道",
+            "2": "不知道",
+            "3": "不知道"
+          }
+        },
+        "3": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "false",
+          "fCount": "4",
+          "features": {
+            "1": "不知道",
+            "2": "不知道",
+            "3": "不知道",
+            "4": "不知道"
+          }
         }
-      },
-      "pro": {
-        "name": "不知道放啥",
-        "price": "NT$0",
-        "description": "不知道放啥",
-        "features": {
-          "storage": "不知道放啥",
-          "bandwidth": "不知道放啥",
-          "domains": "不知道放啥",
-          "ssl": "不知道放啥",
-          "support": "不知道放啥"
-        }
-      },
-      "enterprise": {
-        "name": "不知道放啥",
-        "price": "NT$0",
-        "description": "不知道放啥",
-        "features": {
-          "storage": "不知道放啥",
-          "bandwidth": "不知道放啥",
-          "domains": "不知道放啥",
-          "dedicated": "不知道放啥",
-          "support": "不知道放啥"
+      }
+    },
+    "faq": {
+      "title": "常見問題",
+      "subtitle": "關於我們託管平台您需要了解的一切",
+      "stillHaveQuestions": "還有問題嗎？",
+      "contactSupport": "加入群組",
+      "questions": {
+        "hosting": {
+          "question": "託管方案包含什麼？",
+          "answer": "沒有。"
+        },
+        "upgrade": {
+          "question": "我可以隨時升級或降級方案嗎？",
+          "answer": "是的，您可以隨時升級或降級方案。"
+        },
+        "support": {
+          "question": "你們提供什麼樣的支援？",
+          "answer": "Discord。"
+        },
+        "guarantee": {
+          "question": "你們提供退款保證嗎？",
+          "answer": "是的，我們為所有新客戶提供 30 天退款保證。如果您不滿意，我們將退還您的款項。"
         }
       }
     },
     "cta": {
-      "title": "準備好開始了嗎？",
-      "subtitle": "加入數千位滿意客戶的行列，體驗 SHD Cloud 的卓越服務",
-      "button": "加入"
+      "badge": "準備開始了嗎？",
+      "title": "立即開始您的雲端之旅",
+      "subtitle": "加入我們的行列",
+      "start": "立即開始",
+      "features": {
+        "noFees": "無設定費用",
+        "cancelAnytime": "隨時取消",
+        "support": "12/7 技術支援"
+      }
     },
     "footer": {
       "description": "SHD Cloud 致力於提供最可愛的雲端託管服務，快點喵喵叫！",
@@ -139,7 +226,12 @@
       "help": "幫助中心",
       "docs": "文檔",
       "status": "服務狀態",
-      "rights": "保留所有權利"
+      "rights": "保留所有權利",
+      "legal": {
+        "privacy": "隱私政策",
+        "terms": "服務條款",
+        "cookies": "Cookie 政策"
+      }
     }
   },
   "dashboard": {

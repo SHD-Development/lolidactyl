@@ -29,41 +29,93 @@
       "getStarted": "Get Started"
     },
     "hero": {
-      "title": "Reimagining \"Cloud\"",
+      "badge": "Free server hosting",
+      "title": {
+        "prefix": "Reimagine a",
+        "highlight": "cloud"
+      },
       "subtitle": "SHD Cloud provides free hosting services and an active gaming community.",
-      "cta": "Get Started"
+      "cta": "Get Started",
+      "joinGroup": "Join Group",
+      "indicators": {
+        "security": "Security",
+        "uptime": "90% Uptime SLA",
+        "support": "12/7 Support"
+      }
     },
     "features": {
-      "title": "Rich Features to Meet Your Needs",
+      "title": "Everything you need to succeed",
       "subtitle": "We provide comprehensive solutions",
       "security": {
         "title": "Security",
-        "description": "We won't steal your tokens"
+        "description": "We won't steal your tokens",
+        "dCount": "3",
+        "details": {
+          "1": "DDoS Protection",
+          "2": "SSL Certificates",
+          "3": "Data Encryption"
+        }
       },
       "performance": {
         "title": "Performance",
-        "description": "High-performance servers ensuring fast and stable operation"
+        "description": "High-performance servers ensuring fast and stable operation",
+        "dCount": "3",
+        "details": {
+          "1": "99.9% Uptime",
+          "2": "SSD Storage",
+          "3": "CDN Integration"
+        }
       },
       "global": {
         "title": "Languages",
-        "description": "We support multiple languages"
+        "description": "We support multiple languages",
+        "dCount": "3",
+        "details": {
+          "1": "20+ Locations",
+          "2": "Low Latency",
+          "3": "Global Network"
+        }
       },
       "scalable": {
         "title": "Scalable",
-        "description": "Adjust resource allocation based on needs"
+        "description": "Adjust resource allocation based on needs",
+        "dCount": "3",
+        "details": {
+          "1": "Auto Scaling",
+          "2": "Load Balancing",
+          "3": "Resource Monitoring"
+        }
       },
       "backup": {
         "title": "Backup",
-        "description": "Backup your data with restore functionality"
+        "description": "Backup your data with restore functionality",
+        "dCount": "3",
+        "details": {
+          "1": "Daily Backups",
+          "2": "Point-in-Time Recovery",
+          "3": "Multi-Region"
+        }
       },
       "support": {
         "title": "Support",
-        "description": "Support team waiting for you on Discord"
+        "description": "Support team waiting for you on Discord",
+        "dCount": "3",
+        "details": {
+          "1": "12/7 Support",
+          "2": "Expert Team",
+          "3": "Priority Response"
+        }
       }
     },
+    "stats": {
+      "uptime": "Uptime Guarantee",
+      "customers": "Happy Customers",
+      "locations": "Global Locations",
+      "support": "Expert Support"
+    },
     "testimonials": {
-      "title": "Customer Reviews",
-      "subtitle": "See what our customers say",
+      "title": "What our customers say",
+      "subtitle": "Join thousands of satisfied customers who trust us with their cloud infrastructure",
       "tCount": "3",
       "t": {
         "1": {
@@ -84,50 +136,90 @@
       }
     },
     "pricing": {
-      "title": "Flexible Pricing Plans",
-      "subtitle": "Choose the plan that best fits your needs, upgrade or adjust anytime",
+      "title": "Simple, transparent pricing",
+      "subtitle": "Choose the perfect plan for your needs. All plans include our core features with no hidden fees.",
       "popular": "Most Popular",
       "chooseplan": "Choose Plan",
-      "starter": {
-        "name": "Starter",
-        "price": "$9.99",
-        "description": "Perfect for personal websites and small projects",
-        "features": {
-          "storage": "10GB SSD Storage",
-          "bandwidth": "100GB Monthly Bandwidth",
-          "domains": "1 Domain Name",
-          "support": "Email Technical Support"
+      "guarantee": "30-day money-back guarantee on all plans",
+      "pCount": "3",
+      "plans": {
+        "1": {
+          "name": "Starter",
+          "price": "$9.99",
+          "description": "Perfect for personal websites and small projects",
+          "popular": "false",
+          "fCount": "4",
+          "features": {
+            "1": "10GB SSD Storage",
+            "2": "100GB Monthly Bandwidth",
+            "3": "1 Domain Name",
+            "4": "Email Technical Support"
+          }
+        },
+        "2": {
+          "name": "Professional",
+          "price": "$29.99",
+          "description": "Ideal for small to medium businesses and professional websites",
+          "popular": "true",
+          "fCount": "5",
+          "features": {
+            "1": "50GB SSD Storage",
+            "2": "500GB Monthly Bandwidth",
+            "3": "5 Domain Names",
+            "4": "Free SSL Certificate",
+            "5": "24/7 Online Customer Support"
+          }
+        },
+        "3": {
+          "name": "Enterprise",
+          "price": "$99.99",
+          "description": "Perfect for large enterprises and high-traffic websites",
+          "popular": "false",
+          "fCount": "5",
+          "features": {
+            "1": "200GB SSD Storage",
+            "2": "Unlimited Monthly Bandwidth",
+            "3": "Unlimited Domain Names",
+            "4": "Dedicated Server Resources",
+            "5": "Dedicated Account Manager"
+          }
         }
-      },
-      "pro": {
-        "name": "Professional",
-        "price": "$29.99",
-        "description": "Ideal for small to medium businesses and professional websites",
-        "features": {
-          "storage": "50GB SSD Storage",
-          "bandwidth": "500GB Monthly Bandwidth",
-          "domains": "5 Domain Names",
-          "ssl": "Free SSL Certificate",
-          "support": "24/7 Online Customer Support"
-        }
-      },
-      "enterprise": {
-        "name": "Enterprise",
-        "price": "$99.99",
-        "description": "Perfect for large enterprises and high-traffic websites",
-        "features": {
-          "storage": "200GB SSD Storage",
-          "bandwidth": "Unlimited Monthly Bandwidth",
-          "domains": "Unlimited Domain Names",
-          "dedicated": "Dedicated Server Resources",
-          "support": "Dedicated Account Manager"
+      }
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "subtitle": "Everything you need to know about our hosting platform",
+      "stillHaveQuestions": "Still have questions?",
+      "contactSupport": "Contact Support",
+      "questions": {
+        "hosting": {
+          "question": "What is included in the hosting plans?",
+          "answer": "No."
+        },
+        "upgrade": {
+          "question": "Can I upgrade or downgrade my plan anytime?",
+          "answer": "Yes, you can upgrade or downgrade your plan at any time."
+        },
+        "support": {
+          "question": "What kind of support do you offer?",
+          "answer": "Discord."
+        },
+        "guarantee": {
+          "question": "Do you offer a money-back guarantee?",
+          "answer": "Yes, we offer a 30-day money-back guarantee for all new customers. If you're not satisfied, we'll refund your payment."
         }
       }
     },
     "cta": {
-      "title": "Ready to Get Started?",
-      "subtitle": "Join thousands of satisfied customers and experience SHD Cloud's excellent service",
-      "button": "Join"
+      "badge": "Ready to get started?",
+      "title": "Start your cloud journey today",
+      "subtitle": "Join thousands of businesses that trust our platform for their cloud infrastructure needs",
+      "start": "Start",
+      "features": {
+        "noFees": "No setup fees",
+        "cancelAnytime": "Cancel anytime",
+        "support": "12/7 support"
+      }
     },
     "footer": {
       "description": "SHD Cloud is committed to providing the cutest cloud hosting services, meow meow!",
@@ -139,7 +231,12 @@
       "help": "Help Center",
       "docs": "Documentation",
       "status": "Service Status",
-      "rights": "All rights reserved"
+      "rights": "All rights reserved",
+      "legal": {
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service",
+        "cookies": "Cookie Policy"
+      }
     }
   },
   "dashboard": {

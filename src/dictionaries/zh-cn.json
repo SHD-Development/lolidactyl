@@ -4,9 +4,9 @@
     "droplets": "露凝",
     "languages": "语言",
     "login": "登录",
-    "logout": "登出",
+    "logout": "退出",
     "resources": "资源",
-    "dashboard": "仪表板"
+    "dashboard": "仪表盘"
   },
   "resourceCards": {
     "resources": "资源",
@@ -29,37 +29,89 @@
       "getStarted": "立即开始"
     },
     "hero": {
-      "title": "重新想象「云」",
-      "subtitle": "SHD Cloud 提供免费的托管服务，以及活跃的音 (黄？) 游社群。",
-      "cta": "立即开始"
+      "badge": "免费服务器托管",
+      "title": {
+        "prefix": "重新想象",
+        "highlight": "云"
+      },
+      "subtitle": "SHD Cloud 提供免费的托管服务，以及活跃的音（黄？）游社群。",
+      "cta": "立即开始",
+      "joinGroup": "加入群组",
+      "indicators": {
+        "security": "安全",
+        "uptime": "90% 在线率保证",
+        "support": "12/7 技术支持"
+      }
     },
     "features": {
-      "title": "丰富功能，满足您的需求",
+      "title": "成功所需的一切",
       "subtitle": "我们提供全方位的解决方案",
       "security": {
         "title": "安全",
-        "description": "我们不会偷啃您的 Token"
+        "description": "我们不会偷咬您的 Token",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "performance": {
         "title": "性能",
-        "description": "高性能服务器，确保您的网站快速稳定运行"
+        "description": "不知道",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "global": {
         "title": "语言",
-        "description": "我们支持多种语言"
+        "description": "我们支持多种语言",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "scalable": {
         "title": "弹性",
-        "description": "根据需求调整资源配置"
+        "description": "根据需求调整资源配置",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "backup": {
         "title": "备份",
-        "description": "备份您的数据，支持还原功能"
+        "description": "备份您的数据，支持还原功能",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       },
       "support": {
         "title": "支持",
-        "description": "支持团队在 Discord 等着您"
+        "description": "支持团队在 Discord 等着您",
+        "dCount": "3",
+        "details": {
+          "1": "不知道",
+          "2": "不知道",
+          "3": "不知道"
+        }
       }
+    },
+    "stats": {
+      "uptime": "正常运行保证",
+      "customers": "满意客户",
+      "locations": "全球位置",
+      "support": "专业支持"
     },
     "testimonials": {
       "title": "客户评价",
@@ -84,50 +136,85 @@
       }
     },
     "pricing": {
-      "title": "灵活的价格方案",
-      "subtitle": "选择最适合您需求的方案，随时可以升级或调整",
+      "title": "简单透明的定价",
+      "subtitle": "选择最适合您需求的方案。所有方案都包含我们的核心功能，无隐藏费用。",
       "popular": "最受欢迎",
       "chooseplan": "选择方案",
-      "starter": {
-        "name": "入门版",
-        "price": "¥19.9",
-        "description": "适合个人网站和小型项目",
-        "features": {
-          "storage": "10GB SSD 存储空间",
-          "bandwidth": "100GB 月流量",
-          "domains": "1 个域名",
-          "support": "邮件技术支持"
+      "guarantee": "所有方案享有 30 天退款保证",
+      "pCount": "3",
+      "plans": {
+        "1": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "false",
+          "fCount": "2",
+          "features": {
+            "1": "不知道",
+            "2": "不知道"
+          }
+        },
+        "2": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "true",
+          "fCount": "3",
+          "features": {
+            "1": "不知道",
+            "2": "不知道",
+            "3": "不知道"
+          }
+        },
+        "3": {
+          "name": "不知道",
+          "price": "$0",
+          "description": "不知道",
+          "popular": "false",
+          "fCount": "4",
+          "features": {
+            "1": "不知道",
+            "2": "不知道",
+            "3": "不知道",
+            "4": "不知道"
+          }
         }
-      },
-      "pro": {
-        "name": "专业版",
-        "price": "¥59.9",
-        "description": "适合中小型企业和专业网站",
-        "features": {
-          "storage": "50GB SSD 存储空间",
-          "bandwidth": "500GB 月流量",
-          "domains": "5 个域名",
-          "ssl": "免费 SSL 证书",
-          "support": "24/7 在线客服支持"
-        }
-      },
-      "enterprise": {
-        "name": "企业版",
-        "price": "¥199.9",
-        "description": "适合大型企业和高流量网站",
-        "features": {
-          "storage": "200GB SSD 存储空间",
-          "bandwidth": "无限月流量",
-          "domains": "无限域名",
-          "dedicated": "专属服务器资源",
-          "support": "专属客户经理服务"
+      }
+    },
+    "faq": {
+      "title": "常见问题",
+      "subtitle": "关于我们托管平台您需要了解的一切",
+      "stillHaveQuestions": "还有问题吗？",
+      "contactSupport": "加入群组",
+      "questions": {
+        "hosting": {
+          "question": "托管方案包含什么？",
+          "answer": "没有。"
+        },
+        "upgrade": {
+          "question": "我可以随时升级或降级方案吗？",
+          "answer": "是的，您可以随时升级或降级方案。"
+        },
+        "support": {
+          "question": "你们提供什么样的支持？",
+          "answer": "Discord。"
+        },
+        "guarantee": {
+          "question": "你们提供退款保证吗？",
+          "answer": "是的，我们为所有新客户提供 30 天退款保证。如果您不满意，我们将退还您的款项。"
         }
       }
     },
     "cta": {
-      "title": "准备好开始了吗？",
-      "subtitle": "加入数千位满意客户的行列，体验 SHD Cloud 的卓越服务",
-      "button": "加入"
+      "badge": "准备开始了吗？",
+      "title": "立即开始您的云端之旅",
+      "subtitle": "加入我们的行列",
+      "start": "立即开始",
+      "features": {
+        "noFees": "无设置费用",
+        "cancelAnytime": "随时取消",
+        "support": "12/7 技术支持"
+      }
     },
     "footer": {
       "description": "SHD Cloud 致力于提供最可爱的云端托管服务，快点喵喵叫！",
@@ -139,7 +226,12 @@
       "help": "帮助中心",
       "docs": "文档",
       "status": "服务状态",
-      "rights": "保留所有权利"
+      "rights": "保留所有权利",
+      "legal": {
+        "privacy": "隐私政策",
+        "terms": "服务条款",
+        "cookies": "Cookie 政策"
+      }
     }
   },
   "dashboard": {
@@ -163,7 +255,7 @@
     "agreementSuffix": "。"
   },
   "sidebar": {
-    "dashboard": "仪表板",
+    "dashboard": "仪表盘",
     "home": "首页",
     "panel": "面板",
     "docs": "文档",
@@ -250,7 +342,7 @@
       },
       "empty": {
         "title": "找不到服务器",
-        "description": "没有服务器符合目前的筛选条件。"
+        "description": "没有服务器符合当前的筛选条件。"
       },
       "loading": "加载服务器中...",
       "error": "加载服务器失败",
@@ -345,7 +437,7 @@
               "total": "总费用"
             },
             "balance": {
-              "current": "目前余额",
+              "current": "当前余额",
               "afterPayment": "付款后余额",
               "insufficient": "余额不足",
               "change": "余额变化",
@@ -398,7 +490,7 @@
     "error": {
       "accessDenied": {
         "title": "拒绝访问",
-        "description": "您可能使用了 VPN / Proxy / Hosting 或是有创立多重账号的行为，这些都是不被我们的条款允许的。",
+        "description": "您可能使用了 VPN / 代理 / 托管 或是有创建多重账号的行为，这些都是不被我们的条款允许的。",
         "suggestion": "请联系管理员以获得进一步协助。"
       },
       "configuration": {
@@ -429,22 +521,22 @@
     "droplets": "露凝",
     "dropletsDescription": "您的货币余额",
     "servers": "服务器",
-    "serversDescription": "您目前拥有的服务器数量",
+    "serversDescription": "您当前拥有的服务器数量",
     "goToPanel": "前往面板",
-    "resetPassword": "重设密码",
-    "resettingPassword": "重设中...",
-    "confirmResetTitle": "确认重设密码",
-    "confirmResetDescription": "您确定要重设密码吗？这将会产生一个新的密码，旧密码将无法使用。",
+    "resetPassword": "重置密码",
+    "resettingPassword": "重置中...",
+    "confirmResetTitle": "确认重置密码",
+    "confirmResetDescription": "您确定要重置密码吗？这将会产生一个新的密码，旧密码将无法使用。",
     "cancel": "取消",
-    "confirmReset": "确认重设",
-    "passwordResetSuccess": "密码重设成功",
+    "confirmReset": "确认重置",
+    "passwordResetSuccess": "密码重置成功",
     "passwordResetDescription": "您的新密码如下，请妥善保存:",
     "userId": "Discord ID",
     "newPassword": "新密码",
     "close": "关闭"
   },
   "navUser": {
-    "logout": "登出",
+    "logout": "退出",
     "droplets": "露凝",
     "language": "语言"
   },
@@ -575,7 +667,7 @@
   "coupons": {
     "breadcrumbs": "兑换代码",
     "title": "兑换代码",
-    "description": "输入兑换代码以兑换",
+    "description": "输入兑换代码以兑换露凝",
     "form": {
       "label": "兑换代码",
       "placeholder": "请输入您的兑换代码",
@@ -592,7 +684,7 @@
       "alreadyUsed": "该兑换代码已被兑换过",
       "notFound": "无效的兑换代码",
       "limitReached": "该兑换代码已被兑换完毕",
-      "redeemFailed": "兑换兑换代码失败"
+      "redeemFailed": "兑换代码失败"
     }
   },
   "transfer": {
@@ -639,12 +731,12 @@
       "lastUpdated": "最后更新",
       "readMore": "阅读更多",
       "backToHome": "返回文档索引",
-      "backToDashboard": "返回仪表板",
+      "backToDashboard": "返回仪表盘",
       "searchPlaceholder": "搜索文档...",
-      "noResults": "未找到相关文档",
-      "noResultsHint": "请尝试不同的搜索关键词",
+      "noResults": "找不到相关文档",
+      "noResultsHint": "请尝试不同的搜索关键字",
       "privacy": {
-        "title": "隐私政策",
+        "title": "隐私权政策",
         "description": "了解我们如何收集、使用和保护您的个人信息",
         "updated": "最后更新"
       },
