@@ -277,7 +277,14 @@
     "resources": "Resources",
     "platform": "Platform",
     "go": "Go",
-    "destination": "Go to"
+    "destination": "Go to",
+    "descriptions": {
+      "index": "Dashboard Index",
+      "home": "Back to Home",
+      "docs": "View Documentation",
+      "panel": "Server Panel"
+    },
+    "loading": "Loading..."
   },
   "servers": {
     "breadcrumbs": {

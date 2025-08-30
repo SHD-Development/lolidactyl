@@ -272,7 +272,14 @@
     "resources": "资源",
     "platform": "平台",
     "go": "前往",
-    "destination": "跳转至"
+    "destination": "跳转至",
+    "descriptions": {
+      "index": "仪表板索引",
+      "home": "返回首页",
+      "docs": "查看文档",
+      "panel": "服务器面板"
+    },
+    "loading": "加载中..."
   },
   "servers": {
     "breadcrumbs": {

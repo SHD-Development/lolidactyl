@@ -144,59 +144,79 @@ export function NavUser({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-xl border bg-white/95 backdrop-blur-xl dark:bg-zinc-900/95 shadow-2xl"
             side={isMobile ? "bottom" : "right"}
             align="end"
-            sideOffset={4}
+            sideOffset={8}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg">
+              <div className="flex items-center gap-3 px-4 py-3 text-left text-sm border-b border-zinc-200 dark:border-zinc-700">
+                <Avatar className="h-10 w-10 rounded-xl">
                   <AvatarImage src={user.avatar} alt={user.name} />
-                  <AvatarFallback className="rounded-lg">...</AvatarFallback>
+                  <AvatarFallback className="rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
+                    {user.name?.charAt(0)?.toUpperCase() || "U"}
+                  </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-medium">{user.name}</span>
-                  <span className="truncate text-xs">{user.email}</span>
+                  <span className="truncate font-semibold text-zinc-900 dark:text-zinc-100">
+                    {user.name}
+                  </span>
+                  <span className="truncate text-xs text-zinc-500 dark:text-zinc-400">
+                    {user.email}
+                  </span>
                 </div>
               </div>
             </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem className="flex items-center gap-2">
-                <Droplets className="h-4 w-4" />
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium">{t("droplets")}</span>
-                  <span className="text-xs text-muted-foreground">
+            <DropdownMenuGroup className="p-2">
+              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 cursor-pointer group">
+                <div className="flex items-center justify-center size-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
+                  <Droplets className="h-4 w-4 text-emerald-600 dark:text-emerald-400 transition-colors duration-300" />
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
+                    {t("droplets")}
+                  </span>
+                  <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
                     {loading ? (
-                      <LoaderCircle className="h-3 w-3 animate-spin inline" />
+                      <div className="flex items-center gap-1">
+                        <LoaderCircle className="h-3 w-3 animate-spin" />
+                        <span>{t("loading")}</span>
+                      </div>
                     ) : (
-                      `${userInfo?.coins?.toFixed(2) || "0.00"}`
+                      <span className="font-medium">
+                        {userInfo?.coins?.toFixed(2) || "0.00"}
+                      </span>
                     )}
                   </span>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem className="flex items-center">
-                <Sun className="h-4 w-4" />
+            <div className="border-t border-zinc-200 dark:border-zinc-700 p-2 space-y-1">
+              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
+                <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
+                  <Sun className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                </div>
                 <Switch
                   checked={isDark}
                   onCheckedChange={toggleTheme}
                   aria-label="Toggle dark mode"
                 />
-                <Moon className="h-4 w-4" />
               </DropdownMenuItem>
-              <DropdownMenuItem asChild className="flex items-center gap-2">
+
+              <DropdownMenuItem
+                asChild
+                className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
+              >
                 <div>
-                  <Languages className="h-4 w-4" />
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
+                    <Languages className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                  </div>
                   <div
                     className="flex flex-1 items-center"
                     onClick={(e) => e.stopPropagation()}
                   >
                     <Select value={locale} onValueChange={changeLanguage}>
-                      <SelectTrigger className="h-8 w-32">
+                      <SelectTrigger className="h-8 w-32 border-zinc-300 dark:border-zinc-600">
                         <SelectValue placeholder="Language" />
                       </SelectTrigger>
                       <SelectContent>
@@ -222,14 +242,18 @@ export function NavUser({
                   </div>
                 </div>
               </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <Link href="/auth/logout" prefetch={false}>
-              <DropdownMenuItem>
-                <LogOut />
-                {t("logout")}
-              </DropdownMenuItem>
-            </Link>
+            </div>
+
+            <div className="border-t border-zinc-200 dark:border-zinc-700 p-2">
+              <Link href="/auth/logout" prefetch={false}>
+                <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400">
+                  <div className="flex size-9 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950/30">
+                    <LogOut className="h-4 w-4" />
+                  </div>
+                  <span className="text-sm font-medium">{t("logout")}</span>
+                </DropdownMenuItem>
+              </Link>
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
       </SidebarMenuItem>
