@@ -235,8 +235,84 @@
     }
   },
   "dashboard": {
+    "title": "仪表盘",
+    "description": "欢迎来到您的控制面板",
     "breadcrumbs": "索引",
-    "additionalResources": "其他资源"
+    "additionalResources": "其他资源",
+    "components": {
+      "welcome": {
+        "morning": "早安",
+        "afternoon": "午安",
+        "evening": "晚安",
+        "night": "夜深了",
+        "systemStatus": "系统运行正常",
+        "today": "今天"
+      },
+      "stats": {
+        "title": "统计总览",
+        "balance": "露凝余额",
+        "activeServers": "活跃服务器",
+        "totalCpu": "总CPU",
+        "totalRam": "总内存",
+        "totalDisk": "总磁盘",
+        "totalDatabases": "总数据库",
+        "totalResources": "总资源使用量",
+        "loadingError": "无法载入统计数据"
+      },
+      "quickActions": {
+        "title": "快速操作",
+        "createServer": "建立服务器",
+        "createServerDesc": "部署新的游戏服务器",
+        "manageServers": "管理服务器",
+        "manageServersDesc": "查看和管理现有服务器",
+        "controlPanel": "控制面板",
+        "controlPanelDesc": "前往控制面板",
+        "helpDocs": "帮助文档",
+        "helpDocsDesc": "查看使用指南和教学",
+        "joinCommunity": "加入社群",
+        "joinCommunityDesc": "加入我们的 Discord 社群"
+      },
+      "announcements": {
+        "title": "最新公告",
+        "viewAll": "查看所有公告",
+        "allAnnouncements": "所有公告",
+        "learnMore": "了解更多"
+      },
+      "serverQuickView": {
+        "title": "服务器快速预览",
+        "noServers": "没有找到服务器",
+        "createFirst": "创建您的第一个服务器",
+        "status": "状态",
+        "expires": "到期时间",
+        "autoRenew": "自动续费",
+        "enabled": "已启用",
+        "disabled": "已禁用",
+        "goToPanel": "前往面板",
+        "viewAll": "查看全部",
+        "cpu": "处理器",
+        "ram": "内存",
+        "disk": "磁盘",
+        "servers": "个服务器"
+      },
+      "recentActivity": {
+        "title": "最近活动",
+        "noActivity": "没有最近活动",
+        "serverCreated": "服务器已建立",
+        "serverExpiring": "服务器即将到期",
+        "autoRenew": "自动续费",
+        "loadingError": "无法载入活动",
+        "expiring": "即期",
+        "created": "创建",
+        "deployedSuccessfully": "已成功部署",
+        "willExpireOn": "将于",
+        "expiresOn": "到期",
+        "aboutToExpire": "即将到期",
+        "justNow": "刚刚",
+        "minutesAgo": "分钟前",
+        "hoursAgo": "小时前",
+        "daysAgo": "天前"
+      }
+    }
   },
   "settings": {
     "title": "设置",

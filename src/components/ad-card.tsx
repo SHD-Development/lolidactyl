@@ -51,10 +51,12 @@ export function AdCard() {
 
   return (
     <>
-      <Card className="w-full max-w-md mx-auto cursor-pointer group hover:shadow-lg transition-shadow duration-200">
+      <Card className="w-full max-w-md mx-auto cursor-pointer group hover:shadow-lg transition-shadow duration-200 bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm">
         <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2">
-            <Megaphone className="h-5 w-5 text-orange-500" />
+          <CardTitle className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
+            <div className="p-2.5 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500 text-white">
+              <Megaphone className="h-5 w-5" />
+            </div>
             {t("title", { defaultValue: "推薦服務" })}
           </CardTitle>
         </CardHeader>
@@ -84,15 +86,15 @@ export function AdCard() {
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
+            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors text-zinc-900 dark:text-zinc-100">
               {currentAd.title}
             </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
+            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
               {currentAd.description}
             </p>
           </div>
 
-          <div className="border-t pt-4">
+          <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4">
             <Button
               variant="default"
               size="sm"
@@ -112,7 +114,7 @@ export function AdCard() {
           </div>
 
           <div className="text-center">
-            <span className="text-xs text-muted-foreground">
+            <span className="text-xs text-zinc-500 dark:text-zinc-500">
               {t("advertisement", { defaultValue: "廣告" })}
             </span>
           </div>

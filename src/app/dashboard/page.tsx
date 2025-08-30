@@ -12,6 +12,12 @@ import { Separator } from "@/components/ui/separator";
 import { useTranslations } from "next-intl";
 import { UserCard } from "@/components/user-card";
 import { AdCard } from "@/components/ad-card";
+import { StatsOverview } from "@/components/dashboard/stats-overview";
+import { ServerQuickView } from "@/components/dashboard/server-quick-view";
+import { QuickActions } from "@/components/dashboard/quick-actions";
+import { RecentActivity } from "@/components/dashboard/recent-activity";
+import { WelcomeCard } from "@/components/dashboard/welcome-card";
+import { AnnouncementCard } from "@/components/dashboard/announcement-card";
 import { Button } from "@/components/ui/button";
 import { PlusCircle } from "lucide-react";
 import {
@@ -51,9 +57,26 @@ export default function Dashboard() {
           </Breadcrumb>
         </div>
       </header>
-      <div className="p-6 flex justify-center">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
+      <div className="p-4 sm:p-6 lg:p-10 space-y-6">
+        <div className="flex flex-col space-y-4 sm:flex-row sm:items-center sm:justify-between sm:space-y-0">
+          <div>
+            <h1 className="text-3xl font-bold">{t("title")}</h1>
+            <p className="text-muted-foreground">{t("description")}</p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="md:col-span-2">
+            <WelcomeCard />
+          </div>
+          <StatsOverview />
+          <QuickActions />
+          <div className="md:col-span-2">
+            <AnnouncementCard />
+          </div>
           <UserCard />
+          <ServerQuickView />
+          <RecentActivity />
           <AdCard />
           <AdCard />
           <AdCard />

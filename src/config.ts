@@ -58,7 +58,7 @@ const appConfig = {
       description: "加入我們的 Discord 社群！",
       imageUrl:
         "https://upload.wikimedia.org/wikipedia/en/thumb/9/98/Discord_logo.svg/1920px-Discord_logo.svg.png",
-      linkUrl: "https://dc.shdtw.cloud",
+      linkUrl: "https://dc.shdctw.com",
       isActive: true,
     },
     {
@@ -68,6 +68,25 @@ const appConfig = {
       imageUrl: "https://cdn.coffeehost.net/logo.png",
       linkUrl: "https://coffeehost.net",
       isActive: true,
+    },
+  ],
+  welcomeMessages: ["歡迎回來！你喜歡酪梨嗎？"],
+  announcements: [
+    {
+      id: 1,
+      title: "我們換網域了",
+      content: "感謝小黃贊助的 shdctw.com",
+      color: "green",
+      date: "2025-08-30",
+      isSticky: true,
+    },
+    {
+      id: 2,
+      title: "正在優化 Lolidactyl 的設計",
+      content: "可以看 Github",
+      color: "blue",
+      date: "2025-08-30",
+      link: "https://github.com/SHD-Development/lolidactyl",
     },
   ],
 };

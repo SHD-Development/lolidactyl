@@ -240,8 +240,84 @@
     }
   },
   "dashboard": {
+    "title": "Dashboard",
+    "description": "Welcome to your control panel",
     "breadcrumbs": "Index",
-    "additionalResources": "Additional Resources"
+    "additionalResources": "Additional Resources",
+    "components": {
+      "welcome": {
+        "morning": "Good Morning",
+        "afternoon": "Good Afternoon",
+        "evening": "Good Evening",
+        "night": "Late Night",
+        "systemStatus": "System Running",
+        "today": "Today"
+      },
+      "stats": {
+        "title": "Statistics Overview",
+        "balance": "Balance",
+        "activeServers": "Active Servers",
+        "totalCpu": "Total CPU",
+        "totalRam": "Total RAM",
+        "totalDisk": "Total Disk",
+        "totalDatabases": "Total Databases",
+        "totalResources": "Total Resource Usage",
+        "loadingError": "Unable to load statistics"
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "createServer": "Create Server",
+        "createServerDesc": "Deploy a new game server",
+        "manageServers": "Manage Servers",
+        "manageServersDesc": "View and manage existing servers",
+        "controlPanel": "Control Panel",
+        "controlPanelDesc": "Go to control panel",
+        "helpDocs": "Help Documentation",
+        "helpDocsDesc": "View guides and tutorials",
+        "joinCommunity": "Join Community",
+        "joinCommunityDesc": "Join our Discord community"
+      },
+      "announcements": {
+        "title": "Latest Announcements",
+        "viewAll": "View All Announcements",
+        "allAnnouncements": "All Announcements",
+        "learnMore": "Learn More"
+      },
+      "serverQuickView": {
+        "title": "Server Quick View",
+        "noServers": "No servers found",
+        "createFirst": "Create your first server",
+        "status": "Status",
+        "expires": "Expires",
+        "autoRenew": "Auto Renew",
+        "enabled": "Enabled",
+        "disabled": "Disabled",
+        "goToPanel": "Go to Panel",
+        "viewAll": "View All",
+        "cpu": "CPU",
+        "ram": "RAM",
+        "disk": "DISK",
+        "servers": "servers"
+      },
+      "recentActivity": {
+        "title": "Recent Activity",
+        "noActivity": "No recent activity",
+        "serverCreated": "Server Created",
+        "serverExpiring": "Server Expiring Soon",
+        "autoRenew": "Auto Renewed",
+        "loadingError": "Unable to load activity",
+        "expiring": "Expiring",
+        "created": "Created",
+        "deployedSuccessfully": "successfully deployed",
+        "willExpireOn": "will expire on",
+        "expiresOn": "expires on",
+        "aboutToExpire": "About to expire",
+        "justNow": "Just now",
+        "minutesAgo": "minutes ago",
+        "hoursAgo": "hours ago",
+        "daysAgo": "days ago"
+      }
+    }
   },
   "settings": {
     "title": "Settings",

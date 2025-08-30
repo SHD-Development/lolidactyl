@@ -235,8 +235,84 @@
     }
   },
   "dashboard": {
+    "title": "儀表板",
+    "description": "歡迎來到您的控制面板",
     "breadcrumbs": "索引",
-    "additionalResources": "其他資源"
+    "additionalResources": "其他資源",
+    "components": {
+      "welcome": {
+        "morning": "早安",
+        "afternoon": "午安",
+        "evening": "晚安",
+        "night": "夜深了",
+        "systemStatus": "系統運行正常",
+        "today": "今天"
+      },
+      "stats": {
+        "title": "統計總覽",
+        "balance": "露凝餘額",
+        "activeServers": "活躍伺服器",
+        "totalCpu": "總CPU",
+        "totalRam": "總記憶體",
+        "totalDisk": "總磁碟",
+        "totalDatabases": "總資料庫",
+        "totalResources": "總資源使用量",
+        "loadingError": "無法載入統計數據"
+      },
+      "quickActions": {
+        "title": "快速操作",
+        "createServer": "建立伺服器",
+        "createServerDesc": "部署新的遊戲伺服器",
+        "manageServers": "管理伺服器",
+        "manageServersDesc": "查看和管理現有伺服器",
+        "controlPanel": "控制面板",
+        "controlPanelDesc": "前往控制面板",
+        "helpDocs": "幫助文檔",
+        "helpDocsDesc": "查看使用指南和教學",
+        "joinCommunity": "加入社群",
+        "joinCommunityDesc": "加入我們的 Discord 社群"
+      },
+      "announcements": {
+        "title": "最新公告",
+        "viewAll": "查看所有公告",
+        "allAnnouncements": "所有公告",
+        "learnMore": "了解更多"
+      },
+      "serverQuickView": {
+        "title": "伺服器快速預覽",
+        "noServers": "沒有找到伺服器",
+        "createFirst": "建立您的第一個伺服器",
+        "status": "狀態",
+        "expires": "到期時間",
+        "autoRenew": "自動續費",
+        "enabled": "已啟用",
+        "disabled": "已停用",
+        "goToPanel": "前往面板",
+        "viewAll": "查看全部",
+        "cpu": "處理器",
+        "ram": "記憶體",
+        "disk": "磁碟",
+        "servers": "個伺服器"
+      },
+      "recentActivity": {
+        "title": "最近活動",
+        "noActivity": "沒有最近活動",
+        "serverCreated": "伺服器已建立",
+        "serverExpiring": "伺服器即將到期",
+        "autoRenew": "自動續費",
+        "loadingError": "無法載入活動",
+        "expiring": "即期",
+        "created": "創建",
+        "deployedSuccessfully": "已成功部署",
+        "willExpireOn": "將於",
+        "expiresOn": "到期",
+        "aboutToExpire": "即將到期",
+        "justNow": "剛剛",
+        "minutesAgo": "分鐘前",
+        "hoursAgo": "小時前",
+        "daysAgo": "天前"
+      }
+    }
   },
   "settings": {
     "title": "設定",
