@@ -621,7 +621,8 @@
   "navUser": {
     "logout": "登出",
     "droplets": "露凝",
-    "language": "語言"
+    "language": "語言",
+    "loading": "載入中..."
   },
   "adCard": {
     "title": "推薦服務",

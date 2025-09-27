@@ -626,7 +626,8 @@
   "navUser": {
     "logout": "Log out",
     "droplets": "Droplets",
-    "language": "Language"
+    "language": "Language",
+    "loading": "Loading..."
   },
   "adCard": {
     "title": "Recommended Services",

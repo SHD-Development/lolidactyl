@@ -61,7 +61,7 @@ export function NavUser({
   user: {
     name: string;
     email: string;
-    avatar: string;
+    image: string;
   };
 }) {
   const { isMobile } = useSidebar();
@@ -131,7 +131,7 @@ export function NavUser({
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage src={user.image} alt={user.name} />
                 <AvatarFallback className="rounded-lg">
                   <LoaderCircle className="h-4 w-4 animate-spin" />
                 </AvatarFallback>
@@ -152,7 +152,7 @@ export function NavUser({
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-3 px-4 py-3 text-left text-sm border-b border-zinc-200 dark:border-zinc-700">
                 <Avatar className="h-10 w-10 rounded-xl">
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage src={user.image} alt={user.name} />
                   <AvatarFallback className="rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
                     {user.name?.charAt(0)?.toUpperCase() || "U"}
                   </AvatarFallback>
