@@ -239,6 +239,10 @@
     "description": "欢迎来到您的控制面板",
     "breadcrumbs": "索引",
     "additionalResources": "其他资源",
+    "pageLoad": {
+      "loading": "载入中...",
+      "description": "等待页面载入"
+    },
     "components": {
       "welcome": {
         "morning": "早安",

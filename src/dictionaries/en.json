@@ -244,6 +244,10 @@
     "description": "Welcome to your control panel",
     "breadcrumbs": "Index",
     "additionalResources": "Additional Resources",
+    "pageLoad": {
+      "loading": "Loading...",
+      "description": "Hang tight while we load your content"
+    },
     "components": {
       "welcome": {
         "morning": "Good Morning",

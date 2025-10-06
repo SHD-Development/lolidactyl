@@ -7,13 +7,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     Discord({
       clientId: process.env.AUTH_DISCORD_ID,
       clientSecret: process.env.AUTH_DISCORD_SECRET,
+      authorization: { params: { scope: "identify email" } },
       async profile(profile) {
         return {
           id: profile.id,
           name: profile.username,
           email: profile.email,
           image: profile.avatar
-            ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png`
+            ? `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.png?size=1024`
             : null,
         };
       },

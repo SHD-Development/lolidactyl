@@ -1,6 +1,8 @@
 import { SidebarProvider, SidebarInset } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import { auth } from "@/auth";
+import { PageLoading } from "@/components/dashboard/page-loading";
+
 export default async function DashboardLayout({
   children,
 }: Readonly<{
@@ -10,7 +12,10 @@ export default async function DashboardLayout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <SidebarInset>{children}</SidebarInset>
+      <SidebarInset>
+        <PageLoading />
+        {children}
+      </SidebarInset>
     </SidebarProvider>
   );
 }
