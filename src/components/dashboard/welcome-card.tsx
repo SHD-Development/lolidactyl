@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Sun, Moon, Coffee, Star } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -101,32 +101,32 @@ export function WelcomeCard() {
 
   return (
     <Card className="bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden relative group h-full">
-      <CardContent className="p-6 relative z-10 h-full flex flex-col justify-between">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-3">
-            <div
-              className={`p-2.5 bg-gradient-to-r ${getTimeBasedIconGradient()} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}
-            >
-              <Icon className="h-5 w-5 text-white" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate">
-                {greeting}，{userName}！
-              </h2>
-              <div className="flex items-center gap-2 mt-1">
-                <Star className="h-4 w-4 text-yellow-500 animate-pulse" />
-                <Badge
-                  className={`bg-gradient-to-r ${getTimeBasedIconGradient()} text-white shadow-sm text-xs`}
-                >
-                  Lolidactyl
-                </Badge>
-                <span className="text-zinc-700 dark:text-zinc-300 text-xs">
-                  {welcomeMessage}
-                </span>
-              </div>
+      <CardHeader className="relative z-10">
+        <div className="flex items-center gap-3">
+          <div
+            className={`p-2.5 bg-gradient-to-r ${getTimeBasedIconGradient()} rounded-lg shadow-lg group-hover:scale-110 transition-transform duration-300`}
+          >
+            <Icon className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate">
+              {greeting}，{userName}！
+            </h2>
+            <div className="flex items-center gap-2 mt-1">
+              <Star className="h-4 w-4 text-yellow-500 animate-pulse" />
+              <Badge
+                className={`bg-gradient-to-r ${getTimeBasedIconGradient()} text-white shadow-sm text-xs`}
+              >
+                Lolidactyl
+              </Badge>
+              <span className="text-zinc-700 dark:text-zinc-300 text-xs">
+                {welcomeMessage}
+              </span>
             </div>
           </div>
         </div>
+      </CardHeader>
+      <CardContent className="p-6 pt-0">
         <Image
           src="/images/amamiya.webp"
           alt=""
