@@ -105,9 +105,9 @@ export function WelcomeCard() {
         <div className="flex-1">
           <div className="flex items-center gap-3 mb-3">
             <div
-              className={`p-3 bg-gradient-to-r ${getTimeBasedIconGradient()} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}
+              className={`p-2.5 bg-gradient-to-r ${getTimeBasedIconGradient()} rounded-xl shadow-lg group-hover:scale-110 transition-transform duration-300`}
             >
-              <Icon className="h-6 w-6 text-white" />
+              <Icon className="h-5 w-5 text-white" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate">
