@@ -119,29 +119,16 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <SidebarMenuButton size="lg" asChild>
-                  <Link
-                    href="/dashboard"
-                    className="group/home relative overflow-hidden"
-                  >
-                    <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-purple-600 text-white flex aspect-square size-8 items-center justify-center rounded-xl shadow-lg transition-all duration-500 group-hover/home:scale-110 group-hover/home:shadow-2xl group-hover/home:from-blue-400 group-hover/home:via-purple-400 group-hover/home:to-purple-500 relative overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent opacity-0 group-hover/home:opacity-100 transition-opacity duration-500" />
-                      <Cloud className="size-4 transition-all duration-500 group-hover/home:rotate-12 group-hover/home:scale-110 relative z-10" />
-                      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-white/10 to-white/20 opacity-0 group-hover/home:opacity-100 transition-opacity duration-700 delay-100" />
+                  <Link href="/dashboard" className="group/home">
+                    <div className="bg-primary text-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg transition-colors hover:bg-primary/90">
+                      <Cloud className="size-4" />
                     </div>
                     <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-purple-700 bg-clip-text text-transparent transition-all duration-300 group-hover/home:from-blue-500 group-hover/home:via-purple-500 group-hover/home:to-purple-600">
-                        Lolidactyl
+                      <span className="truncate font-semibold">Lolidactyl</span>
+                      <span className="truncate text-xs text-muted-foreground">
+                        {t("dashboard")}
                       </span>
-                      <div className="relative h-4 overflow-hidden">
-                        <span className="absolute truncate text-xs text-muted-foreground transition-all duration-300 ease-in-out group-hover/home:-translate-y-4 group-hover/home:opacity-0">
-                          {t("dashboard")}
-                        </span>
-                        <span className="absolute truncate text-xs bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent font-semibold transition-all duration-300 ease-in-out translate-y-4 opacity-0 group-hover/home:translate-y-0 group-hover/home:opacity-100">
-                          {t("go")}
-                        </span>
-                      </div>
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-0 group-hover/home:opacity-100 transition-opacity duration-500 rounded-lg" />
                   </Link>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>

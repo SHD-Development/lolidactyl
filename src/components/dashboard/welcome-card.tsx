@@ -100,44 +100,39 @@ export function WelcomeCard() {
   const Icon = getIcon();
 
   return (
-    <Card className="bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden relative group h-full">
-      <CardHeader className="relative z-10">
+    <Card className="h-full">
+      <CardHeader>
         <div className="flex items-center gap-3">
-          <div
-            className={`p-2.5 bg-gradient-to-r ${getTimeBasedIconGradient()} rounded-lg shadow-lg group-hover:scale-110 transition-transform duration-300`}
-          >
-            <Icon className="h-5 w-5 text-white" />
+          <div className="p-2 bg-primary text-primary-foreground rounded-lg">
+            <Icon className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors truncate">
+            <h2 className="text-xl font-semibold truncate">
               {greeting}，{userName}！
             </h2>
             <div className="flex items-center gap-2 mt-1">
-              <Star className="h-4 w-4 text-yellow-500 animate-pulse" />
-              <Badge
-                className={`bg-gradient-to-r ${getTimeBasedIconGradient()} text-white shadow-sm text-xs`}
-              >
+              <Badge variant="secondary" className="text-xs">
                 Lolidactyl
               </Badge>
-              <span className="text-zinc-700 dark:text-zinc-300 text-xs">
+              <span className="text-sm text-muted-foreground">
                 {welcomeMessage}
               </span>
             </div>
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-6 pt-0">
+      <CardContent className="pt-0">
         <Image
           src="/images/amamiya.webp"
           alt=""
           width={1920}
           height={1080}
-          className="object-cover rounded-xl"
+          className="object-cover rounded-lg"
         />
-        <div className="mt-4 flex items-center gap-2 text-xs text-zinc-600 dark:text-zinc-400">
-          <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <div className="mt-4 flex items-center gap-2 text-xs text-muted-foreground">
+          <div className="w-2 h-2 bg-green-500 rounded-full"></div>
           <span>{t("systemStatus")}</span>
-          <span className="text-zinc-400 dark:text-zinc-500">•</span>
+          <span>•</span>
           <span>{new Date().toLocaleDateString()}</span>
         </div>
       </CardContent>

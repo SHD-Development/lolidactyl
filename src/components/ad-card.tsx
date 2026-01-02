@@ -51,10 +51,10 @@ export function AdCard() {
 
   return (
     <>
-      <Card className="w-full max-w-md mx-auto cursor-pointer group hover:shadow-lg transition-shadow duration-200 bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm">
+      <Card className="w-full max-w-md mx-auto cursor-pointer group hover:shadow-lg transition-shadow duration-200">
         <CardHeader className="pb-4">
-          <CardTitle className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
-            <div className="p-2.5 rounded-lg bg-gradient-to-br from-orange-500 to-pink-500 text-white">
+          <CardTitle className="flex items-center gap-2">
+            <div className="p-2.5 rounded-lg bg-primary text-primary-foreground">
               <Megaphone className="h-5 w-5" />
             </div>
             {t("title", { defaultValue: "推薦服務" })}
@@ -86,22 +86,22 @@ export function AdCard() {
           </div>
 
           <div className="space-y-2">
-            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors text-zinc-900 dark:text-zinc-100">
+            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
               {currentAd.title}
             </h3>
-            <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed line-clamp-2">
+            <p className="text-sm text-muted-foreground leading-relaxed line-clamp-2">
               {currentAd.description}
             </p>
           </div>
 
-          <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4">
+          <div className="border-t pt-4">
             <Button
               variant="default"
               size="sm"
-              className="w-full relative overflow-hidden bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 hover:from-orange-500 hover:via-pink-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 group/btn"
+              className="w-full relative overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl group/btn"
               onClick={handleAdClick}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+              <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
 
               <div className="relative flex items-center justify-center gap-2">
                 <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-12 group-hover/btn:scale-110" />
@@ -171,13 +171,13 @@ export function AdCard() {
                 {t("close")}
               </Button>
               <Button
-                className="flex-1 relative overflow-hidden bg-gradient-to-r from-orange-400 via-pink-500 to-purple-600 hover:from-orange-500 hover:via-pink-600 hover:to-purple-700 text-white font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-xl hover:shadow-orange-500/25 group/btn"
+                className="flex-1 relative overflow-hidden transition-all duration-300 transform hover:scale-105 hover:shadow-xl group/btn"
                 onClick={() => {
                   handleAdClick();
                   setDialogOpen(false);
                 }}
               >
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
+                <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover/btn:translate-x-full transition-transform duration-700 ease-in-out" />
 
                 <div className="relative flex items-center justify-center gap-2">
                   <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover/btn:rotate-12 group-hover/btn:scale-110" />

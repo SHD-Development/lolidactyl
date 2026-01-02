@@ -158,18 +158,16 @@ export function RecentActivity() {
   const activities = userInfo ? generateActivities(userInfo.servers) : [];
 
   return (
-    <Card className="bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden relative">
-      <CardHeader className="relative z-10">
+    <Card>
+      <CardHeader>
         <CardTitle className="flex items-center gap-3">
-          <div className="p-2.5 bg-gradient-to-br from-green-500 to-blue-600 rounded-lg shadow-lg">
-            <Clock className="h-5 w-5 text-white" />
+          <div className="p-2 bg-primary text-primary-foreground rounded-lg">
+            <Clock className="h-5 w-5" />
           </div>
-          <span className="text-zinc-900 dark:text-zinc-100 font-bold">
-            {t("title")}
-          </span>
+          <span>{t("title")}</span>
         </CardTitle>
       </CardHeader>
-      <CardContent className="relative z-10">
+      <CardContent>
         {activities.length === 0 ? (
           <div className="text-center py-8">
             <div className="p-3 bg-zinc-100 dark:bg-zinc-800 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
@@ -189,47 +187,45 @@ export function RecentActivity() {
               return (
                 <div
                   key={activity.id}
-                  className={`p-4 rounded-xl border backdrop-blur-sm transition-all duration-200 hover:scale-105 ${
+                  className={`p-4 rounded-lg border ${
                     isExpiring
-                      ? "bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 border-orange-200 dark:border-orange-800/50 "
-                      : "bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-950/30 dark:to-emerald-950/30 border-green-200 dark:border-green-800/50 "
-                  } hover:shadow-md`}
+                      ? "bg-orange-50/50 dark:bg-orange-950/20 border-orange-200 dark:border-orange-800"
+                      : "bg-green-50/50 dark:bg-green-950/20 border-green-200 dark:border-green-800"
+                  }`}
                 >
                   <div className="flex items-start gap-3">
                     <div
-                      className={`p-2 rounded-lg shadow-sm ${
+                      className={`p-2 rounded-lg ${
                         isExpiring
-                          ? "bg-gradient-to-r from-orange-500 to-red-500"
-                          : "bg-gradient-to-r from-green-500 to-emerald-500"
+                          ? "bg-orange-500 text-white"
+                          : "bg-green-500 text-white"
                       }`}
                     >
-                      <Icon className="h-4 w-4 text-white" />
+                      <Icon className="h-4 w-4" />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p
-                        className={`text-sm font-semibold ${
-                          isExpiring
-                            ? "text-orange-800 dark:text-orange-300"
-                            : "text-green-800 dark:text-green-300"
-                        }`}
-                      >
-                        {activity.title}
-                      </p>
-                      <p className="text-xs text-gray-600 dark:text-gray-300 truncate mt-1">
+                      <p className="text-sm font-semibold">{activity.title}</p>
+                      <p className="text-xs text-muted-foreground truncate mt-1">
                         {activity.description}
                       </p>
                       <div className="flex items-center gap-1 mt-2">
-                        <Clock className="h-3 w-3 text-gray-400 dark:text-gray-500" />
-                        <span className="text-xs text-gray-500 dark:text-gray-400 font-medium">
+                        <Clock className="h-3 w-3 text-muted-foreground" />
+                        <span className="text-xs text-muted-foreground">
                           {activity.time}
                         </span>
                         {isExpiring && (
-                          <Badge className="ml-auto bg-gradient-to-r from-orange-500 to-red-500 text-white text-xs">
+                          <Badge
+                            variant="secondary"
+                            className="ml-auto text-xs"
+                          >
                             {t("expiring")}
                           </Badge>
                         )}
                         {isCreated && (
-                          <Badge className="ml-auto bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs">
+                          <Badge
+                            variant="secondary"
+                            className="ml-auto text-xs"
+                          >
                             {t("created")}
                           </Badge>
                         )}

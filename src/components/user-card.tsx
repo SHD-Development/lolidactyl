@@ -123,10 +123,10 @@ export function UserCard() {
   const { user } = session;
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm">
+    <Card className="w-full max-w-md mx-auto">
       <CardHeader className="pb-4">
-        <CardTitle className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100">
-          <div className="p-2.5 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
+        <CardTitle className="flex items-center gap-2">
+          <div className="p-2 rounded-lg bg-primary text-primary-foreground">
             <User className="h-5 w-5" />
           </div>
           {t("title", { defaultValue: "用戶資訊" })}
@@ -158,24 +158,21 @@ export function UserCard() {
           </div>
         </div>
 
-        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4">
+        <div className="border-t pt-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-gradient-to-br from-blue-500 to-cyan-500 text-white">
+              <div className="p-1.5 rounded-md bg-blue-500 text-white">
                 <Droplets className="h-3.5 w-3.5" />
               </div>
-              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <span className="text-sm font-medium">
                 {t("droplets", { defaultValue: "露凝" })}
               </span>
             </div>
-            <Badge
-              variant="secondary"
-              className="bg-blue-500/10 text-blue-700 dark:bg-blue-500/20 dark:text-blue-300 border-blue-500/20"
-            >
+            <Badge variant="secondary">
               {loading ? "..." : userInfo?.coins?.toLocaleString() || "0"}
             </Badge>
           </div>
-          <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             {t("dropletsDescription", {
               defaultValue: "您的貨幣餘額",
               balance: userInfo?.coins || 0,
@@ -183,24 +180,21 @@ export function UserCard() {
           </p>
         </div>
 
-        <div className="border-t border-zinc-200 dark:border-zinc-800 pt-4">
+        <div className="border-t pt-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="p-1.5 rounded-md bg-gradient-to-br from-emerald-500 to-green-500 text-white">
+              <div className="p-1.5 rounded-md bg-green-500 text-white">
                 <Server className="h-3.5 w-3.5" />
               </div>
-              <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100">
+              <span className="text-sm font-medium">
                 {t("servers", { defaultValue: "伺服器" })}
               </span>
             </div>
-            <Badge
-              variant="secondary"
-              className="bg-emerald-500/10 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/20"
-            >
+            <Badge variant="secondary">
               {loading ? "..." : userInfo?.servers?.length || 0}
             </Badge>
           </div>
-          <p className="text-xs text-zinc-600 dark:text-zinc-400 mt-1">
+          <p className="text-xs text-muted-foreground mt-1">
             {t("serversDescription", {
               defaultValue: "您目前擁有的伺服器數量",
               count: userInfo?.servers?.length || 0,
@@ -213,7 +207,7 @@ export function UserCard() {
             <Button
               variant="default"
               size="sm"
-              className="w-full bg-gradient-to-r from-blue-400 to-blue-700 hover:from-blue-600 hover:to-blue-700 text-white"
+              className="w-full"
               onClick={() => window.open("/go/panel", "_blank")}
             >
               <ExternalLink className="h-4 w-4 mr-2" />

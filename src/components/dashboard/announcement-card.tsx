@@ -57,15 +57,13 @@ export function AnnouncementCard() {
   };
 
   return (
-    <Card className="bg-zinc-50/80 dark:bg-zinc-900/80 border-zinc-200/50 dark:border-zinc-800/50 backdrop-blur-sm shadow-lg">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-3">
-          <div className="p-2.5 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg">
-            <Megaphone className="h-5 w-5 text-white" />
+          <div className="p-2 bg-primary text-primary-foreground rounded-lg">
+            <Megaphone className="h-5 w-5" />
           </div>
-          <span className="text-zinc-900 dark:text-zinc-100 font-bold">
-            {t("title")}
-          </span>
+          <span>{t("title")}</span>
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -74,8 +72,8 @@ export function AnnouncementCard() {
           return (
             <div
               key={announcement.id}
-              className={`p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 bg-zinc-100/50 dark:bg-zinc-800/50 hover:shadow-md transition-all duration-200 ${
-                announcement.isSticky ? "ring-2 ring-amber-500/20" : ""
+              className={`p-4 rounded-lg border bg-muted/50 ${
+                announcement.isSticky ? "border-amber-500" : ""
               }`}
             >
               <div className="flex items-start justify-between mb-3">
@@ -131,8 +129,8 @@ export function AnnouncementCard() {
             <DialogContent className="max-w-4xl max-h-[80vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle className="flex items-center gap-3">
-                  <div className="p-2.5 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg shadow-lg">
-                    <Megaphone className="h-5 w-5 text-white" />
+                  <div className="p-2 bg-primary text-primary-foreground rounded-lg">
+                    <Megaphone className="h-5 w-5" />
                   </div>
                   {t("allAnnouncements")}
                 </DialogTitle>
@@ -143,8 +141,8 @@ export function AnnouncementCard() {
                   return (
                     <div
                       key={announcement.id}
-                      className={`p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-700/50 bg-zinc-100/50 dark:bg-zinc-800/50 hover:shadow-md transition-all duration-200 ${
-                        announcement.isSticky ? "ring-2 ring-amber-500/20" : ""
+                      className={`p-4 rounded-lg border bg-muted/50 ${
+                        announcement.isSticky ? "border-amber-500" : ""
                       }`}
                     >
                       <div className="flex items-start justify-between mb-3">
