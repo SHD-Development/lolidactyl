@@ -15,8 +15,10 @@ import {
 } from "@/components/ui/navigation-menu";
 import { SparklesCore } from "@/components/ui/sparkles";
 import { BackgroundBeams } from "@/components/ui/background-beams";
+import { TextHoverEffect } from "@/components/ui/text-hover-effect";
 import { Link } from "next-view-transitions";
-import { Zap, Lock, DollarSign, Check } from "lucide-react";
+import { Zap, Lock, DollarSign, Check, ArrowRight, Rocket } from "lucide-react";
+import { FaDiscord } from "react-icons/fa6";
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
@@ -34,38 +36,29 @@ export default function LandingPage() {
       <BackgroundBeams className="absolute inset-0" />
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/50 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="text-xl font-semibold">SHD Cloud</div>
+          <div className="text-xl font-semibold md:hidden">SC</div>
+          <div className="text-xl font-semibold hidden md:block">SHD Cloud</div>
           <div className="flex items-center gap-4">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/docs"
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    文檔
-                  </NavigationMenuLink>
+                  <NavigationMenuLink href="/docs">文檔</NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="https://dc.shdctw.com"
-                    className={navigationMenuTriggerStyle()}
-                  >
+                  <NavigationMenuLink href="https://dc.shdctw.com">
                     社群
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <NavigationMenuLink
-                    href="/go/panel"
-                    className={navigationMenuTriggerStyle()}
-                  >
-                    面板
-                  </NavigationMenuLink>
+                  <NavigationMenuLink href="/go/panel">面板</NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>
             <Link href="/dashboard">
-              <Button variant="secondary" size="sm">
+              <Button
+                variant="secondary"
+                className="bg-secondary/50 hover:bg-sky-700/50"
+              >
                 儀表板
               </Button>
             </Link>
@@ -83,9 +76,9 @@ export default function LandingPage() {
             </span>
           </div>
 
-          <h1 className="text-8xl md:text-8xl font-bold tracking-tight">
-            SHD Cloud
-          </h1>
+          <div className="h-48 md:h-60 w-full mx-auto flex items-center justify-center">
+            <TextHoverEffect text="SHD CLOUD" duration={0.5} />
+          </div>
 
           <p className="text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
             我們提供免費的雲端服務以及活躍的社群
@@ -96,9 +89,19 @@ export default function LandingPage() {
             <Link href="/dashboard">
               <Button
                 size="lg"
-                className="bg-white text-black hover:bg-gray-200 py-8 px-12 text-xl"
+                className="bg-white text-black hover:bg-gray-200 py-8 px-12 text-xl group ring-blue-600/50 hover:ring-5 ring-offset-5 ring-offset-black transition-all duration-300"
               >
-                開始使用
+                <span className="flex items-center gap-2">
+                  <Rocket
+                    className="max-w-6 opacity-100 transition-all duration-300 group-hover:max-w-0 group-hover:opacity-0"
+                    size={24}
+                  />
+                  開始使用
+                  <ArrowRight
+                    className="max-w-0 opacity-0 transition-all duration-300 group-hover:max-w-6 group-hover:opacity-100 group-hover:translate-x-1"
+                    size={24}
+                  />
+                </span>
               </Button>
             </Link>
             <Link href="https://dc.shdctw.com">
