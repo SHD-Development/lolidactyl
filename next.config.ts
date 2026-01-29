@@ -1,7 +1,7 @@
 import type { NextConfig } from "next";
 import createNextIntlPlugin from "next-intl/plugin";
 import appConfig from "./src/config";
-import createMDX from "@next/mdx";
+import { createMDX } from "fumadocs-mdx/next";
 
 function extractImageDomains() {
   const domains = new Set<string>();

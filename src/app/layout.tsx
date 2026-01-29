@@ -5,6 +5,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ViewTransitions } from "next-view-transitions";
 import { SessionProvider } from "next-auth/react";
+import { RootProvider } from "fumadocs-ui/provider/next";
+
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 import { Locale } from "@/components/locale";
@@ -39,7 +41,7 @@ export default async function RootLayout({
     <ViewTransitions>
       <html lang={locale} suppressHydrationWarning>
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col min-h-screen`}
         >
           <NextTopLoader color="#4FD1C5" />
           <ThemeProvider
@@ -50,7 +52,7 @@ export default async function RootLayout({
           >
             <SessionProvider>
               <NextIntlClientProvider>
-                {children}
+                <RootProvider>{children}</RootProvider>
                 <Toaster />
               </NextIntlClientProvider>
             </SessionProvider>
