@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 import axios from "axios";
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    const user = session?.user as any;
+    const userId = user?.d_id || user?.id;
+
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -33,9 +40,9 @@ export async function POST(request: NextRequest) {
       "";
     const userInfoUrl = new URL(process.env.BACKEND_API_URL as string);
     userInfoUrl.pathname = "/userinfo";
-    userInfoUrl.searchParams.append("id", session.user.id);
-    userInfoUrl.searchParams.append("name", session.user.name || "");
-    userInfoUrl.searchParams.append("email", session.user.email || "");
+    userInfoUrl.searchParams.append("id", userId);
+    userInfoUrl.searchParams.append("name", user?.name || "");
+    userInfoUrl.searchParams.append("email", user?.email || "");
     userInfoUrl.searchParams.append("ip", ip);
 
     const userInfoResponse = await axios.get(userInfoUrl.toString(), {
@@ -78,7 +85,7 @@ export async function POST(request: NextRequest) {
     const response = await axios.post(
       apiUrl.toString(),
       {
-        id: session.user.id,
+        id: userId,
         serverId: serverId,
       },
       {

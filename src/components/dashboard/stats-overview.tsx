@@ -11,7 +11,7 @@ import {
   MemoryStick,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
 import axios from "axios";
 
@@ -33,7 +33,7 @@ interface UserInfo {
 }
 
 export function StatsOverview() {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const t = useTranslations("dashboard.components.stats");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);

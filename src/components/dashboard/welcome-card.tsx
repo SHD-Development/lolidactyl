@@ -2,14 +2,14 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Sparkles, Sun, Moon, Coffee, Star } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import appConfig from "@/config";
 
 export function WelcomeCard() {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const t = useTranslations("dashboard.components.welcome");
   const [greeting, setGreeting] = useState("");
   const [iconName, setIconName] = useState("sun");

@@ -28,14 +28,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 export default function Dashboard() {
   const t = useTranslations("dashboard");
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { data: session, status } = useSession();
   return (
     <>
       <header className="flex h-16 shrink-0 items-center gap-2">

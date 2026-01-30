@@ -1,18 +1,24 @@
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 export async function PATCH(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = session.user;
+    const { id, d_id } = session.user as any;
+    const userId = d_id || id;
 
-    if (!id) {
+
+    if (!userId) {
       return NextResponse.json({ error: "Missing user ID" }, { status: 400 });
     }
 
@@ -26,7 +32,7 @@ export async function PATCH(request: NextRequest) {
 
     const apiUrl = new URL(process.env.BACKEND_API_URL as string);
     apiUrl.pathname = "/resetpassword";
-    apiUrl.searchParams.append("id", id);
+    apiUrl.searchParams.append("id", userId);
     apiUrl.searchParams.append("email", session.user.email as string);
     apiUrl.searchParams.append("name", session.user.name as string);
     const response = await axios.patch(

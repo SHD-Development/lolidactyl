@@ -4,7 +4,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getMessages } from "next-intl/server";
 import { ViewTransitions } from "next-view-transitions";
-import { SessionProvider } from "next-auth/react";
 import { RootProvider } from "fumadocs-ui/provider/next";
 
 import NextTopLoader from "nextjs-toploader";
@@ -50,12 +49,10 @@ export default async function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <SessionProvider>
-              <NextIntlClientProvider>
+            <NextIntlClientProvider>
                 <RootProvider>{children}</RootProvider>
                 <Toaster />
-              </NextIntlClientProvider>
-            </SessionProvider>
+            </NextIntlClientProvider>
           </ThemeProvider>
           <Locale />
           <SpeedInsights />

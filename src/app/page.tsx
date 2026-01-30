@@ -76,7 +76,7 @@ export default function LandingPage() {
             </span>
           </div>
 
-          <div className="h-48 md:h-60 w-full mx-auto flex items-center justify-center">
+          <div className="h-24 md:h-60 w-full mx-auto flex items-center justify-center">
             <TextHoverEffect text="SHD CLOUD" duration={0.5} />
           </div>
 

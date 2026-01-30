@@ -1,19 +1,25 @@
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 export async function POST(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id } = session.user;
+    const { id, d_id } = session.user as any;
+    const userId = d_id || id;
+
     const { code } = await request.json();
 
-    if (!id) {
+    if (!userId) {
       return NextResponse.json({ error: "Missing user ID" }, { status: 400 });
     }
 
@@ -38,7 +44,7 @@ export async function POST(request: NextRequest) {
     const response = await axios.post(
       apiUrl.toString(),
       {
-        id: id,
+        id: userId,
         code: code,
       },
       {

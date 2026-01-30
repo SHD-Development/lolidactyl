@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 import appConfig from "@/config";
 
 function validateResourceLimits(resources: {
@@ -54,14 +56,21 @@ function validateResourceLimits(resources: {
 
 export async function POST(request: Request) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-    if (!session?.user?.id) {
-      return NextResponse.json(
+    const user = session?.user as any;
+    const userId = user?.d_id || user?.id;
+
+    if (!userId) {
+       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }
       );
     }
+
+
 
     const body = await request.json();
     const {
@@ -111,7 +120,7 @@ export async function POST(request: Request) {
 
     const serverData = {
       name,
-      id: session.user.id,
+      id: userId,
       location: locationId,
       egg: serverType,
       nest: nestId,
@@ -159,9 +168,14 @@ export async function POST(request: Request) {
 
 export async function DELETE(request: Request) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-    if (!session?.user?.id) {
+    const user = session?.user as any;
+    const userId = user?.d_id || user?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }
@@ -188,7 +202,7 @@ export async function DELETE(request: Request) {
     const apiUrl = new URL(process.env.BACKEND_API_URL as string);
     apiUrl.pathname = "/servers/delete";
     apiUrl.searchParams.append("serverIds", idsToDelete);
-    apiUrl.searchParams.append("id", session.user.id);
+    apiUrl.searchParams.append("id", userId);
     const response = await axios.delete(apiUrl.toString(), {
       headers: {
         Authorization: `Bearer ${apiKey}`,
@@ -221,9 +235,14 @@ export async function DELETE(request: Request) {
 
 export async function PATCH(request: Request) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
-    if (!session?.user?.id) {
+    const user = session?.user as any;
+    const userId = user?.d_id || user?.id;
+
+    if (!userId) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }
@@ -279,9 +298,9 @@ export async function PATCH(request: Request) {
 
     const userInfoUrl = new URL(process.env.BACKEND_API_URL as string);
     userInfoUrl.pathname = "/userinfo";
-    userInfoUrl.searchParams.append("id", session.user.id);
-    userInfoUrl.searchParams.append("name", session.user.name || "");
-    userInfoUrl.searchParams.append("email", session.user.email || "");
+    userInfoUrl.searchParams.append("id", userId);
+    userInfoUrl.searchParams.append("name", user?.name || "");
+    userInfoUrl.searchParams.append("email", user?.email || "");
     userInfoUrl.searchParams.append("ip", "");
 
     const userInfoResponse = await axios.get(userInfoUrl.toString(), {
@@ -363,7 +382,7 @@ export async function PATCH(request: Request) {
 
     const serverData = {
       serverId,
-      id: session.user.id,
+      id: userId,
       egg: serverType,
       nest: nestId,
       cpu,

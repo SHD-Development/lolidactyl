@@ -144,83 +144,58 @@ export function NavUser({
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent
-            className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-xl border bg-white/95 backdrop-blur-xl dark:bg-zinc-900/95 shadow-2xl"
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-xl border bg-white/95 backdrop-blur-xl dark:bg-black shadow-2xl"
             side={isMobile ? "bottom" : "right"}
             align="end"
             sideOffset={8}
           >
             <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-3 px-4 py-3 text-left text-sm border-b border-zinc-200 dark:border-zinc-700">
-                <Avatar className="h-10 w-10 rounded-xl">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <Avatar className="h-8 w-8 rounded-lg">
                   <AvatarImage src={user.image} alt={user.name} />
-                  <AvatarFallback className="rounded-xl bg-gradient-to-br from-blue-500 to-purple-600 text-white font-semibold">
-                    {user.name?.charAt(0)?.toUpperCase() || "U"}
+                  <AvatarFallback className="rounded-lg">
+                    {user.name?.charAt(0)?.toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold text-zinc-900 dark:text-zinc-100">
-                    {user.name}
-                  </span>
-                  <span className="truncate text-xs text-zinc-500 dark:text-zinc-400">
-                    {user.email}
-                  </span>
+                  <span className="truncate font-semibold">{user.name}</span>
+                  <span className="truncate text-xs">{user.email}</span>
                 </div>
               </div>
             </DropdownMenuLabel>
             <DropdownMenuGroup className="p-2">
-              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 cursor-pointer group">
-                <div className="flex items-center justify-center size-9 rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
-                  <Droplets className="h-4 w-4 text-emerald-600 dark:text-emerald-400 transition-colors duration-300" />
-                </div>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
-                    {t("droplets")}
-                  </span>
-                  <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-                    {loading ? (
-                      <div className="flex items-center gap-1">
-                        <LoaderCircle className="h-3 w-3 animate-spin" />
-                        <span>{t("loading")}</span>
-                      </div>
-                    ) : (
-                      <span className="font-medium">
-                        {userInfo?.coins?.toFixed(2) || "0.00"}
-                      </span>
-                    )}
+              <DropdownMenuItem className="gap-2 cursor-pointer">
+                <div className="flex items-center justify-between w-full">
+                  <div className="flex items-center gap-2">
+                     <Droplets className="size-4" />
+                     <span>{t("droplets")}</span>
+                  </div>
+                  <span className="ml-auto font-mono text-xs">
+                     {loading ? (
+                        <LoaderCircle className="h-3 w-3 animate-spin inline" />
+                     ) : (
+                        userInfo?.coins?.toFixed(2)
+                     )}
                   </span>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <div className="border-t border-zinc-200 dark:border-zinc-700 p-2 space-y-1">
-              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50">
-                <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
-                  <Sun className="h-4 w-4 text-amber-600 dark:text-amber-400" />
-                </div>
-                <Switch
-                  checked={isDark}
-                  onCheckedChange={toggleTheme}
-                  aria-label="Toggle dark mode"
-                />
+              <DropdownMenuItem className="gap-2" onSelect={(e) => e.preventDefault()}>
+                   <Sun className="h-4 w-4" />
+                   <span className="flex-1">Dark Mode</span>
+                   <Switch checked={isDark} onCheckedChange={toggleTheme} className="scale-75" />
               </DropdownMenuItem>
 
-              <DropdownMenuItem
-                asChild
-                className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50"
-              >
-                <div>
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800">
-                    <Languages className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div
-                    className="flex flex-1 items-center"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <Select value={locale} onValueChange={changeLanguage}>
-                      <SelectTrigger className="h-8 w-32 border-zinc-300 dark:border-zinc-600">
-                        <SelectValue placeholder="Language" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
+               <DropdownMenuItem className="gap-2" onSelect={(e) => e.preventDefault()}>
+                   <Languages className="h-4 w-4" />
+                   <div className="flex flex-1 items-center" onClick={(e) => e.stopPropagation()}>
+                     <Select value={locale} onValueChange={changeLanguage}>
+                       <SelectTrigger className="h-7 w-32 text-xs">
+                         <SelectValue placeholder="Language" />
+                       </SelectTrigger>
+                       <SelectContent>
+                         <SelectGroup>
                           <SelectItem value="en">
                             <div className="flex items-center gap-1">
                               <US className="h-3 w-4" /> English
@@ -236,21 +211,18 @@ export function NavUser({
                               <CN className="h-3 w-4" /> 简体中文
                             </div>
                           </SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </DropdownMenuItem>
+                         </SelectGroup>
+                       </SelectContent>
+                     </Select>
+                   </div>
+               </DropdownMenuItem>
             </div>
 
             <div className="border-t border-zinc-200 dark:border-zinc-700 p-2">
-              <Link href="/auth/logout" prefetch={false}>
-                <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-red-50 dark:hover:bg-red-950/20 text-red-600 dark:text-red-400">
-                  <div className="flex size-9 items-center justify-center rounded-lg bg-red-100 dark:bg-red-950/30">
+              <Link href="/auth/logout" prefetch={false} className="w-full">
+                <DropdownMenuItem className="gap-2 text-red-600 dark:text-red-400 cursor-pointer">
                     <LogOut className="h-4 w-4" />
-                  </div>
-                  <span className="text-sm font-medium">{t("logout")}</span>
+                    <span>{t("logout")}</span>
                 </DropdownMenuItem>
               </Link>
             </div>

@@ -1,18 +1,23 @@
 import { auth } from "@/auth";
+import { headers } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 import axios from "axios";
 
 export async function GET(request: NextRequest) {
   try {
-    const session = await auth();
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
 
     if (!session?.user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { id, name, email } = session.user;
+    const { id, name, email, d_id } = session.user as any;
+    const userId = d_id || id;
 
-    if (!id || !name || !email) {
+
+    if (!userId || !name || !email) {
       return NextResponse.json(
         { error: "Missing required user information" },
         { status: 400 }
@@ -32,7 +37,7 @@ export async function GET(request: NextRequest) {
       "";
     const apiUrl = new URL(process.env.BACKEND_API_URL as string);
     apiUrl.pathname = "/userinfo";
-    apiUrl.searchParams.append("id", id);
+    apiUrl.searchParams.append("id", userId);
     apiUrl.searchParams.append("name", name);
     apiUrl.searchParams.append("email", email);
     apiUrl.searchParams.append("ip", ip);

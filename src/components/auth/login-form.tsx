@@ -1,25 +1,29 @@
+"use client";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { signIn } from "@/auth";
+import { authClient } from "@/lib/auth-client";
 import { FaDiscord } from "react-icons/fa6";
-import { getTranslations } from "next-intl/server";
+import { useTranslations } from "next-intl";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
-export async function LoginForm({
+
+export function LoginForm({
   className,
   ...props
 }: React.ComponentProps<"div">) {
-  async function discordLogin() {
-    "use server";
-    await signIn("discord", { redirectTo: "/dashboard" });
-  }
-  const t = await getTranslations("loginForm");
+  const t = useTranslations("loginForm");
+
+  const handleDiscordLogin = async () => {
+    await authClient.signIn.social({
+      provider: "discord",
+      callbackURL: "/dashboard",
+    });
+  };
+
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card className="overflow-hidden p-0 w-full">
+      <Card className="overflow-hidden p-0 w-full dark:bg-zinc-950">
         <CardContent className="grid p-0 md:grid-cols-2">
           <div className="p-6 md:p-8">
             <div className="flex flex-col gap-6">
@@ -30,7 +34,7 @@ export async function LoginForm({
                 </p>
               </div>
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
-                <span className="bg-card text-muted-foreground relative z-10 px-2">
+                <span className="bg-card dark:bg-zinc-950 text-muted-foreground relative z-10 px-2">
                   {t("continueWith")}
                 </span>
               </div>
@@ -40,7 +44,7 @@ export async function LoginForm({
                   variant="outline"
                   type="button"
                   className="w-full"
-                  onClick={discordLogin}
+                  onClick={handleDiscordLogin}
                 >
                   <FaDiscord className="h-4 w-4" />
                   <span>Discord</span>

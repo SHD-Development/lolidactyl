@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import axios from "axios";
 import { auth } from "@/auth";
+import { headers } from "next/headers";
+
 
 export async function GET(request: Request) {
   const apiKey = process.env.BACKEND_API_KEY;
@@ -8,14 +10,18 @@ export async function GET(request: Request) {
   apiUrl.pathname = "/ipcheck";
 
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    const user = session?.user as any;
+    const userId = user?.d_id || user?.id;
+    if (!userId) {
       return NextResponse.json(
         { success: false, error: "User not authenticated" },
         { status: 401 }
       );
     }
-    apiUrl.searchParams.append("id", session.user.id);
+    apiUrl.searchParams.append("id", userId);
     apiUrl.searchParams.append(
       "ip",
       request.headers.get("x-forwarded-for") ||

@@ -19,7 +19,7 @@ import {
   Copy,
   Check,
 } from "lucide-react";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -47,7 +47,7 @@ interface UserInfo {
 }
 
 export function UserCard() {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const t = useTranslations("userCard");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -108,7 +108,7 @@ export function UserCard() {
 
   const copyUserIdToClipboard = async () => {
     try {
-      await navigator.clipboard.writeText(user.id || "");
+      await navigator.clipboard.writeText((user as any).d_id || user.id || "");
       setCopiedUserId(true);
       setTimeout(() => setCopiedUserId(false), 2000);
     } catch (error) {
@@ -147,7 +147,7 @@ export function UserCard() {
             <div className="">
               <p className="text-sm text-muted-foreground">
                 Discord ID:{" "}
-                {user.id || t("unknownId", { defaultValue: "未知" })}
+                {(user as any).d_id || user.id || t("unknownId", { defaultValue: "未知" })}
               </p>
               {userInfo?.panelId && (
                 <p className="text-sm text-muted-foreground">
@@ -281,7 +281,7 @@ export function UserCard() {
               </label>
               <div className="flex items-center justify-between p-3 bg-muted rounded-md">
                 <code className="font-mono text-sm">
-                  {user.id || t("unknownId", { defaultValue: "未知" })}
+                  {(user as any).d_id || user.id || t("unknownId", { defaultValue: "未知" })}
                 </code>
                 <Button
                   size="sm"

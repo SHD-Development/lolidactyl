@@ -11,7 +11,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
 import axios from "axios";
 
@@ -39,7 +39,7 @@ interface ActivityItem {
 }
 
 export function RecentActivity() {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const t = useTranslations("dashboard.components.recentActivity");
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);

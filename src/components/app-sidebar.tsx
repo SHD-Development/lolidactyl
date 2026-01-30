@@ -18,19 +18,25 @@ import {
   CircleGauge,
   Droplet,
   Store,
+  ChevronRight,
+  type LucideIcon,
 } from "lucide-react";
 import { Link } from "next-view-transitions";
-import { NavMain } from "@/components/nav-main";
 import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
   SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
   SidebarHeader,
-  SidebarRail,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarRail,
 } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
@@ -40,12 +46,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+    Collapsible,
+    CollapsibleContent,
+    CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import appConfig from "@/config";
-import { useSession } from "next-auth/react";
+import { authClient } from "@/lib/auth-client";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
+
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
-  const { data: session } = useSession();
+  const { data: session } = authClient.useSession();
   const pathname = usePathname();
   const isPathActive = (url: string) => {
     if (url === "#") return false;
@@ -95,25 +107,12 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           },
         ],
       },
-      // {
-      //   title: t("store"),
-      //   url: "/dashboard/store",
-      //   icon: Store,
-      //   isActive: isPathActive("/dashboard/store"),
-      //   items: [
-      //     {
-      //       title: t("general"),
-      //       url: "/dashboard/store/general",
-      //       isActive: isPathActive("/dashboard/store/general"),
-      //     },
-      //   ],
-      // },
     ],
   };
 
   return (
-    <Sidebar collapsible="icon" {...props} variant="inset" className="">
-      <SidebarHeader className="pb-4">
+    <Sidebar collapsible="icon" {...props} variant="floating" className="">
+      <SidebarHeader className="pb-4 dark:bg-zinc-950 rounded-lg">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
@@ -133,88 +132,40 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
               <DropdownMenuContent
-                className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-xl border bg-white/95 backdrop-blur-xl dark:bg-zinc-900/95 shadow-2xl"
+                className="w-(--radix-dropdown-menu-trigger-width) min-w-64 rounded-xl border bg-white/95 backdrop-blur-xl dark:bg-black shadow-2xl"
                 align="start"
                 sideOffset={8}
               >
-                <DropdownMenuLabel className="text-zinc-500 dark:text-zinc-400 text-xs font-semibold uppercase tracking-wider px-4 py-3 border-b border-zinc-200 dark:border-zinc-700">
+                <DropdownMenuLabel className="text-xs font-semibold px-4 py-2 text-muted-foreground">
                   {t("destination")}
                 </DropdownMenuLabel>
 
-                <div className="p-2 space-y-1">
-                  <DropdownMenuItem className="gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 focus:bg-zinc-50 dark:focus:bg-zinc-800/50 group cursor-pointer">
-                    <Link
-                      href="/dashboard"
-                      className="flex items-center gap-3 w-full h-full"
-                    >
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
-                        <CircleGauge className="size-4 shrink-0 text-blue-600 dark:text-blue-400 transition-all duration-300 group-hover:rotate-12" />
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
-                          {t("index")}
-                        </span>
-                        <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-                          {t("descriptions.index")}
-                        </span>
-                      </div>
+                <div className="p-1">
+                  <DropdownMenuItem asChild>
+                    <Link href="/dashboard" className="cursor-pointer">
+                      <CircleGauge className="mr-2 h-4 w-4" />
+                      <span>{t("index")}</span>
                     </Link>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem className="gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 focus:bg-zinc-50 dark:focus:bg-zinc-800/50 group cursor-pointer">
-                    <Link
-                      href="/"
-                      className="flex items-center gap-3 w-full h-full"
-                    >
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
-                        <Home className="size-4 shrink-0 text-green-600 dark:text-green-400 transition-all duration-300 group-hover:-rotate-12" />
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
-                          {t("home")}
-                        </span>
-                        <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-                          {t("descriptions.home")}
-                        </span>
-                      </div>
+                  <DropdownMenuItem asChild>
+                    <Link href="/" className="cursor-pointer">
+                      <Home className="mr-2 h-4 w-4" />
+                      <span>{t("home")}</span>
                     </Link>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem className="gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 focus:bg-zinc-50 dark:focus:bg-zinc-800/50 group cursor-pointer">
-                    <Link
-                      href="/docs"
-                      className="flex items-center gap-3 w-full h-full"
-                    >
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
-                        <BookOpen className="size-4 text-amber-600 dark:text-amber-400 transition-all duration-300 group-hover:rotate-6" />
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
-                          {t("docs")}
-                        </span>
-                        <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-                          {t("descriptions.docs")}
-                        </span>
-                      </div>
+                  <DropdownMenuItem asChild>
+                    <Link href="/docs" className="cursor-pointer">
+                      <BookOpen className="mr-2 h-4 w-4" />
+                      <span>{t("docs")}</span>
                     </Link>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem className="gap-3 p-3 rounded-lg transition-all duration-300 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 focus:bg-zinc-50 dark:focus:bg-zinc-800/50 group cursor-pointer">
-                    <Link
-                      href={process.env.NEXT_PUBLIC_PANEL_URL as string}
-                      className="flex items-center gap-3 w-full h-full"
-                    >
-                      <div className="flex size-9 items-center justify-center rounded-lg bg-zinc-100 dark:bg-zinc-800 group-hover:bg-zinc-200 dark:group-hover:bg-zinc-700 transition-all duration-300 group-hover:scale-110">
-                        <Server className="size-4 text-purple-600 dark:text-purple-400 transition-all duration-300 group-hover:-rotate-6" />
-                      </div>
-                      <div className="flex flex-col gap-0.5">
-                        <span className="font-medium text-zinc-900 dark:text-zinc-100 transition-colors duration-300">
-                          {t("panel")}
-                        </span>
-                        <span className="text-xs text-zinc-500 dark:text-zinc-400 transition-colors duration-300">
-                          {t("descriptions.panel")}
-                        </span>
-                      </div>
+                  <DropdownMenuItem asChild>
+                    <Link href={process.env.NEXT_PUBLIC_PANEL_URL as string} className="cursor-pointer">
+                      <Server className="mr-2 h-4 w-4" />
+                      <span>{t("panel")}</span>
                     </Link>
                   </DropdownMenuItem>
                 </div>
@@ -223,9 +174,117 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
-      <SidebarContent className="px-2">
-        <NavMain items={data.navMain} />
+      
+      <SidebarContent className="dark:bg-zinc-950">
+        <SidebarGroup>
+          <SidebarGroupLabel className="text-xs font-semibold uppercase tracking-wider text-muted-foreground/80 mb-2">
+            {t("platform")}
+          </SidebarGroupLabel>
+          <SidebarMenu className="gap-1">
+            {data.navMain.map((item, index) => (
+              <Collapsible
+                key={item.title}
+                asChild
+                defaultOpen={item.isActive}
+                className="group/collapsible"
+              >
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton
+                      tooltip={item.title}
+                      className={`group relative overflow-hidden rounded-lg transition-all duration-300 hover:bg-gradient-to-r ${
+                        index === 0
+                          ? "hover:from-blue-50 hover:to-indigo-50 dark:hover:from-blue-950/30 dark:hover:to-indigo-950/30"
+                          : "hover:from-emerald-50 hover:to-teal-50 dark:hover:from-emerald-950/30 dark:hover:to-teal-950/30"
+                      } hover:shadow-sm`}
+                    >
+                      <div className="flex items-center gap-3 w-full">
+                        {item.icon && (
+                          <div
+                            className={`flex items-center justify-center size-5 rounded-md transition-all duration-300 ${
+                              index === 0
+                                ? "text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300"
+                                : "text-emerald-600 dark:text-emerald-400 group-hover:text-emerald-700 dark:group-hover:text-emerald-300"
+                            }`}
+                          >
+                            <item.icon className="size-4" />
+                          </div>
+                        )}
+                        <span className="font-medium transition-colors duration-300 group-hover:text-foreground">
+                          {item.title}
+                        </span>
+                        <ChevronRight
+                          className={`w-4 h-4 ml-auto transition-all duration-300 group-data-[state=open]/collapsible:rotate-90 ${
+                            index === 0
+                              ? "text-blue-500 dark:text-blue-400"
+                              : "text-emerald-500 dark:text-emerald-400"
+                          } group-hover:scale-110`}
+                        />
+                      </div>
+                      <div
+                        className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r ${
+                          index === 0
+                            ? "from-blue-500/5 to-indigo-500/5"
+                            : "from-emerald-500/5 to-teal-500/5"
+                        } rounded-lg`}
+                      />
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="transition-all duration-300 ease-in-out">
+                    <SidebarMenuSub className="ml-4 border-l-2 border-muted/30 pl-4 space-y-1">
+                      {item.items?.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={subItem.isActive}
+                            className={`group relative overflow-hidden rounded-lg transition-all duration-300 hover:bg-gradient-to-r ${
+                              index === 0
+                                ? "hover:from-blue-50/50 hover:to-indigo-50/50 dark:hover:from-blue-950/20 dark:hover:to-indigo-950/20"
+                                : "hover:from-emerald-50/50 hover:to-teal-50/50 dark:hover:from-emerald-950/20 dark:hover:to-teal-950/20"
+                            } ${
+                              subItem.isActive
+                                ? "bg-gradient-to-r " +
+                                  (index === 0
+                                    ? "from-blue-100 to-indigo-100 dark:from-blue-950/40 dark:to-indigo-950/40"
+                                    : "from-emerald-100 to-teal-100 dark:from-emerald-950/40 dark:to-teal-950/40")
+                                : ""
+                            }`}
+                          >
+                            <Link href={subItem.url} className="flex items-center gap-2 w-full">
+                              <div
+                                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                                  subItem.isActive
+                                    ? (index === 0 ? "bg-blue-500" : "bg-emerald-500") +
+                                      " shadow-lg"
+                                    : "bg-muted-foreground/30 group-hover:" +
+                                      (index === 0 ? "bg-blue-400" : "bg-emerald-400")
+                                }`}
+                              />
+                              <span
+                                className={`text-sm transition-colors duration-300 ${
+                                  subItem.isActive
+                                    ? "font-medium " +
+                                      (index === 0
+                                        ? "text-blue-700 dark:text-blue-300"
+                                        : "text-emerald-700 dark:text-emerald-300")
+                                    : "text-muted-foreground group-hover:text-foreground"
+                                }`}
+                              >
+                                {subItem.title}
+                              </span>
+                            </Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
+            ))}
+          </SidebarMenu>
+        </SidebarGroup>
       </SidebarContent>
+
       <SidebarFooter className="pt-4">
         <NavUser user={data.user} />
       </SidebarFooter>
