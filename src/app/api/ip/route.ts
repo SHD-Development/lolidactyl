@@ -3,7 +3,6 @@ import axios from "axios";
 import { auth } from "@/auth";
 import { headers } from "next/headers";
 
-
 export async function GET(request: Request) {
   const apiKey = process.env.BACKEND_API_KEY;
   const apiUrl = new URL(process.env.BACKEND_API_URL as string);
@@ -18,7 +17,7 @@ export async function GET(request: Request) {
     if (!userId) {
       return NextResponse.json(
         { success: false, error: "User not authenticated" },
-        { status: 401 }
+        { status: 401 },
       );
     }
     apiUrl.searchParams.append("id", userId);
@@ -26,7 +25,7 @@ export async function GET(request: Request) {
       "ip",
       request.headers.get("x-forwarded-for") ||
         request.headers.get("x-real-ip") ||
-        ""
+        "",
     );
 
     const response = await axios.get(apiUrl.toString(), {
@@ -42,12 +41,17 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error("IP check error:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
+    }
     return NextResponse.json(
       {
         success: false,
         error: error instanceof Error ? error.message : "Unknown error",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

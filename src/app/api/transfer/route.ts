@@ -26,21 +26,21 @@ export async function POST(request: NextRequest) {
     if (!to) {
       return NextResponse.json(
         { error: "Missing recipient Discord ID" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (userId === to) {
       return NextResponse.json(
         { status: "error", errors: ["Same user transfer is not allowed"] },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!coins || typeof coins !== "number" || coins <= 0) {
       return NextResponse.json(
         { error: "Invalid transfer amount" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       return NextResponse.json(
         { error: "API key not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return NextResponse.json(response.data);
@@ -75,6 +75,9 @@ export async function POST(request: NextRequest) {
     console.error("Transfer error:", error);
 
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       if (error.response) {
         return NextResponse.json(error.response.data, {
           status: error.response.status,
@@ -84,7 +87,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

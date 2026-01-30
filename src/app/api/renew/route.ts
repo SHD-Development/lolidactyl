@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
     if (!serverId) {
       return NextResponse.json(
         { error: "Server ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
     if (!apiKey) {
       return NextResponse.json(
         { error: "API key not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -56,12 +56,12 @@ export async function POST(request: NextRequest) {
     if (!userInfo.servers || !Array.isArray(userInfo.servers)) {
       return NextResponse.json(
         { error: "Unable to fetch server information" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     const serverToRenew = userInfo.servers.find(
-      (server: any) => server.id === serverId
+      (server: any) => server.id === serverId,
     );
     if (!serverToRenew) {
       return NextResponse.json({ error: "Server not found" }, { status: 404 });
@@ -70,13 +70,14 @@ export async function POST(request: NextRequest) {
     const expirationDate = new Date(serverToRenew.expiresAt);
     const currentDate = new Date();
     const daysUntilExpiry = Math.floor(
-      (expirationDate.getTime() - currentDate.getTime()) / (1000 * 60 * 60 * 24)
+      (expirationDate.getTime() - currentDate.getTime()) /
+        (1000 * 60 * 60 * 24),
     );
 
     if (daysUntilExpiry >= 30) {
       return NextResponse.json(
         { error: "Server can only be renewed within 30 days of expiration" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -93,7 +94,7 @@ export async function POST(request: NextRequest) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${apiKey}`,
         },
-      }
+      },
     );
 
     return NextResponse.json(response.data);
@@ -101,6 +102,9 @@ export async function POST(request: NextRequest) {
     console.error("Renew server error:", error);
 
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       const status = error.response?.status || 500;
       const message = error.response?.data;
       return NextResponse.json({ error: message }, { status });
@@ -108,7 +112,7 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

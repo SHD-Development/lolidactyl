@@ -21,6 +21,11 @@ export async function GET(request: NextRequest) {
     });
   } catch (error) {
     console.error("Error fetching backend status:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
+    }
 
     return NextResponse.json({
       success: false,

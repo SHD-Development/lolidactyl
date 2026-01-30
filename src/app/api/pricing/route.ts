@@ -18,9 +18,14 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Error fetching pricing:", error);
+    if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
+    }
     return NextResponse.json(
       { success: false, error: "Failed to fetch pricing" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

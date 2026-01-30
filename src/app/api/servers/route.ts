@@ -64,13 +64,11 @@ export async function POST(request: Request) {
     const userId = user?.d_id || user?.id;
 
     if (!userId) {
-       return NextResponse.json(
+      return NextResponse.json(
         { success: false, error: "Unauthorized" },
-        { status: 401 }
+        { status: 401 },
       );
     }
-
-
 
     const body = await request.json();
     const {
@@ -98,7 +96,7 @@ export async function POST(request: Request) {
     ) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -114,7 +112,7 @@ export async function POST(request: Request) {
     if (validationError) {
       return NextResponse.json(
         { success: false, error: validationError },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -150,18 +148,21 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Error creating server:", error);
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       return NextResponse.json(
         {
           success: false,
           error: error.response?.data || "Failed to create server",
         },
-        { status: error.response?.status || 500 }
+        { status: error.response?.status || 500 },
       );
     }
 
     return NextResponse.json(
       { success: false, error: "Failed to create server" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -178,7 +179,7 @@ export async function DELETE(request: Request) {
     if (!userId) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -194,7 +195,7 @@ export async function DELETE(request: Request) {
     } else {
       return NextResponse.json(
         { success: false, error: "Server ID(s) required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -217,18 +218,21 @@ export async function DELETE(request: Request) {
   } catch (error) {
     console.error("Error deleting server:", error);
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       return NextResponse.json(
         {
           success: false,
           error: error.response?.data || "Failed to delete server",
         },
-        { status: error.response?.status || 500 }
+        { status: error.response?.status || 500 },
       );
     }
 
     return NextResponse.json(
       { success: false, error: "Failed to delete server" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -245,7 +249,7 @@ export async function PATCH(request: Request) {
     if (!userId) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
-        { status: 401 }
+        { status: 401 },
       );
     }
 
@@ -267,14 +271,14 @@ export async function PATCH(request: Request) {
     if (!serverId) {
       return NextResponse.json(
         { success: false, error: "Server ID is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
     if (!serverType || !nestId || !cpu || !ram || !disk) {
       return NextResponse.json(
         { success: false, error: "Missing required fields" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -290,7 +294,7 @@ export async function PATCH(request: Request) {
     if (validationError) {
       return NextResponse.json(
         { success: false, error: validationError },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -314,24 +318,24 @@ export async function PATCH(request: Request) {
     if (!userInfo.servers || !Array.isArray(userInfo.servers)) {
       return NextResponse.json(
         { success: false, error: "Unable to fetch server information" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
     const serverToModify = userInfo.servers.find(
-      (server: any) => server.id === serverId
+      (server: any) => server.id === serverId,
     );
     if (!serverToModify) {
       return NextResponse.json(
         { success: false, error: "Server not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     if (serverToModify.status === "Suspended") {
       return NextResponse.json(
         { success: false, error: "Cannot modify suspended server" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -373,10 +377,10 @@ export async function PATCH(request: Request) {
         {
           success: false,
           error: `Insufficient balance. Required: ${additionalCost.toFixed(
-            2
+            2,
           )} Droplets, Available: ${userInfo.coins.toFixed(2)} Droplets`,
         },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -411,18 +415,21 @@ export async function PATCH(request: Request) {
   } catch (error) {
     console.error("Error modifying server:", error);
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       return NextResponse.json(
         {
           success: false,
           error: error.response?.data || "Failed to modify server",
         },
-        { status: error.response?.status || 500 }
+        { status: error.response?.status || 500 },
       );
     }
 
     return NextResponse.json(
       { success: false, error: "Failed to modify server" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

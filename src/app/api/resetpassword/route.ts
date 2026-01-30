@@ -17,7 +17,6 @@ export async function PATCH(request: NextRequest) {
     const { id, d_id } = session.user as any;
     const userId = d_id || id;
 
-
     if (!userId) {
       return NextResponse.json({ error: "Missing user ID" }, { status: 400 });
     }
@@ -26,7 +25,7 @@ export async function PATCH(request: NextRequest) {
     if (!apiKey) {
       return NextResponse.json(
         { error: "API key not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -43,7 +42,7 @@ export async function PATCH(request: NextRequest) {
           Authorization: `Bearer ${apiKey}`,
           "Content-Type": "application/json",
         },
-      }
+      },
     );
 
     return NextResponse.json(response.data);
@@ -51,17 +50,20 @@ export async function PATCH(request: NextRequest) {
     console.error("Error resetting password:", error);
 
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       const status = error.response?.status || 500;
       const message = error.response?.data?.message || error.message;
       return NextResponse.json(
         { error: `External API error: ${message}` },
-        { status }
+        { status },
       );
     }
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

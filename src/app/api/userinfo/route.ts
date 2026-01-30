@@ -16,11 +16,10 @@ export async function GET(request: NextRequest) {
     const { id, name, email, d_id } = session.user as any;
     const userId = d_id || id;
 
-
     if (!userId || !name || !email) {
       return NextResponse.json(
         { error: "Missing required user information" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -28,7 +27,7 @@ export async function GET(request: NextRequest) {
     if (!apiKey) {
       return NextResponse.json(
         { error: "API key not configured" },
-        { status: 500 }
+        { status: 500 },
       );
     }
     const ip =
@@ -52,17 +51,20 @@ export async function GET(request: NextRequest) {
     console.error("Error fetching user info:", error);
 
     if (axios.isAxiosError(error)) {
+      console.error("Response data:", error.response?.data);
+      console.error("Response status:", error.response?.status);
+      console.error("Response headers:", error.response?.headers);
       const status = error.response?.status || 500;
       const message = error.response?.data?.message || error.message;
       return NextResponse.json(
         { error: `External API error: ${message}` },
-        { status }
+        { status },
       );
     }
 
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
