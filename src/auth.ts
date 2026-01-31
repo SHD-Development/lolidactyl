@@ -1,6 +1,7 @@
-import { betterAuth } from "better-auth";
+import { betterAuth, APIError } from "better-auth";
 import { nextCookies } from "better-auth/next-js";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 import axios from "axios";
 import { customSession } from "better-auth/plugins";
 
@@ -39,11 +40,12 @@ export const auth = betterAuth({
             },
           });
         } catch (error) {
+          
           if (
             axios.isAxiosError(error) &&
             (error.response?.status === 403 || error.response?.status === 409)
           ) {
-            throw new Error("AccessDenied");
+            redirect("/auth/error?error=AccessDenied");
           }
         }
 
