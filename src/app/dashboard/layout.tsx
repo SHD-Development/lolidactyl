@@ -3,9 +3,12 @@ import { AppSidebar } from "@/components/app-sidebar";
 import { auth } from "@/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import axios from "axios";
 
 import { PageLoading } from "@/components/dashboard/page-loading";
+
+type BackendErrorResponse = {
+  code?: string;
+};
 
 export default async function DashboardLayout({
   children,
@@ -20,24 +23,31 @@ export default async function DashboardLayout({
     let blocked = false;
 
     try {
-      const apiUrl = new URL(process.env.BACKEND_API_URL as string);
-      apiUrl.pathname = "/userinfo";
-      apiUrl.searchParams.set("id", session.user.id);
+      const backendApiUrl = process.env.BACKEND_API_URL;
+      const backendApiKey = process.env.BACKEND_API_KEY;
 
-      await axios.get(apiUrl.toString(), {
-        headers: {
-          Authorization: `Bearer ${process.env.BACKEND_API_KEY}`,
-          "Content-Type": "application/json",
-        },
-      });
-    } catch (error) {
-      if (
-        axios.isAxiosError(error) &&
-        error.response?.status === 403 &&
-        error.response?.data?.code === "USER_BLOCKED"
-      ) {
-        blocked = true;
+      if (backendApiUrl && backendApiKey) {
+        const apiUrl = new URL(backendApiUrl);
+        apiUrl.pathname = "/userinfo";
+        apiUrl.searchParams.set("id", session.user.id);
+
+        const response = await fetch(apiUrl.toString(), {
+          headers: {
+            Authorization: `Bearer ${backendApiKey}`,
+            "Content-Type": "application/json",
+          },
+          cache: "no-store",
+        });
+
+        if (response.status === 403) {
+          const data = (await response
+            .json()
+            .catch(() => null)) as BackendErrorResponse | null;
+          blocked = data?.code === "USER_BLOCKED";
+        }
       }
+    } catch (error) {
+      console.error("Failed to validate blocked user status:", error);
     }
 
     if (blocked) {
